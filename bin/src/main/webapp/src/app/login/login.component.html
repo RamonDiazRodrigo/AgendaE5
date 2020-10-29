@@ -1,19 +1,15 @@
-<form>
-    <h2>Login</h2>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      <small id="emailHelp" class="form-text text-muted">No compartiremos tu Email con nadie</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Contraseña</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div>
-    <button type="submit" class="btn btn-outline-primary">Acceder</button>
-    <br>
-    <br>
-    <h4>¿Aún no estas registrado?</h4>
-    <button type="submit" class="btn btn-primary btn-lg btn-block">Registrarse</button>
-    </div>
-  </form>
+
+<div class="alert alert-danger" [hidden]="!error">
+	There was a problem logging in. Please try again.
+</div>
+<form role="form" (submit)="login()">
+	<div class="form-group">
+		<label for="username">Username:</label> <input type="text"
+			class="form-control" id="username" name="username" [(ngModel)]="username"/>
+	</div>
+	<div class="form-group">
+		<label for="password">Password:</label> <input type="password"
+			class="form-control" id="password" name="password" [(ngModel)]="password"/>
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>

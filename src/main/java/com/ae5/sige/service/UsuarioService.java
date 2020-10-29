@@ -104,7 +104,7 @@ public class UsuarioService implements UsuarioServiceInt {
   @Override
   public Usuario getUserBynusuarioAndPassword(final String nusuario, final String password) {
 
-    final Usuario usuario = userRepository.findBynUsuarioAndContrasena(nusuario, password);
+    final Usuario usuario = userRepository.findByDniAndContrasena(nusuario, password);
     return usuario;
   }
 

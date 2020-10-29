@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.ae5.sige.model.Reunion;
+
 import com.ae5.sige.repository.ReunionRepositoryInt;
+
+
 
 
 @Service("ReunionServiceInt")
@@ -81,6 +84,11 @@ public class ReunionService implements ReunionServiceInt{
   public void deleteReunion(final String userId) {
 	  reunionRepository.deleteReunion(userId);
   }
+  
+  public List<Reunion> getReunionesByUsuario(String dni) {
+	    List<Reunion> reuniones = reunionRepository.findUsuario(dni);
+	    return reuniones;
+	  }
 
 
 

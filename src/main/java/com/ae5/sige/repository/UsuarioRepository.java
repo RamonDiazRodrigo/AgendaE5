@@ -54,9 +54,9 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	   * 
 	   * @author ae5
 	   */
-	  public Optional<Usuario> findOne(final String nusuario) {
-	    System.out.println("el usuario buscado  es: " + nusuario);
-	    Usuario d = this.mongoOperations.findOne(new Query(Criteria.where("nusuario").is(nusuario)), Usuario.class);
+	  public Optional<Usuario> findOne(final String dni) {
+	    System.out.println("el usuario buscado  es: " + dni);
+	    Usuario d = this.mongoOperations.findOne(new Query(Criteria.where("DNI").is(dni)), Usuario.class);
 	    Optional<Usuario> usuario = Optional.ofNullable(d);
 	    return usuario;
 	  }
@@ -86,15 +86,16 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	   * 
 	   * @author ae5
 	   */
-	  public void deleteUsuario(final String nusuario) {
+	  public void deleteUsuario(final String dni) {
 
-	    this.mongoOperations.findAndRemove(new Query(Criteria.where("nusuario").is(nusuario)), Usuario.class);
+	    this.mongoOperations.findAndRemove(new Query(Criteria.where("DNI").is(dni)), Usuario.class);
 
 	  }
 
+	
 	@Override
-	public Usuario findBynUsuarioAndContrasena(String nusuario, String contrasena) {
-		Usuario usuario = this.mongoOperations.findOne(new Query(Criteria.where("Usuario").is(nusuario).and("contraseña").is(contrasena)), Usuario.class);
+	public Usuario findByDniAndContrasena(String dni, String contrasena) {
+		Usuario usuario = this.mongoOperations.findOne(new Query(Criteria.where("DNI").is(dni).and("Contraseña").is(contrasena)), Usuario.class);
 		    return usuario;
 	}
 

@@ -12,6 +12,8 @@ import org.springframework.util.Assert;
 
 import com.ae5.sige.model.Reunion;
 
+
+
 @Repository
 public class ReunionRepository implements ReunionRepositoryInt{
 	 /**
@@ -86,6 +88,14 @@ public class ReunionRepository implements ReunionRepositoryInt{
 
 	    this.mongoOperations.findAndRemove(new Query(Criteria.where("id").is(id)), Reunion.class);
 
+	  }
+	  
+	  @Override
+	  public List<Reunion> findUsuario(final String dni) {
+	    final List<Reunion> reuniones = this.mongoOperations
+	        .find(new Query(Criteria.where("listaAsistentes").is(dni)), Reunion.class);
+	    System.out.println("REUNIONES ENCONTRADAS: " + reuniones);
+	   return reuniones;
 	  }
 	
 }

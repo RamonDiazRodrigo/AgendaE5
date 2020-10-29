@@ -30,5 +30,13 @@ public interface ReunionServiceInt {
 	   * @author ae5
 	   */
 	  void deleteReunion(String id);
+	  
+	  /**
+	   * Método para obtener las reuniones de un usuario en función de su dni.
+	   * 
+	   * @author ae5
+	   */
+
+	  List<Reunion> getReunionesByUsuario(String dni);
 
 }

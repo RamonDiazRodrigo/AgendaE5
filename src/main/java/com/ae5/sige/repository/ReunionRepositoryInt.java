@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.ae5.sige.model.Reunion;
 
+
 public interface ReunionRepositoryInt {
 	 /**
 	   * Metodo que te devuelve todas las Reuniones.
@@ -40,6 +41,13 @@ public interface ReunionRepositoryInt {
 	   * @author ae5
 	   */
 	  Optional<Reunion> findOne(String id);
+	  
+	  /**
+	   * Obtener un usuario en función de su dni.
+	   * 
+	   * @author ae5
+	   */
+	  List<Reunion> findUsuario(String dni);
 
 
 }
