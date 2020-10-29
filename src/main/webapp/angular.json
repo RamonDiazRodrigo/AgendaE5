@@ -24,12 +24,14 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": [  
+            "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"]
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -126,6 +128,11 @@
           }
         }
       }
-    }},
-  "defaultProject": "webapp"
+    }
+  },
+  "defaultProject": "webapp",
+  "cli": {
+
+    "analytics": "12c65c13-3a3e-42d9-94c5-9d6753ed1d3c"
+  }
 }
