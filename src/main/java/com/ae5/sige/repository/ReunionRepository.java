@@ -56,7 +56,7 @@ public class ReunionRepository implements ReunionRepositoryInt{
 	   */
 	  public Optional<Reunion> findOne(final String id) {
 	    System.out.println("La Reunion buscada es: " + id);
-	    Reunion d = this.mongoOperations.findOne(new Query(Criteria.where("id").is(id)), Reunion.class);
+	    Reunion d = this.mongoOperations.findOne(new Query(Criteria.where("_id").is(id)), Reunion.class);
 	    return Optional.ofNullable(d);
 	  }
 

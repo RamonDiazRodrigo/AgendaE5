@@ -1,6 +1,6 @@
 package com.ae5.sige.model;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -17,81 +17,78 @@ public class Usuario {
 	@Id
 	private String id;
 	/**
-	 * Contraseña.
+	 * Contrasena.
 	 * 
 	 * @author ae5
 	 */
 	@NonNull
-	private String Contraseña;
+	private String contrasena;
 	/**
-	 * Nombre.
+	 * nombre.
 	 * 
 	 * @author ae5
 	 */
-	private String Nombre;
+	private String nombre;
 	/**
-	 * Apellidos.
+	 * apellidos.
 	 * 
 	 * @author ae5
 	 */
-	private String Apellidos;
+	private String apellidos;
 	/**
-	 * DNI.
+	 * dni.
 	 * 
 	 * @author ae5
 	 */
 	@NonNull
-	private String DNI;
+	private String dni;
 	/**
-	 * Telefono.
+	 * telefono.
 	 * 
 	 * @author ae5
 	 */
-	private String Telefono;
+	private String telefono;
 	/**
-	 * Correo.
+	 * correo.
 	 * 
 	 * @author ae5
 	 */
-	private String Correo;
+	private String correo;
 	/**
-	 * Tipo.
+	 * tipo.
 	 * 
 	 * @author ae5
 	 */
-	private String Tipo;
+	private String tipo;
 	/**
-	 * ListaReuniones.
+	 * listaReuniones.
 	 * 
 	 * @author ae5
 	 */
-	private ArrayList<Object> ListaReuniones = new ArrayList<Object>();
+	private List<String> listaReuniones;
 	/**
-	 * ListaReunionesNuevas.
+	 * listaReunionesNuevas.
 	 * 
 	 * @author ae5
 	 */
-	private ArrayList<Object> ListaReunionesNuevas = new ArrayList<Object>();
+	private List<String> listaReunionesNuevas;
 
-	public Usuario( @NonNull String contraseña, String nombre, String apellidos,
-			@NonNull String dNI, String telefono, String correo, String tipo, ArrayList<Object> listaReuniones,
-			ArrayList<Object> listaReunionesNuevas) {
+	public Usuario( @NonNull String contrasena, String nombre, String apellidos,
+			@NonNull String dni, String telefono, String correo, String tipo, List<String> listaReuniones,
+			List<String> listaReunionesNuevas) {
 		super();
 		this.id = UUID.randomUUID().toString();
-		Contraseña = contraseña;
-		Nombre = nombre;
-		Apellidos = apellidos;
-		DNI = dNI;
-		Telefono = telefono;
-		Correo = correo;
-		Tipo = tipo;
-		ListaReuniones = listaReuniones;
-		ListaReunionesNuevas = listaReunionesNuevas;
+		this.contrasena = contrasena;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.dni = dni;
+		this.telefono = telefono;
+		this.correo = correo;
+		this.tipo = tipo;
+		this.listaReuniones = listaReuniones;
+		this.listaReunionesNuevas = listaReunionesNuevas;
 	}
 
-	public Usuario() {
-
-	}
 
 	public String getId() {
 		return id;
@@ -102,91 +99,91 @@ public class Usuario {
 	}
 
 
-	public String getContraseña() {
-		return Contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setContraseña(String contraseña) {
-		Contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
-	public String getNombre() {
-		return Nombre;
+	public String getnombre() {
+		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		Nombre = nombre;
+	public void setnombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getApellidos() {
-		return Apellidos;
+	public String getapellidos() {
+		return apellidos;
 	}
 
-	public void setApellidos(String apellidos) {
-		Apellidos = apellidos;
+	public void setapellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 
-	public String getDNI() {
-		return DNI;
+	public String getdni() {
+		return dni;
 	}
 
-	public void setDNI(String dNI) {
-		DNI = dNI;
+	public void setdni(String dNI) {
+		dni = dNI;
 	}
 
-	public String getTelefono() {
-		return Telefono;
+	public String gettelefono() {
+		return telefono;
 	}
 
-	public void setTelefono(String telefono) {
-		Telefono = telefono;
+	public void settelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
-	public String getCorreo() {
-		return Correo;
+	public String getcorreo() {
+		return correo;
 	}
 
-	public void setCorreo(String correo) {
-		Correo = correo;
+	public void setcorreo(String correo) {
+		this.correo = correo;
 	}
 
-	public String getTipo() {
-		return Tipo;
+	public String gettipo() {
+		return tipo;
 	}
 
-	public void setTipo(String tipo) {
-		Tipo = tipo;
+	public void settipo(String tipo) {
+		this.tipo = tipo;
 	}
 
-	public ArrayList<Object> getListaReuniones() {
-		return ListaReuniones;
+	public List<String> getlistaReuniones() {
+		return listaReuniones;
 	}
 
-	public void setListaReuniones(ArrayList<Object> listaReuniones) {
-		ListaReuniones = listaReuniones;
+	public void setlistaReuniones(List<String> listaReuniones) {
+		this.listaReuniones = listaReuniones;
 	}
 
-	public ArrayList<Object> getListaReunionesNuevas() {
-		return ListaReunionesNuevas;
+	public List<String> getlistaReunionesNuevas() {
+		return listaReunionesNuevas;
 	}
 
-	public void setListaReunionesNuevas(ArrayList<Object> listaReunionesNuevas) {
-		ListaReunionesNuevas = listaReunionesNuevas;
+	public void setlistaReunionesNuevas(List<String> listaReunionesNuevas) {
+		this.listaReunionesNuevas = listaReunionesNuevas;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Apellidos == null) ? 0 : Apellidos.hashCode());
-		result = prime * result + ((Contraseña == null) ? 0 : Contraseña.hashCode());
-		result = prime * result + ((Correo == null) ? 0 : Correo.hashCode());
-		result = prime * result + ((DNI == null) ? 0 : DNI.hashCode());
-		result = prime * result + ((ListaReuniones == null) ? 0 : ListaReuniones.hashCode());
-		result = prime * result + ((ListaReunionesNuevas == null) ? 0 : ListaReunionesNuevas.hashCode());
-		result = prime * result + ((Nombre == null) ? 0 : Nombre.hashCode());
-		result = prime * result + ((Telefono == null) ? 0 : Telefono.hashCode());
-		result = prime * result + ((Tipo == null) ? 0 : Tipo.hashCode());
+		result = prime * result + ((apellidos == null) ? 0 : apellidos.hashCode());
+		result = prime * result + ((contrasena == null) ? 0 : contrasena.hashCode());
+		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
+		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
+		result = prime * result + ((listaReuniones == null) ? 0 : listaReuniones.hashCode());
+		result = prime * result + ((listaReunionesNuevas == null) ? 0 : listaReunionesNuevas.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -200,50 +197,50 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (Apellidos == null) {
-			if (other.Apellidos != null)
+		if (apellidos == null) {
+			if (other.apellidos != null)
 				return false;
-		} else if (!Apellidos.equals(other.Apellidos))
+		} else if (!apellidos.equals(other.apellidos))
 			return false;
-		if (Contraseña == null) {
-			if (other.Contraseña != null)
+		if (contrasena == null) {
+			if (other.contrasena != null)
 				return false;
-		} else if (!Contraseña.equals(other.Contraseña))
+		} else if (!contrasena.equals(other.contrasena))
 			return false;
-		if (Correo == null) {
-			if (other.Correo != null)
+		if (correo == null) {
+			if (other.correo != null)
 				return false;
-		} else if (!Correo.equals(other.Correo))
+		} else if (!correo.equals(other.correo))
 			return false;
-		if (DNI == null) {
-			if (other.DNI != null)
+		if (dni == null) {
+			if (other.dni != null)
 				return false;
-		} else if (!DNI.equals(other.DNI))
+		} else if (!dni.equals(other.dni))
 			return false;
-		if (ListaReuniones == null) {
-			if (other.ListaReuniones != null)
+		if (listaReuniones == null) {
+			if (other.listaReuniones != null)
 				return false;
-		} else if (!ListaReuniones.equals(other.ListaReuniones))
+		} else if (!listaReuniones.equals(other.listaReuniones))
 			return false;
-		if (ListaReunionesNuevas == null) {
-			if (other.ListaReunionesNuevas != null)
+		if (listaReunionesNuevas == null) {
+			if (other.listaReunionesNuevas != null)
 				return false;
-		} else if (!ListaReunionesNuevas.equals(other.ListaReunionesNuevas))
+		} else if (!listaReunionesNuevas.equals(other.listaReunionesNuevas))
 			return false;
-		if (Nombre == null) {
-			if (other.Nombre != null)
+		if (nombre == null) {
+			if (other.nombre != null)
 				return false;
-		} else if (!Nombre.equals(other.Nombre))
+		} else if (!nombre.equals(other.nombre))
 			return false;
-		if (Telefono == null) {
-			if (other.Telefono != null)
+		if (telefono == null) {
+			if (other.telefono != null)
 				return false;
-		} else if (!Telefono.equals(other.Telefono))
+		} else if (!telefono.equals(other.telefono))
 			return false;
-		if (Tipo == null) {
-			if (other.Tipo != null)
+		if (tipo == null) {
+			if (other.tipo != null)
 				return false;
-		} else if (!Tipo.equals(other.Tipo))
+		} else if (!tipo.equals(other.tipo))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -255,9 +252,9 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", Contraseña=" + Contraseña + ", Nombre=" + Nombre + ", Apellidos=" + Apellidos
-				+ ", DNI=" + DNI + ", Telefono=" + Telefono + ", Correo=" + Correo + ", Tipo=" + Tipo
-				+ ", ListaReuniones=" + ListaReuniones + ", ListaReunionesNuevas=" + ListaReunionesNuevas + "]";
+		return "Usuario [id=" + id + ", Contrasena=" + contrasena + ", nombre=" + nombre + ", apellidos=" + apellidos
+				+ ", dni=" + dni + ", telefono=" + telefono + ", correo=" + correo + ", tipo=" + tipo
+				+ ", listaReuniones=" + listaReuniones + ", listaReunionesNuevas=" + listaReunionesNuevas + "]";
 	}
 
 	
