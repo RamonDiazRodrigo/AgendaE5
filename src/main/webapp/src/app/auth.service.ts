@@ -10,6 +10,7 @@ export class AuthService {
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
     private uri = 'http://localhost:9000/AgendaE5';
+    
     constructor(private http: HttpClient, private router: Router) {
         this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();

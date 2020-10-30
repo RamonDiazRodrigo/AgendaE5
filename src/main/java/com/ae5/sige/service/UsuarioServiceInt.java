@@ -5,7 +5,8 @@ import java.util.List;
 import com.ae5.sige.model.Usuario;
 
 public interface UsuarioServiceInt {
-	  /**
+
+	/**
 	   * @author ae5
 	   */
 	  List<Usuario> findAll();
@@ -13,7 +14,7 @@ public interface UsuarioServiceInt {
 	  /**
 	   * @author ae5
 	   */
-	  Usuario findByUsernusuario(String nusuario);
+	  Usuario findByUsernusuario(String dni);
 
 	  /**
 	   * @author ae5
@@ -28,11 +29,13 @@ public interface UsuarioServiceInt {
 	  /**
 	   * @author ae5
 	   */
-	  void deleteUsuario(String userId);
+	  void deleteUsuario(String dni);
 
 	  /**
 	   * @author ae5
 	   */
 	  Usuario getUserBynusuarioAndPassword(String nusuario, String password);
+	  
+	  List<String> findReuniones(String dni);
 
 }

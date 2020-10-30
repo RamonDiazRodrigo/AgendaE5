@@ -1,5 +1,6 @@
 package com.ae5.sige.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +57,7 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	   */
 	  public Optional<Usuario> findOne(final String dni) {
 	    System.out.println("el usuario buscado  es: " + dni);
-	    Usuario d = this.mongoOperations.findOne(new Query(Criteria.where("DNI").is(dni)), Usuario.class);
+	    Usuario d = this.mongoOperations.findOne(new Query(Criteria.where("dni").is(dni)), Usuario.class);
 	    Optional<Usuario> usuario = Optional.ofNullable(d);
 	    return usuario;
 	  }
@@ -95,8 +96,19 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	
 	@Override
 	public Usuario findByDniAndContrasena(String dni, String contrasena) {
-		Usuario usuario = this.mongoOperations.findOne(new Query(Criteria.where("DNI").is(dni).and("Contraseña").is(contrasena)), Usuario.class);
+		Usuario usuario = this.mongoOperations.findOne(new Query(Criteria.where("dni").is(dni).and("contrasena").is(contrasena)), Usuario.class);
 		    return usuario;
+	}
+
+	@Override
+	public List<String> getReuniones(String dni) {
+		Optional<Usuario> user = findOne(dni);
+		if(user.isPresent()){
+			return user.get().getlistaReuniones();
+		}else {
+			return new ArrayList<>();
+		}
+		
 	}
 
 }

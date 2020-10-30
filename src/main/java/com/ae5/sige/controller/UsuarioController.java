@@ -1,6 +1,7 @@
 package com.ae5.sige.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ae5.sige.model.Usuario;
 import com.ae5.sige.service.UsuarioService;
@@ -47,11 +48,19 @@ public class UsuarioController {
 	@GetMapping("/usuarios")
 	public ResponseEntity<Usuario> getUserPassword(@RequestParam("dni") final String dni,
 			@RequestParam("password") final String pass) {
+		List<String> lista = new ArrayList<>(); 
+		List<String> lista1 = new ArrayList<>();
+		lista.add("1");
+		lista.add("2");
+		lista1.add("7");
 		
+		
+		Usuario usuari = new Usuario("Rcon", "Ramon", "Diaz Rodrigo", "05722902L", "00000", "correo@correo", "usuario", lista, lista1);
+		//usuarioService.saveUsuario(usuari);
 		final Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dni, pass);
-		System.out.println(">"+dni+" "+pass);
+		LOG.info("[SERVER] Buscando usuario: " + dni);
 		if (usuario != null) {
-			LOG.info("[SERVER] Usuario encontrado: " + usuario.getNombre());
+			LOG.info("[SERVER] Usuario encontrado: " + usuario.getnombre());
 			return ResponseEntity.ok(usuario);
 		} else {
 			LOG.info("[SERVER] No se ha encontrado ningún usuario con esos datos.");
@@ -100,8 +109,8 @@ public class UsuarioController {
 			String correo = null;
 			String telefono = null;
 			String tipo = null;
-			ArrayList<Object> ListaReuniones = null;
-			ArrayList<Object> ListaReunionesNuevas = null;
+			List<String> listaReuniones = null;
+			List<String> listaReunionesNuevas = null;
 			try {
 				LOG.info("[SERVER] Registrando usuario...");
 				nombre = jso.getString("nombre");
@@ -115,8 +124,8 @@ public class UsuarioController {
 				return ResponseEntity.badRequest().build();
 			}
 
-			usuario1 = new Usuario(contrasena, nombre, apellidos, dni, telefono, correo, tipo, ListaReuniones,
-					ListaReunionesNuevas);
+			usuario1 = new Usuario(contrasena, nombre, apellidos, dni, telefono, correo, tipo, listaReuniones,
+					listaReunionesNuevas);
 			usuarioService.saveUsuario(usuario1);
 			LOG.info("[SERVER] Usuario registrado.");
 			LOG.info("[SERVER] " + usuario1.toString());
@@ -168,12 +177,12 @@ public class UsuarioController {
 				final String correo = jso.getString("correo");
 				final String contrasena = jso.getString("contrasena");
 
-				usuario.setDNI(dni);
-				usuario.setNombre(nombre);
-				usuario.setApellidos(apellidos);
-				usuario.setTelefono(telefono);
-				usuario.setCorreo(correo);
-				usuario.setContraseña(contrasena);
+				usuario.setdni(dni);
+				usuario.setnombre(nombre);
+				usuario.setapellidos(apellidos);
+				usuario.settelefono(telefono);
+				usuario.setcorreo(correo);
+				usuario.setContrasena(contrasena);
 			} catch (JSONException j) {
 				LOG.error("[SERVER] Error en la lectura del JSON.");
 				LOG.info(j.getMessage());

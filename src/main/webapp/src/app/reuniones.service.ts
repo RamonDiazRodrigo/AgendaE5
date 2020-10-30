@@ -17,9 +17,11 @@ export class ReunionesService {
     return this.http.get(this.uri + '/Reuniones');
   }
 
-  public find(id){
+  public findReuniones(id){
     return this.http.get(this.uri + '/Reuniones/' + id);
   }
- 
+  public findReunionesNuevas(id){
+    return this.http.get(this.uri + '/ReunionesNuevas/' + id);
+  }
 
 }
