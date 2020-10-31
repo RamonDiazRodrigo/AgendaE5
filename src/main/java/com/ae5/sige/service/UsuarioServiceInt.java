@@ -37,5 +37,7 @@ public interface UsuarioServiceInt {
 	  Usuario getUserBynusuarioAndPassword(String nusuario, String password);
 	  
 	  List<String> findReuniones(String dni);
+ 
+	  List<String> findReunionesNuevas(String dni);
 
 }

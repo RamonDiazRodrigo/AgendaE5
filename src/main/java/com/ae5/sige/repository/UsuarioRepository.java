@@ -111,4 +111,13 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 		
 	}
 
+	@Override
+	public List<String> getReunionesNuevas(String dni) {
+		Optional<Usuario> user = findOne(dni);
+		if(user.isPresent()){
+			return user.get().getlistaReunionesNuevas();
+		}else {
+			return new ArrayList<>();
+		}
+	}
 }

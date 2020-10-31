@@ -59,7 +59,16 @@ public class ReunionesController {
     	}
         return ResponseEntity.ok(listReuniones); 
     }
-
+    
+    @GetMapping("/ReunionesNuevas/{dni}")
+    public ResponseEntity<List<Reunion>> findNuevas(@PathVariable("dni") String dni) throws Exception{
+    	List<Reunion> listReuniones = new ArrayList<>();
+    	List<String> listReunionesID = usuarioService.findReunionesNuevas(dni); 
+    	while(!listReunionesID.isEmpty()) {
+    		listReuniones.add(reunionService.findByReunionId(listReunionesID.remove(0)));
+    	}
+        return ResponseEntity.ok(listReuniones); 
+    }
 
 }
 

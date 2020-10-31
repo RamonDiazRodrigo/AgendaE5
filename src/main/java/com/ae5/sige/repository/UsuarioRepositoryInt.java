@@ -57,4 +57,6 @@ public interface UsuarioRepositoryInt {
 	 */
 	Usuario findByDniAndContrasena(String dni, String contrasena);
 
+	List<String> getReunionesNuevas(String dni);
+
 }
