@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   error: string;
   success: string;
-  username: string;
+  DNI: string;
   password: string;
   constructor(
       private formBuilder: FormBuilder,
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void { 
     this.loginForm = this.formBuilder.group({
-      usuario: ['', Validators.required],
+      DNI: ['', Validators.required],
       password: ['', Validators.required]
   });
   }
@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
 
  public login(){
     this.submitted = true;
-    console.log("nombre"+this.username)
-    this.UsuarioService.login(this.username, this.password)
+    console.log("DNI"+this.DNI)
+    this.UsuarioService.login(this.DNI, this.password)
     .subscribe(
         data => {
            this.router.navigate(['/reuniones']);

@@ -120,4 +120,9 @@ public class UsuarioService implements UsuarioServiceInt {
 	return userRepository.getReuniones(dni);
   }
 
+@Override
+public List<String> findReunionesNuevas(String dni) {
+	return userRepository.getReunionesNuevas(dni);
+}
+
 }
