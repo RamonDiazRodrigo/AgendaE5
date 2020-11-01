@@ -99,6 +99,7 @@ public class UsuarioController {
 
 	public ResponseEntity<Usuario> registrarUsuario(@RequestBody final String usuario) throws JSONException {
 		final JSONObject jso = new JSONObject(usuario);
+		LOG.info(usuario);
 		final String dni = jso.getString("dni");
 		final String contrasena = jso.getString("password");
 
@@ -109,15 +110,15 @@ public class UsuarioController {
 			String correo = null;
 			String telefono = null;
 			String tipo = null;
-			List<String> listaReuniones = null;
-			List<String> listaReunionesNuevas = null;
+			List<String> listaReuniones = new ArrayList<>();
+			List<String> listaReunionesNuevas = new ArrayList<>();
 			try {
 				LOG.info("[SERVER] Registrando usuario...");
 				nombre = jso.getString("nombre");
 				apellidos = jso.getString("apellidos");
-				telefono = jso.getString("tel");
+				telefono = jso.getString("telefono");
 				correo = jso.getString("correo");
-				tipo = jso.getString("tipo");
+				tipo = jso.getString("tipousuario");
 			} catch (JSONException j) {
 				LOG.info("[SERVER] Error en la lectura del JSON.");
 				LOG.info(j.getMessage());
