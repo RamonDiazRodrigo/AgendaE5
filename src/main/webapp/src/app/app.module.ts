@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MenuComponent } from './menu/menu.component';
 import { RegistroComponent } from './registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReunionComponent } from './reunion/reunion.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReunionesComponent,
     ReunionesPreComponent,
     MenuComponent,
-    RegistroComponent
+    RegistroComponent,
+    ReunionComponent
 
   ],
   imports: [
