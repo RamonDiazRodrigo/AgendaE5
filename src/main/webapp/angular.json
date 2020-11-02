@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
@@ -93,6 +93,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
@@ -132,7 +133,6 @@
   },
   "defaultProject": "webapp",
   "cli": {
-
     "analytics": "12c65c13-3a3e-42d9-94c5-9d6753ed1d3c"
   }
 }
