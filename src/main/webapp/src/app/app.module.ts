@@ -12,6 +12,7 @@ import { MenuComponent } from './menu/menu.component';
 import { RegistroComponent } from './registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReunionComponent } from './reunion/reunion.component';
+import { AlertaComponent } from './alerta/alerta.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ReunionComponent } from './reunion/reunion.component';
     ReunionesPreComponent,
     MenuComponent,
     RegistroComponent,
-    ReunionComponent
+    ReunionComponent,
+    AlertaComponent
 
   ],
   imports: [
