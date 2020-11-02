@@ -1,6 +1,5 @@
 Feature: Acceder al sistema
 
-
 Scenario Outline: <testCase><resultado>
 
 Given abrir la aplicación web en el navegador
