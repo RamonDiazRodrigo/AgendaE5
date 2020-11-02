@@ -30,8 +30,8 @@ public class PasosLogin{
 	    fo.addArguments("--headless");
 	    WebDriver driver = new FirefoxDriver(fo);
 	    
-	    //AÑADIR DIRECCION
-	    driver.get("http://localhost:8080/");
+	    //VERIFICAR SI LA DIRECCION ES CORRECTA
+	    driver.get("http://localhost:8080/login");
 	}
 	
 	@When("introducir los datos de acceso")
@@ -43,6 +43,7 @@ public class PasosLogin{
 
 	}
 	
+	
 	@Then("pulsamos entrar")
 	public void pulsamos_entrar() {
 		driver.findElement(By.xpath("//input[@value='Acceder']")).click();
@@ -50,13 +51,13 @@ public class PasosLogin{
 		String expectedUrl = driver.getCurrentUrl();
 		 
 		
-		//AÑADIR DIRECCIONES
+		//VERIFICAR SI LAS DIRECCIONES SON CORRECTAS
 		if(a.get(0).get("testCase")=="Case 1") {
-			assertEquals("http://localhost:8080/", expectedUrl);
+			assertEquals("http://localhost:8080/reuniones", expectedUrl);
 		}else if(a.get(0).get("testCase")=="Case 2") {
-			assertEquals("http://localhost:8080/", expectedUrl);
+			assertEquals("http://localhost:8080/reuniones", expectedUrl);
 		}else {
-			assertEquals("http://localhost:8080/", expectedUrl);
+			assertEquals("http://localhost:8080/login", expectedUrl);
 
 		}
 		
