@@ -1,7 +1,8 @@
 .container {
-    width: 600px;
+    width: 500px;
     margin: 16px auto;
     font-size: 16px;
+    padding: 10px;
 }
 
 
@@ -17,16 +18,16 @@
 /* The container form is achieved by a CSS hack */
 
 .register-container {
-    width: 600;
+    width: 400;
     margin-right: auto;
     margin-left: auto;
     border: 12px solid transparent;
-    border-bottom-color: #23bfca;
+    
 }
 
 .register-title {
     background: #23bfca;
-    padding: 20px;
+    padding: 16px;
     font-size: 1.4em;
     font-weight: normal;
     text-align: center;
@@ -69,7 +70,18 @@
     color: #555;
     margin-top: 5px;
 }
-
+.container select{
+      box-sizing: border-box;
+    padding: 6px;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    padding: 5%;
+    outline: 0;
+    font-family: inherit;
+    font-size: 0.95em;
+}
 
 /* Text fields' focus effect */
 
@@ -84,6 +96,7 @@
     color: #fff;
     cursor: pointer;
     left: 50%;
+    border-radius: 10px;
 }
 
 .container input[type="submit"]:hover {
