@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
 import { AlertaService } from '../services/alerta.service';
 import { UsuarioService } from '../services/usuario.service';
 
@@ -20,9 +19,8 @@ export class RegistroComponent implements OnInit {
   constructor(
       private formBuilder: FormBuilder,
       private router: Router,
-      private authService: AuthService,
       private userService: UsuarioService,
-      private alertaService: AlertaService
+      public alertaService: AlertaService,
   ) {
     
   }
@@ -48,11 +46,7 @@ export class RegistroComponent implements OnInit {
       this.alertaService.clear();
 
 
-      // para aquí si el form es inválido
-      if (this.registerForm.invalid) {
-          return;
-      }
-
+     
       if ((this.f.dni.value.length != 9)) {
           this.alertaService.error("Formato de DNI incorrecto. El DNI debe de tener 8 números y una letra", false);
           return;

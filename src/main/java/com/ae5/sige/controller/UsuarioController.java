@@ -109,7 +109,7 @@ public class UsuarioController {
 			String apellidos = null;
 			String correo = null;
 			String telefono = null;
-			String tipo = null;
+			String tipo = "asistente";
 			List<String> listaReuniones = new ArrayList<>();
 			List<String> listaReunionesNuevas = new ArrayList<>();
 			try {
@@ -118,7 +118,7 @@ public class UsuarioController {
 				apellidos = jso.getString("apellidos");
 				telefono = jso.getString("telefono");
 				correo = jso.getString("correo");
-				tipo = jso.getString("tipousuario");
+				
 			} catch (JSONException j) {
 				LOG.info("[SERVER] Error en la lectura del JSON.");
 				LOG.info(j.getMessage());
