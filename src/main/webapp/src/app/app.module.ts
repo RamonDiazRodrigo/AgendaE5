@@ -13,6 +13,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReunionComponent } from './reunion/reunion.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { AlertaComponent } from './alerta/alerta.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     ReunionesPreComponent,
     MenuComponent,
     RegistroComponent,
-    ReunionComponent
+    ReunionComponent,
+    AlertaComponent
 
   ],
   imports: [
