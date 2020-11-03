@@ -12,8 +12,8 @@ import { MenuComponent } from './menu/menu.component';
 import { RegistroComponent } from './registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReunionComponent } from './reunion/reunion.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { AlertaComponent } from './alerta/alerta.component';
-
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { AlertaComponent } from './alerta/alerta.component';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
   entryComponents:[
     ReunionComponent
