@@ -43,10 +43,7 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	  public Optional<List<Usuario>> findAll() {
 
 	    List<Usuario> users = this.mongoOperations.find(new Query(), Usuario.class);
-
-	    Optional<List<Usuario>> optionalUsuarios = Optional.ofNullable(users);
-
-	    return optionalUsuarios;
+	    return Optional.ofNullable(users);
 
 	  }
 
@@ -58,8 +55,7 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	  public Optional<Usuario> findOne(final String dni) {
 	    System.out.println("el usuario buscado  es: " + dni);
 	    Usuario d = this.mongoOperations.findOne(new Query(Criteria.where("dni").is(dni)), Usuario.class);
-	    Optional<Usuario> usuario = Optional.ofNullable(d);
-	    return usuario;
+	    return Optional.ofNullable(d);
 	  }
 
 	  /**
@@ -96,8 +92,7 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	
 	@Override
 	public Usuario findByDniAndContrasena(String dni, String contrasena) {
-		Usuario usuario = this.mongoOperations.findOne(new Query(Criteria.where("dni").is(dni).and("contrasena").is(contrasena)), Usuario.class);
-		    return usuario;
+		    return this.mongoOperations.findOne(new Query(Criteria.where("dni").is(dni).and("contrasena").is(contrasena)), Usuario.class);
 	}
 
 	@Override

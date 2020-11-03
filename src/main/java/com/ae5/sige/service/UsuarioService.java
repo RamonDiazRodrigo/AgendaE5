@@ -1,6 +1,5 @@
 package com.ae5.sige.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -107,15 +106,13 @@ public class UsuarioService implements UsuarioServiceInt {
 
   public Usuario getUserBynusuarioAndPassword(final String nusuario, final String password) {
 
-    final Usuario usuario = userRepository.findByDniAndContrasena(nusuario, password);
-    return usuario;
+    return userRepository.findByDniAndContrasena(nusuario, password);
   }
   /**
    * @author ae5
    */
 
   public List<String> findReuniones(String dni) {
-	
 		
 	return userRepository.getReuniones(dni);
   }

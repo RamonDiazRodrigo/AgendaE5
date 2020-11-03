@@ -60,7 +60,6 @@ public class ReunionService implements ReunionServiceInt{
   @Override
   public List<Reunion> findAll() {
     final Optional<List<Reunion>> reuniones = reunionRepository.findAll();
-    System.out.println(reuniones.get());
     return reuniones.get();
   }
 
@@ -86,16 +85,7 @@ public class ReunionService implements ReunionServiceInt{
   }
   
   public List<Reunion> getReunionesByUsuario(String dni) {
-	    List<Reunion> reuniones = reunionRepository.findUsuario(dni);
-	    return reuniones;
+	    return reunionRepository.findUsuario(dni);
 	  }
-
-
-
-
-
-
-
-
 
 }

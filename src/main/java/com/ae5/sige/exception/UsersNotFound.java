@@ -1,7 +1,5 @@
 package com.ae5.sige.exception;
 
-import java.util.ArrayList;
-
 import org.springframework.core.NestedRuntimeException;
 
 public class UsersNotFound extends NestedRuntimeException {
@@ -13,7 +11,7 @@ public class UsersNotFound extends NestedRuntimeException {
 	   */
 	  public UsersNotFound() {
 
-	    super(String.format("No se ha podido encontrar ningun usuario"));
+	    super("No se ha podido encontrar ningun usuario");
 
 	  }
 
