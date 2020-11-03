@@ -77,7 +77,6 @@ export class RegistroComponent implements OnInit {
       
 
       this.loading = true;
-      alert(this.registerForm.value)
       this.userService.register(this.registerForm.value)
           .pipe(first())
           .subscribe(

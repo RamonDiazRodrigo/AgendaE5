@@ -12,11 +12,13 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.logging.Log;
@@ -29,7 +31,6 @@ public class UsuarioController {
 
 	private static final Log LOG = LogFactory.getLog(UsuarioController.class);
 	private final UsuarioService usuarioService;
-	// private final UsuarioRepository usuarioRepository;
 
 	@Autowired
 	/**
@@ -53,10 +54,6 @@ public class UsuarioController {
 		lista.add("1");
 		lista.add("2");
 		lista1.add("7");
-		
-		
-		Usuario usuari = new Usuario("Rcon", "Ramon", "Diaz Rodrigo", "05722902L", "00000", "correo@correo", "usuario", lista, lista1);
-		//usuarioService.saveUsuario(usuari);
 		final Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dni, pass);
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		if (usuario != null) {
@@ -73,10 +70,10 @@ public class UsuarioController {
 	 * 
 	 * @author ae5
 	 */
-	@RequestMapping(value = "/{userDni}", method = RequestMethod.GET)
+	@GetMapping("/{userDni}")
 	// @ApiOperation(value = "Find an user", notes = "Return a user by DNI")
 
-	public ResponseEntity<Usuario> userByDni(@PathVariable final String dni) throws UserNotFound {
+	public ResponseEntity<Usuario> userByDni(@PathVariable final String dni) {
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		Usuario user;
 		try {
@@ -95,7 +92,7 @@ public class UsuarioController {
 	 * @author ae5.
 	 * @throws JSONException 
 	 */
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping()
 
 	public ResponseEntity<Usuario> registrarUsuario(@RequestBody final String usuario) throws JSONException {
 		final JSONObject jso = new JSONObject(usuario);
@@ -103,7 +100,7 @@ public class UsuarioController {
 		final String dni = jso.getString("dni");
 		final String contrasena = jso.getString("password");
 
-		Usuario usuario1 = usuarioService.getUserBynusuarioAndPassword(dni, contrasena);
+		Usuario usuario1 = usuarioService.findByUsernusuario(dni);
 		if (usuario1 == null) {
 			String nombre = null;
 			String apellidos = null;
@@ -143,7 +140,7 @@ public class UsuarioController {
 	 * 
 	 * @author ae5
 	 */
-	@RequestMapping(value = "/{dni}", method = RequestMethod.DELETE)
+	@DeleteMapping("/{dni}")
 	
 
 	public ResponseEntity<Void> deleteUser(@PathVariable final String dni) {
@@ -158,7 +155,7 @@ public class UsuarioController {
 	 * @author ae5
 	 * @throws JSONException 
 	 */
-	@RequestMapping(value = "/{dni}", method = RequestMethod.PUT)
+	@PutMapping("/{dni}")
 
 	public ResponseEntity<Usuario> updateUsuario(@RequestBody final String mensajerecibido,
 			@PathVariable final String dni) throws JSONException {
