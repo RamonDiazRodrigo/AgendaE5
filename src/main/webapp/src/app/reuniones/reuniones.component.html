@@ -1,16 +1,7 @@
-<div class="container">
+<div class="content" fxLayout="row wrap" fxLayoutGap="18px grid">
     <div class="row">
         <div class="col-md 6">
-            <h1>Reuniones</h1>
-            <div *ngFor="let reunion of reuniones">
-                <app-reuniones-pre [reunion]="reunion"></app-reuniones-pre>
-            </div>
-        </div>
-        
-        
-        <div class="col-md 6">
-            <h1>Nuevas reuniones</h1>
-            <div *ngFor="let reunion of reunionesNuevas">
+            <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let reunion of reuniones">
                 <app-reuniones-pre [reunion]="reunion"></app-reuniones-pre>
             </div>
         </div>

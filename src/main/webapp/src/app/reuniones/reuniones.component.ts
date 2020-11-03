@@ -8,7 +8,7 @@ import { ReunionesService } from '../reuniones.service';
   styleUrls: ['./reuniones.component.css']
 })
 export class ReunionesComponent implements OnInit {
-  
+
   public reuniones;
   public reunionesNuevas;
 
@@ -16,18 +16,23 @@ export class ReunionesComponent implements OnInit {
     private service: ReunionesService,
     private auth: AuthService
   ) { }
-  
+
+  gridColumns = 3;
 
   ngOnInit(): void {
 
-    this.service.findReuniones(this.auth.currentUserValue.dni)
-    .subscribe(response=>{
-      this.reuniones = response;
-    });
-    this.service.findReunionesNuevas(this.auth.currentUserValue.dni)
-    .subscribe(response=>{
-      this.reunionesNuevas = response;
-    });
+
+    if (this.auth.currentUserValue.tipo.value == "Asistente") {
+      this.service.findReuniones(this.auth.currentUserValue.dni)
+        .subscribe(response => {
+          this.reuniones = response;
+        });
+    } else {
+      this.service.findAll()
+        .subscribe(response => {
+          this.reuniones = response;
+        });
+    }
   }
 
 }
