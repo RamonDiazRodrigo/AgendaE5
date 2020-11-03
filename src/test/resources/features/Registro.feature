@@ -2,6 +2,7 @@ Feature: Registrarse en la aplicación como asistente
 
 Scenario Outline: <testCase><resultado>
 
+
 Given abrir la aplicación web en el navegador e iniciar el formulario de registro
 When introducir los datos de registro
     |DNI|password|nombre|apellidos|correo|telefono|
