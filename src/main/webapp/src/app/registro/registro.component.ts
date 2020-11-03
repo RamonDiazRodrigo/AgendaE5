@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
+import { AlertaService } from '../services/alerta.service';
 import { UsuarioService } from '../services/usuario.service';
 
 @Component({
@@ -19,8 +19,8 @@ export class RegistroComponent implements OnInit {
   constructor(
       private formBuilder: FormBuilder,
       private router: Router,
-      private authService: AuthService,
-      private userService: UsuarioService
+      private userService: UsuarioService,
+      public alertaService: AlertaService,
   ) {
     
   }
@@ -43,13 +43,37 @@ export class RegistroComponent implements OnInit {
 
   onSubmit() {
       this.submitted = true;
+      this.alertaService.clear();
 
 
-      // para aquí si el form es inválido
-      if (this.registerForm.invalid) {
+     
+      if ((this.f.dni.value.length != 9)) {
+          this.alertaService.error("Formato de DNI incorrecto. El DNI debe de tener 8 números y una letra", false);
           return;
       }
 
+      if ((this.f.password.value.length < 5)) {
+          this.alertaService.error("Formato de contraseña incorrecta. La contraseña debe contener al menos 6 carácteres, mayúsuculas y minúsculas, números y algún símbolo.", false);
+          return;
+      }
+
+      if ((this.f.telefono.value.length != 9) && (!isNaN(this.f.telefono.value))) {
+        this.alertaService.error("Formato de número de teléfono incorrecto. El teléfono debe tener al menos 9 números", false);
+        return;
+    }
+
+    if (isNaN(this.f.telefono.value)) {
+        this.alertaService.error("Formato de número de teléfono incorrecto. El teléfono debe ser un número", false);
+        return;
+    }
+
+    if (!(
+        (this.f.correo.value.includes('@')) &&
+        (this.f.correo.value.includes('.es') || this.f.correo.value.includes('.com')))
+    ) {
+        this.alertaService.error("Formato incorrecto del correo electrónico. ", false);
+        return;
+    }
       
 
       this.loading = true;
@@ -58,33 +82,17 @@ export class RegistroComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                  this.router.navigate(['/login'], { queryParams: { registered: true } });
+                this.alertaService.success('Registration successful', true);
+                this.router.navigate(['/login'], { queryParams: { registered: true } });
               },
               error => {
-                  this.loading = false;
+                this.alertaService.error("Error: El usuario ya está registrado.");
+                this.loading = false;
               });
 
-      function allLetter(inputtxt) {
-          var letters = /^[A-Za-z]+$/;
-          var space = ' ';
-          if (inputtxt.value.match(letters) || inputtxt.value.match(space) || inputtxt.value.match("ñ") || inputtxt.value.match("Ñ")) {
-              return true;
-          }
-          else {
-              return false;
-          }
-      }
 
-      function checkPass(inputText) {
-          var all = /^[A-Za-z0-9,!,@,#,$,%,^,&,*,?,_,~]+$/;
 
-          if (inputText.value.match(all)) {
-              return true;
-          } else {
-              return false;
-          }
-
-      }
+     
 
   }
 
