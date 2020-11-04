@@ -21,7 +21,7 @@ export class ReunionesPreComponent implements OnInit {
 
   verReunion() {
 		const dialogRef = this.dialog.open(ReunionComponent, {
-			width: '400px',
+      width: '325px',
 			data: this.reunion
 		});
   }
