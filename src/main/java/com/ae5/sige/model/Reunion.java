@@ -1,9 +1,10 @@
 package com.ae5.sige.model;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 @Document(collection = "Reuniones")
 public class Reunion {
 	  /**
@@ -63,9 +64,9 @@ public class Reunion {
 	   * @author ae5
 	   */
 	 
-	  private ArrayList<String> listaAsistentes = new ArrayList<>();
+	  private List<String> listaAsistentes = new ArrayList<>();
 	public Reunion(String id, String titulo, String descripcion, String organizador, String fecha, String horaIni,
-			String horaFin, ArrayList<String> listaAsistentes) {
+			String horaFin, List<String> listaAsistentes) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -118,10 +119,10 @@ public class Reunion {
 	public void setHoraFin(String horaFin) {
 		this.horaFin = horaFin;
 	}
-	public ArrayList<String> getListaAsistentes() {
+	public List<String> getListaAsistentes() {
 		return listaAsistentes;
 	}
-	public void setListaAsistentes(ArrayList<String> listaAsistentes) {
+	public void setListaAsistentes(List<String> listaAsistentes) {
 		this.listaAsistentes = listaAsistentes;
 	}
 	@Override
@@ -138,57 +139,7 @@ public class Reunion {
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
 		return result;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Reunion other = (Reunion) obj;
-		if (descripcion == null) {
-			if (other.descripcion != null)
-				return false;
-		} else if (!descripcion.equals(other.descripcion))
-			return false;
-		if (fecha == null) {
-			if (other.fecha != null)
-				return false;
-		} else if (!fecha.equals(other.fecha))
-			return false;
-		if (horaFin == null) {
-			if (other.horaFin != null)
-				return false;
-		} else if (!horaFin.equals(other.horaFin))
-			return false;
-		if (horaIni == null) {
-			if (other.horaIni != null)
-				return false;
-		} else if (!horaIni.equals(other.horaIni))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (listaAsistentes == null) {
-			if (other.listaAsistentes != null)
-				return false;
-		} else if (!listaAsistentes.equals(other.listaAsistentes))
-			return false;
-		if (organizador == null) {
-			if (other.organizador != null)
-				return false;
-		} else if (!organizador.equals(other.organizador))
-			return false;
-		if (titulo == null) {
-			if (other.titulo != null)
-				return false;
-		} else if (!titulo.equals(other.titulo))
-			return false;
-		return true;
-	}
+	
 	@Override
 	public String toString() {
 		return "Reunion [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion + ", organizador="
