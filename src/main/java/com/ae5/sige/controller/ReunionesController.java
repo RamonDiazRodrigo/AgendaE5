@@ -44,7 +44,7 @@ public class ReunionesController {
 	  }
 
     @GetMapping("/Reuniones")
-    public List<Reunion> findAll(){
+    public List<Reunion> findAll(){ 	
     	return reunionService.findAll();
     }
 
