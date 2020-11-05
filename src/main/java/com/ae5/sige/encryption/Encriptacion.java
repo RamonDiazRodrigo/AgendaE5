@@ -40,5 +40,35 @@ public class Encriptacion {
 	    }
 	    return base64EncryptedString;
 	  }
+	  
+	  /**
+	   * Método para desencriptar texto.
+	   * 
+	   * @author e3corp
+	   */
+
+	  public static String desencriptar(final String textoEncriptado) throws Exception {
+
+	    final String secretKey = "ae5sige"; // llave para desencriptar datos
+	    String base64EncryptedString = "";
+
+	    try {
+	      final byte[] message = Base64.decodeBase64(textoEncriptado.getBytes("utf-8"));
+	      final MessageDigest md = MessageDigest.getInstance("MD5");
+	      final byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
+	      final byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+	      final SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+
+	      final Cipher decipher = Cipher.getInstance("DESede");
+	      decipher.init(Cipher.DECRYPT_MODE, key);
+
+	      final byte[] plainText = decipher.doFinal(message);
+
+	      base64EncryptedString = new String(plainText, "UTF-8");
+
+	    } catch (Exception ex) {
+	    }
+	    return base64EncryptedString;
+	  }
 
 }
