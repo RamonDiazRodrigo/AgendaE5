@@ -112,67 +112,67 @@ public class Usuario {
 		this.contrasena = contrasena;
 	}
 
-	public String getnombre() {
+	public String getNombre() {
 		return nombre;
 	}
 
-	public void setnombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public String getapellidos() {
+	public String getApellidos() {
 		return apellidos;
 	}
 
-	public void setapellidos(String apellidos) {
+	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
-	public String getdni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setdni(String dNI) {
+	public void setDni(String dNI) {
 		dni = dNI;
 	}
 
-	public String gettelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void settelefono(String telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
-	public String getcorreo() {
+	public String getCorreo() {
 		return correo;
 	}
 
-	public void setcorreo(String correo) {
+	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
 
-	public String gettipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void settipo(String tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
-	public List<String> getlistaReuniones() {
+	public List<String> getListaReuniones() {
 		return listaReuniones;
 	}
 
-	public void setlistaReuniones(List<String> listaReuniones) {
+	public void setListaReuniones(List<String> listaReuniones) {
 		this.listaReuniones = listaReuniones;
 	}
 
-	public List<String> getlistaReunionesNuevas() {
+	public List<String> getListaReunionesNuevas() {
 		return listaReunionesNuevas;
 	}
 
-	public void setlistaReunionesNuevas(List<String> listaReunionesNuevas) {
+	public void setListaReunionesNuevas(List<String> listaReunionesNuevas) {
 		this.listaReunionesNuevas = listaReunionesNuevas;
 	}
 

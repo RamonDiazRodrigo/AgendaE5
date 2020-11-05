@@ -2,12 +2,15 @@ package com.ae5.sige.encryption;
 
 import java.security.MessageDigest;
 import java.util.Arrays;
+import java.util.Optional;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+
+import com.ae5.sige.model.Usuario;
 
 public class Encriptacion {
 
@@ -44,7 +47,7 @@ public class Encriptacion {
 	  /**
 	   * Método para desencriptar texto.
 	   * 
-	   * @author e3corp
+	   * @author ae5
 	   */
 
 	  public static String desencriptar(final String textoEncriptado) throws Exception {
@@ -70,5 +73,51 @@ public class Encriptacion {
 	    }
 	    return base64EncryptedString;
 	  }
+	  
+	  /**
+	   * Método para desencriptar un  optional usuario.
+	   * 
+	   * @author ae5
+	   */
+	  public static Optional<Usuario> desencriptarOptionalUsuario(final Optional<Usuario> user) {
+
+			try {
+				user.get().setContrasena(desencriptar(user.get().getContrasena()));
+				user.get().setNombre(desencriptar(user.get().getNombre()));
+				user.get().setApellidos(desencriptar(user.get().getApellidos()));
+				user.get().setDni(desencriptar(user.get().getDni()));
+				user.get().setTelefono(desencriptar(user.get().getTelefono()));
+				user.get().setCorreo(desencriptar(user.get().getCorreo()));
+
+				return user;
+			} catch (Exception ex) {
+
+				return null;
+			}
+
+		}
+
+		  /**
+		   * Método para desencriptar usuario.
+		   * 
+		   * @author ae5
+		   */
+		  public static Usuario desencriptarUsuario(final Usuario user) {
+
+		    try {
+
+		    	user.setContrasena(desencriptar(user.getContrasena()));
+				user.setNombre(desencriptar(user.getNombre()));
+				user.setApellidos(desencriptar(user.getApellidos()));
+				user.setDni(desencriptar(user.getDni()));
+				user.setTelefono(desencriptar(user.getTelefono()));
+				user.setCorreo(desencriptar(user.getCorreo()));
+		      return user;
+		    } catch (Exception ex) {
+
+		      return null;
+		    }
+
+		  }
 
 }
