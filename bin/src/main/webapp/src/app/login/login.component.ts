@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   error: string;
   success: string;
-  username: string;
+  DNI: string;
   password: string;
   constructor(
       private formBuilder: FormBuilder,
@@ -29,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void { 
     this.loginForm = this.formBuilder.group({
-      usuario: ['', Validators.required],
+      DNI: ['', Validators.required],
       password: ['', Validators.required]
   });
   }
@@ -41,8 +40,8 @@ export class LoginComponent implements OnInit {
 
  public login(){
     this.submitted = true;
-    console.log("nombre"+this.username)
-    this.UsuarioService.login(this.username, this.password)
+    console.log("DNI"+this.DNI)
+    this.UsuarioService.login(this.DNI, this.password)
     .subscribe(
         data => {
            this.router.navigate(['/reuniones']);
@@ -53,3 +52,31 @@ export class LoginComponent implements OnInit {
             
         });
   }
+
+
+
+ /* usuario:string;
+  contrasena:string;
+
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router
+  ) { }
+
+  ngOnInit(): void {
+  }
+
+  public Login(){
+    const usuario = {
+      "usuario" : this.usuario,
+      "contrasena": this.contrasena
+    };*/
+
+    /*this.usuarioService.login(this.usuario, this.contrasena)
+    .subscribe(response =>
+      this.router.navigate['/registro']
+    )
+  }*/
+
+}
+
