@@ -20,7 +20,7 @@ public class Encriptacion {
 	/**
 	 * Método para encriptar texto.
 	 * 
-	 * @author e3corp
+	 * @author ae5
 	 */
 	public static String encriptar(final String texto) {
 
@@ -158,47 +158,89 @@ public class Encriptacion {
 
 		return usuariosDesencriptados;
 	}
-	
+
 	/**
-	   * Método para desenciptar reuniones.
-	   * 
-	   * @author ae5
-	   */
+	 * Método para desenciptar reuniones.
+	 * 
+	 * @author ae5
+	 */
 
-	  public static Reunion desencriptarCita(Reunion reunion ) {
-	    try {
-	      Reunion r = new Reunion(null, null, null, null, null, null, null, null);
+	public static Reunion desencriptarReunion(Reunion reunion) {
+		try {
 
-	      r.setId(reunion.getId());
-	      
-	      r.setTitulo(desencriptar(reunion.getTitulo()));
-	      r.setTitulo(desencriptar(reunion.getTitulo()));
+			reunion.setId(reunion.getId());
 
-	      r.setDescripcion(desencriptar(reunion.getDescripcion()));
-	      r.setDescripcion(desencriptar(reunion.getDescripcion()));
-	      
-	      r.setOrganizador(desencriptar(reunion.getOrganizador()));
-	      r.setOrganizador(desencriptar(reunion.getOrganizador()));
+			reunion.setTitulo(desencriptar(reunion.getTitulo()));
+			reunion.setTitulo(desencriptar(reunion.getTitulo()));
 
-	      r.setFecha(desencriptar(reunion.getFecha()));
-	      r.setFecha(desencriptar(reunion.getFecha()));
+			reunion.setDescripcion(desencriptar(reunion.getDescripcion()));
+			reunion.setDescripcion(desencriptar(reunion.getDescripcion()));
 
-	      
+			reunion.setOrganizador(desencriptar(reunion.getOrganizador()));
+			reunion.setOrganizador(desencriptar(reunion.getOrganizador()));
 
-	      r.setHoraIni(desencriptar(reunion.getHoraIni()));
-	      r.setHoraIni(desencriptar(reunion.getHoraIni()));
+			reunion.setFecha(desencriptar(reunion.getFecha()));
+			reunion.setFecha(desencriptar(reunion.getFecha()));
 
-	      r.setHoraFin(desencriptar(reunion.getHoraFin()));
-	      r.setHoraFin(desencriptar(reunion.getHoraFin()));
-	      
+			reunion.setHoraIni(desencriptar(reunion.getHoraIni()));
+			reunion.setHoraIni(desencriptar(reunion.getHoraIni()));
 
-	      return r;
-	    }
+			reunion.setHoraFin(desencriptar(reunion.getHoraFin()));
+			reunion.setHoraFin(desencriptar(reunion.getHoraFin()));
 
-	    catch (Exception ex) {
+			return reunion;
+		}
 
-	      return null;
-	    }
-	  }
+		catch (Exception ex) {
 
+			return null;
+		}
+	}
+
+	/**
+	 * Método para desencriptar lista de reuniones.
+	 * 
+	 * @author ae5
+	 */
+	public static List<Reunion> desencriptarListaReuniones(final List<Reunion> reunion) {
+		final List<Reunion> reunionesDesencriptado = new ArrayList<Reunion>();
+		for (Reunion reunionesDesencriptadas : reunion) {
+			reunionesDesencriptado.add(desencriptarReunion(reunionesDesencriptadas));
+		}
+		return reunionesDesencriptado;
+	}
+
+	/**
+	 * Método para desencriptar una optional lista de reuniones.
+	 * 
+	 * @author ae5
+	 */
+
+	public static Optional<Reunion> desencriptarOptionalReuniones(final Optional<Reunion> reunion) {
+		try {
+
+			reunion.get().setTitulo(desencriptar(reunion.get().getTitulo()));
+			reunion.get().setTitulo(desencriptar(reunion.get().getTitulo()));
+
+			reunion.get().setDescripcion(desencriptar(reunion.get().getDescripcion()));
+			reunion.get().setDescripcion(desencriptar(reunion.get().getDescripcion()));
+
+			reunion.get().setOrganizador(desencriptar(reunion.get().getOrganizador()));
+			reunion.get().setOrganizador(desencriptar(reunion.get().getOrganizador()));
+
+			reunion.get().setFecha(desencriptar(reunion.get().getFecha()));
+			reunion.get().setFecha(desencriptar(reunion.get().getFecha()));
+
+			reunion.get().setHoraIni(desencriptar(reunion.get().getHoraIni()));
+			reunion.get().setHoraIni(desencriptar(reunion.get().getHoraIni()));
+
+			reunion.get().setHoraFin(desencriptar(reunion.get().getHoraFin()));
+			reunion.get().setHoraFin(desencriptar(reunion.get().getHoraFin()));
+
+			return reunion;
+		} catch (Exception ex) {
+
+			return null;
+		}
+	}
 }

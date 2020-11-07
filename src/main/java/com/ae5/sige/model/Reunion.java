@@ -76,6 +76,10 @@ public class Reunion {
 		this.horaFin = horaFin;
 		this.listaAsistentes = listaAsistentes;
 	}
+	public Reunion() {
+		
+	}
+	
 	public String getId() {
 		return id;
 	}
