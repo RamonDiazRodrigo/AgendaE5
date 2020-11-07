@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 
 @RestController
 @RequestMapping("/AgendaE5")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200","https://agenda-e5.herokuapp.com/"}, allowedHeaders = "*")
 public class UsuarioController {
 
 	private static final Log LOG = LogFactory.getLog(UsuarioController.class);
