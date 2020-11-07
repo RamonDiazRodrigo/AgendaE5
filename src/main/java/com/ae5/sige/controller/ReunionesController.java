@@ -17,7 +17,7 @@ import com.ae5.sige.service.UsuarioServiceInt;
 
 @RestController
 @RequestMapping("/AgendaE5")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200","https://agenda-e5.herokuapp.com"}, allowedHeaders = "*")
 public class ReunionesController {
 	/**
 	   * Interfaz CitasService.
