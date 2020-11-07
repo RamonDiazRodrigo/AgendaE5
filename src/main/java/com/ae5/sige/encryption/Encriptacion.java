@@ -12,6 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.ae5.sige.model.Reunion;
 import com.ae5.sige.model.Usuario;
 
 public class Encriptacion {
@@ -157,5 +158,47 @@ public class Encriptacion {
 
 		return usuariosDesencriptados;
 	}
+	
+	/**
+	   * Método para desenciptar reuniones.
+	   * 
+	   * @author ae5
+	   */
+
+	  public static Reunion desencriptarCita(Reunion reunion ) {
+	    try {
+	      Reunion r = new Reunion(null, null, null, null, null, null, null, null);
+
+	      r.setId(reunion.getId());
+	      
+	      r.setTitulo(desencriptar(reunion.getTitulo()));
+	      r.setTitulo(desencriptar(reunion.getTitulo()));
+
+	      r.setDescripcion(desencriptar(reunion.getDescripcion()));
+	      r.setDescripcion(desencriptar(reunion.getDescripcion()));
+	      
+	      r.setOrganizador(desencriptar(reunion.getOrganizador()));
+	      r.setOrganizador(desencriptar(reunion.getOrganizador()));
+
+	      r.setFecha(desencriptar(reunion.getFecha()));
+	      r.setFecha(desencriptar(reunion.getFecha()));
+
+	      
+
+	      r.setHoraIni(desencriptar(reunion.getHoraIni()));
+	      r.setHoraIni(desencriptar(reunion.getHoraIni()));
+
+	      r.setHoraFin(desencriptar(reunion.getHoraFin()));
+	      r.setHoraFin(desencriptar(reunion.getHoraFin()));
+	      
+
+	      return r;
+	    }
+
+	    catch (Exception ex) {
+
+	      return null;
+	    }
+	  }
 
 }

@@ -57,7 +57,7 @@ public class UsuarioController {
 		final Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dni, pass);
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		if (usuario != null) {
-			LOG.info("[SERVER] Usuario encontrado: " + usuario.getnombre());
+			LOG.info("[SERVER] Usuario encontrado: " + usuario.getNombre());
 			return ResponseEntity.ok(usuario);
 		} else {
 			LOG.info("[SERVER] No se ha encontrado ningún usuario con esos datos.");
@@ -175,11 +175,11 @@ public class UsuarioController {
 				final String correo = jso.getString("correo");
 				final String contrasena = jso.getString("contrasena");
 
-				usuario.setdni(dni);
-				usuario.setnombre(nombre);
-				usuario.setapellidos(apellidos);
-				usuario.settelefono(telefono);
-				usuario.setcorreo(correo);
+				usuario.setDni(dni);
+				usuario.setNombre(nombre);
+				usuario.setApellidos(apellidos);
+				usuario.setTelefono(telefono);
+				usuario.setCorreo(correo);
 				usuario.setContrasena(contrasena);
 			} catch (JSONException j) {
 				LOG.error("[SERVER] Error en la lectura del JSON.");
