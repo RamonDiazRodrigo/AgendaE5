@@ -1,6 +1,4 @@
-languaje: node.js
-node_js:
-  -"8.11.3"
+languaje: java
 script: 'true'
 deploy:
   provider: heroku
