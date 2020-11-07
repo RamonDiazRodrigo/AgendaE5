@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.ae5.sige.encryption.Encriptacion;
 @Document(collection = "Reuniones")
 public class Reunion {
 	  /**
@@ -68,12 +70,12 @@ public class Reunion {
 			String horaFin, ArrayList<String> listaAsistentes) {
 		super();
 		this.id = id;
-		this.titulo = titulo;
-		this.descripcion = descripcion;
-		this.organizador = organizador;
-		this.fecha = fecha;
-		this.horaIni = horaIni;
-		this.horaFin = horaFin;
+		this.titulo = Encriptacion.encriptar(titulo);
+		this.descripcion = Encriptacion.encriptar(descripcion);
+		this.organizador = Encriptacion.encriptar(organizador);
+		this.fecha = Encriptacion.encriptar(fecha);
+		this.horaIni = Encriptacion.encriptar(horaIni);
+		this.horaFin = Encriptacion.encriptar(horaFin);
 		this.listaAsistentes = listaAsistentes;
 	}
 	public Reunion() {

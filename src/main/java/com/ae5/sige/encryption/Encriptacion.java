@@ -169,23 +169,11 @@ public class Encriptacion {
 		try {
 
 			reunion.setId(reunion.getId());
-
 			reunion.setTitulo(desencriptar(reunion.getTitulo()));
-			reunion.setTitulo(desencriptar(reunion.getTitulo()));
-
 			reunion.setDescripcion(desencriptar(reunion.getDescripcion()));
-			reunion.setDescripcion(desencriptar(reunion.getDescripcion()));
-
 			reunion.setOrganizador(desencriptar(reunion.getOrganizador()));
-			reunion.setOrganizador(desencriptar(reunion.getOrganizador()));
-
 			reunion.setFecha(desencriptar(reunion.getFecha()));
-			reunion.setFecha(desencriptar(reunion.getFecha()));
-
 			reunion.setHoraIni(desencriptar(reunion.getHoraIni()));
-			reunion.setHoraIni(desencriptar(reunion.getHoraIni()));
-
-			reunion.setHoraFin(desencriptar(reunion.getHoraFin()));
 			reunion.setHoraFin(desencriptar(reunion.getHoraFin()));
 
 			return reunion;
@@ -220,21 +208,10 @@ public class Encriptacion {
 		try {
 
 			reunion.get().setTitulo(desencriptar(reunion.get().getTitulo()));
-			reunion.get().setTitulo(desencriptar(reunion.get().getTitulo()));
-
 			reunion.get().setDescripcion(desencriptar(reunion.get().getDescripcion()));
-			reunion.get().setDescripcion(desencriptar(reunion.get().getDescripcion()));
-
 			reunion.get().setOrganizador(desencriptar(reunion.get().getOrganizador()));
-			reunion.get().setOrganizador(desencriptar(reunion.get().getOrganizador()));
-
 			reunion.get().setFecha(desencriptar(reunion.get().getFecha()));
-			reunion.get().setFecha(desencriptar(reunion.get().getFecha()));
-
 			reunion.get().setHoraIni(desencriptar(reunion.get().getHoraIni()));
-			reunion.get().setHoraIni(desencriptar(reunion.get().getHoraIni()));
-
-			reunion.get().setHoraFin(desencriptar(reunion.get().getHoraFin()));
 			reunion.get().setHoraFin(desencriptar(reunion.get().getHoraFin()));
 
 			return reunion;

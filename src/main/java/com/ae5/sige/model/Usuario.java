@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
+import com.ae5.sige.encryption.Encriptacion;
+
 @Document(collection = "Usuarios")
 public class Usuario {
 	/**
@@ -78,12 +80,12 @@ public class Usuario {
 			List<String> listaReunionesNuevas) {
 		super();
 		this.id = UUID.randomUUID().toString();
-		this.contrasena = contrasena;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.dni = dni;
-		this.telefono = telefono;
-		this.correo = correo;
+		this.contrasena = Encriptacion.encriptar(contrasena);
+		this.nombre = Encriptacion.encriptar(nombre);
+		this.apellidos = Encriptacion.encriptar(apellidos);
+		this.dni = Encriptacion.encriptar(dni);
+		this.telefono = Encriptacion.encriptar(telefono);
+		this.correo = Encriptacion.encriptar(correo);
 		this.tipo = tipo;
 		this.listaReuniones = listaReuniones;
 		this.listaReunionesNuevas = listaReunionesNuevas;

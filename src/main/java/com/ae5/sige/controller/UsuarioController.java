@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ae5.sige.model.Usuario;
 import com.ae5.sige.service.UsuarioService;
+import com.ae5.sige.encryption.Encriptacion;
 import com.ae5.sige.exception.UserNotFound;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,10 @@ public class UsuarioController {
 		lista.add("1");
 		lista.add("2");
 		lista1.add("7");
-		final Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dni, pass);
+		
+		   final String dniEncriptado = Encriptacion.encriptar(dni);
+		    final String passEncrip = Encriptacion.encriptar(pass);
+		final Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dniEncriptado, passEncrip);
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		if (usuario != null) {
 			LOG.info("[SERVER] Usuario encontrado: " + usuario.getNombre());
@@ -77,7 +81,8 @@ public class UsuarioController {
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		Usuario user;
 		try {
-			user = usuarioService.findByUsernusuario(dni);
+			 final String dniEncriptado = Encriptacion.encriptar(dni);
+			user = usuarioService.findByUsernusuario(dniEncriptado);
 			LOG.info("[SERVER] Usuario encontrado.");
 		} catch (UserNotFound u) {
 			user = null;
@@ -99,6 +104,8 @@ public class UsuarioController {
 		LOG.info(usuario);
 		final String dni = jso.getString("dni");
 		final String contrasena = jso.getString("password");
+		final String dniEncriptado = Encriptacion.encriptar(dni);
+		final String contrasenaEncrip = Encriptacion.encriptar(contrasena);
 
 		Usuario usuario1 = usuarioService.findByUsernusuario(dni);
 		if (usuario1 == null) {
@@ -122,7 +129,7 @@ public class UsuarioController {
 				return ResponseEntity.badRequest().build();
 			}
 
-			usuario1 = new Usuario(contrasena, nombre, apellidos, dni, telefono, correo, tipo, listaReuniones,
+			usuario1 = new Usuario(contrasenaEncrip, nombre, apellidos, dniEncriptado, telefono, correo, tipo, listaReuniones,
 					listaReunionesNuevas);
 			usuarioService.saveUsuario(usuario1);
 			LOG.info("[SERVER] Usuario registrado.");
@@ -160,7 +167,8 @@ public class UsuarioController {
 	public ResponseEntity<Usuario> updateUsuario(@RequestBody final String mensajerecibido,
 			@PathVariable final String dni) throws JSONException {
 		final JSONObject jso = new JSONObject(mensajerecibido);
-		final Usuario usuario = usuarioService.findByUsernusuario(dni);
+		final String DniEncriptado = Encriptacion.encriptar(dni);
+		final Usuario usuario = usuarioService.findByUsernusuario(DniEncriptado);
 		if (usuario == null) {
 			LOG.info("[SERVER] Error: el usuario no existe.");
 			return ResponseEntity.badRequest().build();
@@ -174,13 +182,20 @@ public class UsuarioController {
 				final String telefono = jso.getString("numTelefono");
 				final String correo = jso.getString("correo");
 				final String contrasena = jso.getString("contrasena");
+				
+				final String nombreEncrip = Encriptacion.encriptar(nombre);
+				final String apellidosEncrip = Encriptacion.encriptar(apellidos);
+				final String telefonoEncrip = Encriptacion.encriptar(telefono);
+				final String correoEncrip = Encriptacion.encriptar(correo);
+				final String contrasenaEncrip = Encriptacion.encriptar(contrasena);
 
-				usuario.setDni(dni);
-				usuario.setNombre(nombre);
-				usuario.setApellidos(apellidos);
-				usuario.setTelefono(telefono);
-				usuario.setCorreo(correo);
-				usuario.setContrasena(contrasena);
+
+				usuario.setDni(DniEncriptado);
+				usuario.setNombre(nombreEncrip);
+				usuario.setApellidos(apellidosEncrip);
+				usuario.setTelefono(telefonoEncrip);
+				usuario.setCorreo(correoEncrip);
+				usuario.setContrasena(contrasenaEncrip);
 			} catch (JSONException j) {
 				LOG.error("[SERVER] Error en la lectura del JSON.");
 				LOG.info(j.getMessage());

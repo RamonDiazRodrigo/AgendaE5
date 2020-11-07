@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
+import com.ae5.sige.encryption.Encriptacion;
 import com.ae5.sige.model.Reunion;
 
 
@@ -55,8 +56,10 @@ public class ReunionRepository implements ReunionRepositoryInt{
 	   */
 	  public Optional<Reunion> findOne(final String id) {
 	    System.out.println("La Reunion buscada es: " + id);
-	    Reunion d = this.mongoOperations.findOne(new Query(Criteria.where("_id").is(id)), Reunion.class);
-	    return Optional.ofNullable(d);
+	    Reunion re = this.mongoOperations.findOne(new Query(Criteria.where("_id").is(id)), Reunion.class);
+	    final Optional<Reunion> reunion = Optional.ofNullable(re);
+	    final Optional<Reunion> reuniondesencriptada = Encriptacion.desencriptarOptionalReuniones(reunion);
+	    return reuniondesencriptada;
 	  }
 
 	  /**
@@ -94,7 +97,8 @@ public class ReunionRepository implements ReunionRepositoryInt{
 	    final List<Reunion> reuniones = this.mongoOperations
 	        .find(new Query(Criteria.where("listaAsistentes").is(dni)), Reunion.class);
 	    System.out.println("REUNIONES ENCONTRADAS: " + reuniones);
-	   return reuniones;
+	    final List<Reunion> reunionesDesencrip = Encriptacion.desencriptarListaReuniones(reuniones);
+	   return reunionesDesencrip;
 	  }
 	
 }
