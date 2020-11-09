@@ -70,12 +70,12 @@ public class Reunion {
 			String horaFin, ArrayList<String> listaAsistentes) {
 		super();
 		this.id = id;
-		this.titulo = Encriptacion.encriptar(titulo);
-		this.descripcion = Encriptacion.encriptar(descripcion);
-		this.organizador = Encriptacion.encriptar(organizador);
-		this.fecha = Encriptacion.encriptar(fecha);
-		this.horaIni = Encriptacion.encriptar(horaIni);
-		this.horaFin = Encriptacion.encriptar(horaFin);
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.organizador = organizador;
+		this.fecha = fecha;
+		this.horaIni = horaIni;
+		this.horaFin = horaFin;
 		this.listaAsistentes = listaAsistentes;
 	}
 	public Reunion() {
