@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ae5.sige.encryption.Encriptacion;
 import com.ae5.sige.exception.UserNotFound;
-import com.ae5.sige.exception.UsersNotFound;
 import com.ae5.sige.model.Usuario;
 import com.ae5.sige.repository.UsuarioRepositoryInt;
 
@@ -41,16 +41,18 @@ public class UsuarioService implements UsuarioServiceInt {
   /**
    * @author ae5
    */
-  public Usuario findByUsernusuario(final String nusuario) {
+  public Usuario findByUsernusuario(final String dni) {
 	
 	  
-    final Optional<Usuario> user = userRepository.findOne(nusuario);
+    final Optional<Usuario> user = userRepository.findOne(dni);
     
     if (user.isPresent()) {	
-	return user.get();
+    	 final Optional<Usuario> userDesencriptado = Encriptacion.desencriptarOptionalUsuario(user);
+
+         return userDesencriptado.get();
     } else {
 
-        throw new UserNotFound(nusuario);
+        throw new UserNotFound(dni);
 
       }
     
@@ -65,11 +67,8 @@ public class UsuarioService implements UsuarioServiceInt {
 	
     final Optional<List<Usuario>> users = userRepository.findAll();
 
-    if (users.isPresent()) {	
-    	return users.get();
-        }else {
-        	throw new UsersNotFound();
-        }
+    final List<Usuario> usersDesencrip = Encriptacion.desencriptarListaUsuarios(users);
+    return usersDesencrip;
         
       
   }
@@ -104,9 +103,11 @@ public class UsuarioService implements UsuarioServiceInt {
    * @author ae5
    */
 
-  public Usuario getUserBynusuarioAndPassword(final String nusuario, final String password) {
+  public Usuario getUserBynusuarioAndPassword(final String dni, final String password) {
 
-    return userRepository.findByDniAndContrasena(nusuario, password);
+    final Usuario usuario = userRepository.findByDniAndContrasena(dni, password);
+    final Usuario usuarioDesencrip = Encriptacion.desencriptarUsuario(usuario);
+    return usuarioDesencrip;
   }
   /**
    * @author ae5
@@ -117,9 +118,5 @@ public class UsuarioService implements UsuarioServiceInt {
 	return userRepository.getReuniones(dni);
   }
 
-@Override
-public List<String> findReunionesNuevas(String dni) {
-	return userRepository.getReunionesNuevas(dni);
-}
 
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ae5.sige.encryption.Encriptacion;
 import com.ae5.sige.model.Reunion;
 import com.ae5.sige.service.ReunionServiceInt;
 import com.ae5.sige.service.UsuarioServiceInt;
@@ -51,18 +53,9 @@ public class ReunionesController {
 
     @GetMapping("/Reuniones/{dni}")
     public ResponseEntity<List<Reunion>> find(@PathVariable("dni") String dni) throws Exception{
+    	final String dniEncriptado = Encriptacion.encriptar(dni);
     	List<Reunion> listReuniones = new ArrayList<>();
-    	List<String> listReunionesID = usuarioService.findReuniones(dni); 
-    	while(!listReunionesID.isEmpty()) {
-    		listReuniones.add(reunionService.findByReunionId(listReunionesID.remove(0)));
-    	}
-        return ResponseEntity.ok(listReuniones); 
-    }
-    
-    @GetMapping("/ReunionesNuevas/{dni}")
-    public ResponseEntity<List<Reunion>> findNuevas(@PathVariable("dni") String dni) throws Exception{
-    	List<Reunion> listReuniones = new ArrayList<>();
-    	List<String> listReunionesID = usuarioService.findReunionesNuevas(dni); 
+    	List<String> listReunionesID = usuarioService.findReuniones(dniEncriptado); 
     	while(!listReunionesID.isEmpty()) {
     		listReuniones.add(reunionService.findByReunionId(listReunionesID.remove(0)));
     	}

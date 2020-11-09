@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import com.ae5.sige.encryption.Encriptacion;
 
 @Document(collection = "Reuniones")
 public class Reunion {
@@ -77,6 +78,10 @@ public class Reunion {
 		this.horaFin = horaFin;
 		this.listaAsistentes = listaAsistentes;
 	}
+	public Reunion() {
+		
+	}
+	
 	public String getId() {
 		return id;
 	}
