@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReunionComponent } from './reunion/reunion.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AlertaComponent } from './alerta/alerta.component';
+import { UsuariosAdminComponent } from './usuarios-admin/usuarios-admin.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AlertaComponent } from './alerta/alerta.component';
     MenuComponent,
     RegistroComponent,
     ReunionComponent,
-    AlertaComponent
+    AlertaComponent,
+    UsuariosAdminComponent
 
   ],
   imports: [
