@@ -38,6 +38,6 @@ public interface UsuarioServiceInt {
 	  
 	  List<String> findReuniones(String dni);
  
-	  List<String> findReunionesNuevas(String dni);
+	
 
 }

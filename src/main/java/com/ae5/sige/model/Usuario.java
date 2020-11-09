@@ -68,16 +68,10 @@ public class Usuario {
 	 * @author ae5
 	 */
 	private List<String> listaReuniones;
-	/**
-	 * listaReunionesNuevas.
-	 * 
-	 * @author ae5
-	 */
-	private List<String> listaReunionesNuevas;
+	
 
 	public Usuario( @NonNull String contrasena, String nombre, String apellidos,
-			@NonNull String dni, String telefono, String correo, String tipo, List<String> listaReuniones,
-			List<String> listaReunionesNuevas) {
+			@NonNull String dni, String telefono, String correo, String tipo, List<String> listaReuniones) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		this.contrasena = Encriptacion.encriptar(contrasena);
@@ -86,9 +80,8 @@ public class Usuario {
 		this.dni = Encriptacion.encriptar(dni);
 		this.telefono = Encriptacion.encriptar(telefono);
 		this.correo = Encriptacion.encriptar(correo);
-		this.tipo = tipo;
+		this.tipo = Encriptacion.encriptar(tipo);
 		this.listaReuniones = listaReuniones;
-		this.listaReunionesNuevas = listaReunionesNuevas;
 	}
 
 
@@ -170,13 +163,6 @@ public class Usuario {
 		this.listaReuniones = listaReuniones;
 	}
 
-	public List<String> getListaReunionesNuevas() {
-		return listaReunionesNuevas;
-	}
-
-	public void setListaReunionesNuevas(List<String> listaReunionesNuevas) {
-		this.listaReunionesNuevas = listaReunionesNuevas;
-	}
 
 	@Override
 	public int hashCode() {
@@ -186,14 +172,14 @@ public class Usuario {
 		result = prime * result + ((contrasena == null) ? 0 : contrasena.hashCode());
 		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
 		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((listaReuniones == null) ? 0 : listaReuniones.hashCode());
-		result = prime * result + ((listaReunionesNuevas == null) ? 0 : listaReunionesNuevas.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -224,15 +210,15 @@ public class Usuario {
 				return false;
 		} else if (!dni.equals(other.dni))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (listaReuniones == null) {
 			if (other.listaReuniones != null)
 				return false;
 		} else if (!listaReuniones.equals(other.listaReuniones))
-			return false;
-		if (listaReunionesNuevas == null) {
-			if (other.listaReunionesNuevas != null)
-				return false;
-		} else if (!listaReunionesNuevas.equals(other.listaReunionesNuevas))
 			return false;
 		if (nombre == null) {
 			if (other.nombre != null)
@@ -249,20 +235,19 @@ public class Usuario {
 				return false;
 		} else if (!tipo.equals(other.tipo))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", Contrasena=" + contrasena + ", nombre=" + nombre + ", apellidos=" + apellidos
+		return "Usuario [id=" + id + ", contrasena=" + contrasena + ", nombre=" + nombre + ", apellidos=" + apellidos
 				+ ", dni=" + dni + ", telefono=" + telefono + ", correo=" + correo + ", tipo=" + tipo
-				+ ", listaReuniones=" + listaReuniones + ", listaReunionesNuevas=" + listaReunionesNuevas + "]";
+				+ ", listaReuniones=" + listaReuniones + "]";
 	}
+
+
+	
 
 	
 }

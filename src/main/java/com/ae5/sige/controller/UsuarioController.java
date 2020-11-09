@@ -50,14 +50,10 @@ public class UsuarioController {
 	@GetMapping("/usuarios")
 	public ResponseEntity<Usuario> getUserPassword(@RequestParam("dni") final String dni,
 			@RequestParam("password") final String pass) {
-		List<String> lista = new ArrayList<>(); 
-		List<String> lista1 = new ArrayList<>();
-		lista.add("1");
-		lista.add("2");
-		lista1.add("7");
 		
 		   final String dniEncriptado = Encriptacion.encriptar(dni);
 		    final String passEncrip = Encriptacion.encriptar(pass);
+			LOG.info(dniEncriptado +" "+ passEncrip );
 		final Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dniEncriptado, passEncrip);
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		if (usuario != null) {
@@ -107,7 +103,7 @@ public class UsuarioController {
 		final String dniEncriptado = Encriptacion.encriptar(dni);
 		final String contrasenaEncrip = Encriptacion.encriptar(contrasena);
 
-		Usuario usuario1 = usuarioService.findByUsernusuario(dni);
+		Usuario usuario1 = usuarioService.getUserBynusuarioAndPassword(dniEncriptado,contrasenaEncrip);
 		if (usuario1 == null) {
 			String nombre = null;
 			String apellidos = null;
@@ -115,7 +111,6 @@ public class UsuarioController {
 			String telefono = null;
 			String tipo = "asistente";
 			List<String> listaReuniones = new ArrayList<>();
-			List<String> listaReunionesNuevas = new ArrayList<>();
 			try {
 				LOG.info("[SERVER] Registrando usuario...");
 				nombre = jso.getString("nombre");
@@ -129,8 +124,7 @@ public class UsuarioController {
 				return ResponseEntity.badRequest().build();
 			}
 
-			usuario1 = new Usuario(contrasenaEncrip, nombre, apellidos, dniEncriptado, telefono, correo, tipo, listaReuniones,
-					listaReunionesNuevas);
+			usuario1 = new Usuario(contrasena, nombre, apellidos, dni, telefono, correo, tipo, listaReuniones);
 			usuarioService.saveUsuario(usuario1);
 			LOG.info("[SERVER] Usuario registrado.");
 			LOG.info("[SERVER] " + usuario1.toString());
@@ -182,12 +176,14 @@ public class UsuarioController {
 				final String telefono = jso.getString("numTelefono");
 				final String correo = jso.getString("correo");
 				final String contrasena = jso.getString("contrasena");
+				final String tipo = jso.getString("tipo");
 				
 				final String nombreEncrip = Encriptacion.encriptar(nombre);
 				final String apellidosEncrip = Encriptacion.encriptar(apellidos);
 				final String telefonoEncrip = Encriptacion.encriptar(telefono);
 				final String correoEncrip = Encriptacion.encriptar(correo);
 				final String contrasenaEncrip = Encriptacion.encriptar(contrasena);
+				final String tipoEncrip = Encriptacion.encriptar(tipo);
 
 
 				usuario.setDni(DniEncriptado);
@@ -196,6 +192,7 @@ public class UsuarioController {
 				usuario.setTelefono(telefonoEncrip);
 				usuario.setCorreo(correoEncrip);
 				usuario.setContrasena(contrasenaEncrip);
+				usuario.setTipo(tipoEncrip);
 			} catch (JSONException j) {
 				LOG.error("[SERVER] Error en la lectura del JSON.");
 				LOG.info(j.getMessage());
