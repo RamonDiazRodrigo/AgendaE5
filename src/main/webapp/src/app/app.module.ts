@@ -15,6 +15,7 @@ import { ReunionComponent } from './reunion/reunion.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { AlertaComponent } from './alerta/alerta.component';
 import { UsuariosAdminComponent } from './usuarios-admin/usuarios-admin.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UsuariosAdminComponent } from './usuarios-admin/usuarios-admin.componen
     ReactiveFormsModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatTableModule
   ],
   entryComponents:[
     ReunionComponent

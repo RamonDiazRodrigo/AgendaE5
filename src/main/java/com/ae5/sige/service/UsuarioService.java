@@ -63,14 +63,8 @@ public class UsuarioService implements UsuarioServiceInt {
    * @author ae5
    */
   public List<Usuario> findAll() {
-
-	
     final Optional<List<Usuario>> users = userRepository.findAll();
-
-    final List<Usuario> usersDesencrip = Encriptacion.desencriptarListaUsuarios(users);
-    return usersDesencrip;
-        
-      
+    return Encriptacion.desencriptarListaUsuarios(users);         
   }
 
   /**

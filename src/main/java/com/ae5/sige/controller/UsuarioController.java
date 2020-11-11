@@ -205,6 +205,13 @@ public class UsuarioController {
 			return ResponseEntity.ok().build();
 		}
 	}
+	
+	@GetMapping("/admin-usuarios/{dni}")
+    public ResponseEntity<List<Usuario>> verUsuarios(@PathVariable final String dni){
+		List<Usuario> users = usuarioService.findAll();
+		
+		return ResponseEntity.ok(users);
+    }
 
 
 }
