@@ -209,7 +209,9 @@ public class UsuarioController {
 	@GetMapping("/admin-usuarios/{dni}")
     public ResponseEntity<List<Usuario>> verUsuarios(@PathVariable final String dni){
 		List<Usuario> users = usuarioService.findAll();
-		
+		LOG.info("[SERVER] Usuarios encontrados" + users.size());
+		for(int i=0; i<users.size();i++)
+			LOG.info(users.get(i));
 		return ResponseEntity.ok(users);
     }
 

@@ -6,7 +6,7 @@ import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 export interface DatosUsuario{
-  contraseña: string;
+  contrasena: string;
   nombre: string;
   apellidos: string;
   dni: string;
@@ -22,7 +22,7 @@ export interface DatosUsuario{
 })
 
 export class UsuariosAdminComponent{
-  columnas: string[] = ['dni', 'nombre', 'apellidos', 'telefono', 'correo', 'tipo'];
+  columnas: string[] = ['contrasena', 'nombre', 'apellidos','dni', 'telefono', 'correo', 'tipo'];
   dataSource = new MatTableDataSource<DatosUsuario>();
   data: DatosUsuario[];
   constructor(
@@ -36,8 +36,15 @@ export class UsuariosAdminComponent{
     this.user.getUsuarios(this.auth.currentUserValue.dni)
     .subscribe((data: DatosUsuario[]) => {
       this.data = data;
+      console.log(data)
       this.dataSource = new MatTableDataSource(data);
     });
+  }
+  modificar(): void{
+    console.log("modificar")
+  }
+  eliminar(): void{
+    console.log("eliminar")
   }
 
 }
