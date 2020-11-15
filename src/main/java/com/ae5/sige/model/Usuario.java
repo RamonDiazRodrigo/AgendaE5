@@ -83,6 +83,20 @@ public class Usuario {
 		this.tipo = Encriptacion.encriptar(tipo);
 		this.listaReuniones = listaReuniones;
 	}
+	
+	public Usuario( String id, String contrasena, String nombre, String apellidos,
+			@NonNull String dni, String telefono, String correo, String tipo, List<String> listaReuniones) {
+		super();
+		this.id = id;
+		this.contrasena = (contrasena);
+		this.nombre = (nombre);
+		this.apellidos = (apellidos);
+		this.dni = (dni);
+		this.telefono = (telefono);
+		this.correo = (correo);
+		this.tipo = (tipo);
+		this.listaReuniones = listaReuniones;
+	}
 
 
 	public Usuario() {

@@ -13,7 +13,7 @@ export class MenuComponent implements OnInit {
     private UsuarioService: AuthService) { }
 
   ngOnInit(): void {
-    this.nombre = this.UsuarioService.currentUserValue.nombre + " " + this.UsuarioService.currentUserValue.apellidos;
+    this.nombre = this.UsuarioService.currentUserValue[0].nombre;
     if (this.UsuarioService.currentUserValue.tipo != "Asistente") {
       this.admin = true;
     }

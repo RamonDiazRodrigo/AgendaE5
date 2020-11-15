@@ -29,4 +29,10 @@ export class ReunionComponent {
      closeDialog(){
        this.dialogRef.close({event: 'Cancel'})
      }
+     modificar(){
+
+     }
+     eliminar(){
+       
+     }
 }
