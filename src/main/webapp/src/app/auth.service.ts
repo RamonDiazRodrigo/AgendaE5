@@ -9,11 +9,15 @@ import { Router } from '@angular/router';
 export class AuthService {
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
+    private tokenSubject: BehaviorSubject<any>;
+    public token: Observable<any>;
     private uri = 'http://localhost:9000/AgendaE5';
     
     constructor(private http: HttpClient, private router: Router) {
         this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
+        this.tokenSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('token')));
+        this.token = this.tokenSubject.asObservable();
     }
 
     public get currentUserValue() {
@@ -25,11 +29,11 @@ export class AuthService {
             .set('dni', dni)
             .set('password', password);
         return this.http.get(this.uri+'/usuarios', { params : params })
-            .pipe(map(user => {
+            .pipe(map(token => {
                 // almacena detalles del usuario y el token jwt en el almacenamiento local para mantener al usuario logueado entre refrescos de página
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                this.currentUserSubject.next(user);
-                return user;
+                localStorage.setItem('currentUser', JSON.stringify(token));
+                this.currentUserSubject.next(token);
+                return token[0];
             }));
     }
 

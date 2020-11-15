@@ -51,7 +51,7 @@ public class UsuarioController {
 	 */
 
 	@GetMapping("/usuarios")
-	public ResponseEntity<JSONArray> getUserPassword(@RequestParam("dni") final String dni,
+	public ResponseEntity<String> getUserPassword(@RequestParam("dni") final String dni,
 			@RequestParam("password") final String pass) {		
 		final String dniEncriptado = Encriptacion.encriptar(dni);
 		final String passEncrip = Encriptacion.encriptar(pass);
@@ -61,7 +61,7 @@ public class UsuarioController {
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		if (usuario != null) {
 			LOG.info("[SERVER] Usuario encontrado: " + usuario.getNombre());
-			return ResponseEntity.ok(token);
+			return ResponseEntity.ok(token.toString());
 		} else {
 			LOG.info("[SERVER] No se ha encontrado ningún usuario con esos datos.");
 			return ResponseEntity.badRequest().build();
