@@ -7,8 +7,10 @@ import com.ae5.sige.model.Usuario;
 import com.ae5.sige.service.UsuarioService;
 import com.ae5.sige.encryption.Encriptacion;
 import com.ae5.sige.exception.UserNotFound;
+import com.ae5.sige.encryption.Token;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 
 @RestController
 @RequestMapping("/AgendaE5")
@@ -42,23 +45,23 @@ public class UsuarioController {
 	}
 
 	/**
-	 * Obtiene la contraseña del usuario mediante su dni.
+	 * Login de usuario
 	 * 
 	 * @author ae5
 	 */
 
 	@GetMapping("/usuarios")
-	public ResponseEntity<Usuario> getUserPassword(@RequestParam("dni") final String dni,
-			@RequestParam("password") final String pass) {
-		
-		   final String dniEncriptado = Encriptacion.encriptar(dni);
-		    final String passEncrip = Encriptacion.encriptar(pass);
-			LOG.info(dniEncriptado +" "+ passEncrip );
+	public ResponseEntity<JSONArray> getUserPassword(@RequestParam("dni") final String dni,
+			@RequestParam("password") final String pass) {		
+		final String dniEncriptado = Encriptacion.encriptar(dni);
+		final String passEncrip = Encriptacion.encriptar(pass);
+		LOG.info(dniEncriptado +" "+ passEncrip );
 		final Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dniEncriptado, passEncrip);
+		JSONArray token = Token.createToken(usuario);
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		if (usuario != null) {
 			LOG.info("[SERVER] Usuario encontrado: " + usuario.getNombre());
-			return ResponseEntity.ok(usuario);
+			return ResponseEntity.ok(token);
 		} else {
 			LOG.info("[SERVER] No se ha encontrado ningún usuario con esos datos.");
 			return ResponseEntity.badRequest().build();
@@ -77,7 +80,7 @@ public class UsuarioController {
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		Usuario user;
 		try {
-			 final String dniEncriptado = Encriptacion.encriptar(dni);
+			final String dniEncriptado = Encriptacion.encriptar(dni);
 			user = usuarioService.findByUsernusuario(dniEncriptado);
 			LOG.info("[SERVER] Usuario encontrado.");
 		} catch (UserNotFound u) {
@@ -117,7 +120,7 @@ public class UsuarioController {
 				apellidos = jso.getString("apellidos");
 				telefono = jso.getString("telefono");
 				correo = jso.getString("correo");
-				
+
 			} catch (JSONException j) {
 				LOG.info("[SERVER] Error en la lectura del JSON.");
 				LOG.info(j.getMessage());
@@ -142,14 +145,14 @@ public class UsuarioController {
 	 * @author ae5
 	 */
 	@DeleteMapping("/{dni}")
-	
+
 
 	public ResponseEntity<Void> deleteUser(@PathVariable final String dni) {
 		LOG.info("Delete user " + dni);
 		usuarioService.deleteUsuario(dni);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	/**
 	 * actualiza un usuario en funcion de su dni.
 	 * 
@@ -177,7 +180,7 @@ public class UsuarioController {
 				final String correo = jso.getString("correo");
 				final String contrasena = jso.getString("contrasena");
 				final String tipo = jso.getString("tipo");
-				
+
 				final String nombreEncrip = Encriptacion.encriptar(nombre);
 				final String apellidosEncrip = Encriptacion.encriptar(apellidos);
 				final String telefonoEncrip = Encriptacion.encriptar(telefono);
@@ -205,15 +208,15 @@ public class UsuarioController {
 			return ResponseEntity.ok().build();
 		}
 	}
-	
+
 	@GetMapping("/admin-usuarios/{dni}")
-    public ResponseEntity<List<Usuario>> verUsuarios(@PathVariable final String dni){
+	public ResponseEntity<List<Usuario>> verUsuarios(@PathVariable final String dni){
 		List<Usuario> users = usuarioService.findAll();
 		LOG.info("[SERVER] Usuarios encontrados" + users.size());
 		for(int i=0; i<users.size();i++)
 			LOG.info(users.get(i));
 		return ResponseEntity.ok(users);
-    }
+	}
 
 
 }
