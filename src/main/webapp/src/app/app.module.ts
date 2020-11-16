@@ -16,7 +16,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { AlertaComponent } from './alerta/alerta.component';
 import { UsuariosAdminComponent } from './usuarios-admin/usuarios-admin.component';
 import { MatTableModule } from '@angular/material/table';
+import { PerfilusuarioComponent } from './perfilusuario/perfilusuario.component';
 import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
     RegistroComponent,
     ReunionComponent,
     AlertaComponent,
-    UsuariosAdminComponent
+    UsuariosAdminComponent,
+    PerfilusuarioComponent
+    
 
   ],
   imports: [
@@ -43,7 +47,8 @@ import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
     MatTableModule
   ],
   entryComponents:[
-    ReunionComponent
+    ReunionComponent,
+    PerfilusuarioComponent
   ],
   providers: [
     {
