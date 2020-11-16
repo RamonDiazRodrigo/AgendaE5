@@ -98,10 +98,7 @@ public class UsuarioService implements UsuarioServiceInt {
    */
 
   public Usuario getUserBynusuarioAndPassword(final String dni, final String password) {
-
-    final Usuario usuario = userRepository.findByDniAndContrasena(dni, password);
-    final Usuario usuarioDesencrip = Encriptacion.desencriptarUsuario(usuario);
-    return usuarioDesencrip;
+    return userRepository.findByDniAndContrasena(dni, password);
   }
   /**
    * @author ae5

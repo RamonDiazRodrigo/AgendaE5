@@ -16,8 +16,8 @@ export class MenuComponent implements OnInit {
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.nombre = this.UsuarioService.currentUserValue.nombre + " " + this.UsuarioService.currentUserValue.apellidos;
-    if (this.UsuarioService.currentUserValue.tipo != "Asistente") {
+    this.nombre = this.UsuarioService.currentUserValue[0].nombre;
+    if (this.UsuarioService.currentUserValue[0].tipo == "eZDSxHyOBUbwM/Gkve6imQ==") {
       this.admin = true;
     }
     else {
