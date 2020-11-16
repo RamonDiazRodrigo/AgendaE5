@@ -70,7 +70,7 @@ public class UsuarioController {
 	 * 
 	 * @author ae5
 	 */
-	@GetMapping("/{userDni}")
+	@GetMapping("/perfil/{dni}")
 	// @ApiOperation(value = "Find an user", notes = "Return a user by DNI")
 
 	public ResponseEntity<Usuario> userByDni(@PathVariable final String dni) {

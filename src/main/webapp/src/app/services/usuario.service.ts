@@ -22,4 +22,8 @@ update(user,id) {
 getUsuarios(id){
   return this.http.get(`${environment.apiUrl}/admin-usuarios/${id}`);
 }
+
+findUser(id){
+  return this.http.get(`${environment.apiUrl}/perfil/${id}`);
+}
 }

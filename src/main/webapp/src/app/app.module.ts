@@ -16,6 +16,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { AlertaComponent } from './alerta/alerta.component';
 import { UsuariosAdminComponent } from './usuarios-admin/usuarios-admin.component';
 import { MatTableModule } from '@angular/material/table';
+import { PerfilusuarioComponent } from './perfilusuario/perfilusuario.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { MatTableModule } from '@angular/material/table';
     RegistroComponent,
     ReunionComponent,
     AlertaComponent,
-    UsuariosAdminComponent
+    UsuariosAdminComponent,
+    PerfilusuarioComponent
+    
 
   ],
   imports: [
@@ -42,7 +45,8 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule
   ],
   entryComponents:[
-    ReunionComponent
+    ReunionComponent,
+    PerfilusuarioComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
