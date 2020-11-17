@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,10 @@ export class ReunionesService {
   public findReuniones(id){
     return this.http.get(this.uri + '/Reuniones/' + id);
   }
-  public findReunionesNuevas(id){
-    return this.http.get(this.uri + '/ReunionesNuevas/' + id);
+  
+  public cancelarReunion(dni,id){
+  
+    return this.http.post(`${environment.apiUrl}/CancelarReuniones/${dni}`,id);
   }
 
 }

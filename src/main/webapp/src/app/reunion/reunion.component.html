@@ -39,7 +39,13 @@
           <input type="text" class="form-control" matInput [(ngModel)]="local_data.listaAsistentes"
             name="listaAsistentes" disabled="false">
         </div>
+        <div>
+          <button raised-button (click)="modificar()" mat-flat-button color="green"
+            class="btn btn-primary">Modificar</button>
 
+          <button raised-button (click)="eliminar()" mat-flat-button color="red"
+            class="btn btn-danger">Eliminar</button>
+        </div>
 
       </form>
     </mat-dialog-content>
