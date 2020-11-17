@@ -50,7 +50,7 @@ public class Token {
 				
 	}
 	public static boolean header(String aux2) throws JSONException {
-		 String[] part1 = aux2.split("\\[");
+		  String[] part1 = aux2.split("\\[");
 		  String[] part = part1[1].split("\\]");
 		  System.out.println(part[0]);
 		  String[]part3 = part[0].split("\\}");
@@ -84,6 +84,7 @@ public class Token {
 			return null;
 		}
 	}
+	
 	@Scheduled(fixedDelay = 30000)
 	public void deletetokenaftertime() throws JSONException {
 		LOG.info("Comprobación token antiguos");

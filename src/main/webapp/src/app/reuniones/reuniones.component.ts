@@ -22,8 +22,8 @@ export class ReunionesComponent implements OnInit {
   ngOnInit(): void {
 
 
-    if (this.auth.currentUserValue[0].tipo.value == "Asistente") {
-      this.service.findReuniones(this.auth.currentUserValue.dni)
+    if (this.auth.currentUserValue[0].tipo != "NJlGkLOGjTQ=")  {
+      this.service.findReuniones(this.auth.currentUserValue[0].dni)
         .subscribe(response => {
           this.reuniones = response;
         });

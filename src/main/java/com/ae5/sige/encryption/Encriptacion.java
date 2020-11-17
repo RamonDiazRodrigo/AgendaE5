@@ -91,7 +91,7 @@ public class Encriptacion {
 			usuario.get().setDni(desencriptar(usuario.get().getDni()));
 			usuario.get().setTelefono(desencriptar(usuario.get().getTelefono()));
 			usuario.get().setCorreo(desencriptar(usuario.get().getCorreo()));
-
+			usuario.get().setTipo(desencriptar(usuario.get().getTipo()));
 			return usuario;
 		} catch (Exception ex) {
 
@@ -115,12 +115,31 @@ public class Encriptacion {
 			usuario.setDni(desencriptar(usuario.getDni()));
 			usuario.setTelefono(desencriptar(usuario.getTelefono()));
 			usuario.setCorreo(desencriptar(usuario.getCorreo()));
+			usuario.setTipo(desencriptar(usuario.getTipo()));
 			return usuario;
 		} catch (Exception ex) {
 
 			return null;
 		}
+		
+	}
+	
+	public static Usuario encriptarUsuario(final Usuario usuario) {
 
+		try {
+
+			usuario.setContrasena(encriptar(usuario.getContrasena()));
+			usuario.setNombre(encriptar(usuario.getNombre()));
+			usuario.setApellidos(encriptar(usuario.getApellidos()));
+			usuario.setDni(encriptar(usuario.getDni()));
+			usuario.setTelefono(encriptar(usuario.getTelefono()));
+			usuario.setCorreo(encriptar(usuario.getCorreo()));
+			usuario.setTipo(encriptar(usuario.getTipo()));
+			return usuario;
+		} catch (Exception ex) {
+
+			return null;
+		}
 	}
 
 	/**

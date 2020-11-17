@@ -28,7 +28,8 @@ public class Interceptor implements HandlerInterceptor {
 				 response.setStatus(401);
 				 return false;
 			 }
-			 
+			 String aux = request.getRequestURL().toString();
+			 System.out.println(aux);
 		   }
 
       return true;

@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.nombre = this.UsuarioService.currentUserValue[0].nombre;
-    if (this.UsuarioService.currentUserValue[0].tipo == "eZDSxHyOBUbwM/Gkve6imQ==") {
+    if (this.UsuarioService.currentUserValue[0].tipo == "NJlGkLOGjTQ=") {
       this.admin = true;
     }
     else {
@@ -26,8 +26,10 @@ export class MenuComponent implements OnInit {
   }
 
   verPerfil(){
+
     const dialogRef = this.dialog.open(PerfilusuarioComponent, {
-      width: '325px'
+      width: '450px'
+      
 		});
     
   }

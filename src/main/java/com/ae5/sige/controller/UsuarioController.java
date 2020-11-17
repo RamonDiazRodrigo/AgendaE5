@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tomcat.jni.User;
 
 
 @RestController
@@ -78,16 +79,17 @@ public class UsuarioController {
 
 	public ResponseEntity<Usuario> userByDni(@PathVariable final String dni) {
 		LOG.info("[SERVER] Buscando usuario: " + dni);
-		Usuario user;
+		
 		try {
-			final String dniEncriptado = Encriptacion.encriptar(dni);
-			user = usuarioService.findByUsernusuario(dniEncriptado);
+			Usuario user = usuarioService.findByUsernusuario(dni);
 			LOG.info("[SERVER] Usuario encontrado.");
+			return ResponseEntity.ok(user);
 		} catch (UserNotFound u) {
-			user = null;
+			
 			LOG.error("[SERVER] Usuario no encontrado.");
+			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(user);
+		
 	}
 
 	/**
@@ -112,7 +114,7 @@ public class UsuarioController {
 			String apellidos = null;
 			String correo = null;
 			String telefono = null;
-			String tipo = "asistente";
+			String tipo = "asistente";//"admin"
 			List<String> listaReuniones = new ArrayList<>();
 			try {
 				LOG.info("[SERVER] Registrando usuario...");
@@ -209,14 +211,15 @@ public class UsuarioController {
 		}
 	}
 
-	@GetMapping("/admin-usuarios/{dni}")
-	public ResponseEntity<List<Usuario>> verUsuarios(@PathVariable final String dni){
+	@GetMapping("/admin-usuarios")
+	public ResponseEntity<List<Usuario>> verUsuarios(){
 		List<Usuario> users = usuarioService.findAll();
 		LOG.info("[SERVER] Usuarios encontrados" + users.size());
 		for(int i=0; i<users.size();i++)
 			LOG.info(users.get(i));
 		return ResponseEntity.ok(users);
 	}
+	
 
 
 }

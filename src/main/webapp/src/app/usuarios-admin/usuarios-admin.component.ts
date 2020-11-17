@@ -33,7 +33,7 @@ export class UsuariosAdminComponent{
   ) { }
 
   ngOnInit(): void {
-    this.user.getUsuarios(this.auth.currentUserValue.dni)
+    this.user.getUsuarios()
     .subscribe((data: DatosUsuario[]) => {
       this.data = data;
       console.log(data)
@@ -41,10 +41,10 @@ export class UsuariosAdminComponent{
     });
   }
   modificar(): void{
-    console.log("modificar")
+   
   }
   eliminar(): void{
-    console.log("eliminar")
+    
   }
 
 }

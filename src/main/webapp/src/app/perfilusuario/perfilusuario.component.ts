@@ -26,7 +26,7 @@ export class PerfilusuarioComponent implements OnInit {
          correo: " "
 
        };
-      this.userservice.findUser(this.auth.currentUserValue.dni)
+      this.userservice.findUser(this.auth.currentUserValue[0].dni)
       .subscribe(response => {
         this.user = response;
       });
