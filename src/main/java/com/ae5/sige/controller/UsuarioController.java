@@ -3,7 +3,9 @@ package com.ae5.sige.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ae5.sige.model.Reunion;
 import com.ae5.sige.model.Usuario;
+import com.ae5.sige.service.ReunionServiceInt;
 import com.ae5.sige.service.UsuarioService;
 import com.ae5.sige.encryption.Encriptacion;
 import com.ae5.sige.exception.UserNotFound;
@@ -36,13 +38,15 @@ public class UsuarioController {
 
 	private static final Log LOG = LogFactory.getLog(UsuarioController.class);
 	private final UsuarioService usuarioService;
+	private final ReunionServiceInt reunionService;
 
 	@Autowired
 	/**
 	 * @author ae5
 	 */
-	public UsuarioController(final UsuarioService usuarioService) {
+	public UsuarioController(final UsuarioService usuarioService, final ReunionServiceInt reunionService) {
 		this.usuarioService = usuarioService;
+		 this.reunionService = reunionService;
 	}
 
 	/**
@@ -145,12 +149,23 @@ public class UsuarioController {
 	 * Borra un usuario en funcion de su dni.
 	 * 
 	 * @author ae5
+	 * @throws Exception 
 	 */
 	@DeleteMapping("/{dni}")
 
 
-	public ResponseEntity<Void> deleteUser(@PathVariable final String dni) {
+	public ResponseEntity<Void> deleteUser(@PathVariable final String dni) throws Exception {
 		LOG.info("Delete user " + dni);
+	 	Usuario user = usuarioService.findByUsernusuario(dni);
+	 	 List<String> listaReuniones = user.getListaReuniones();
+	 	 while(!listaReuniones.isEmpty()){
+	 		String idreunion = listaReuniones.remove(0);
+	 		Reunion reunion = reunionService.findByReunionId(idreunion);
+	 		List<String> listaAsistentes = reunion.getListaAsistentes();
+	 		listaAsistentes.remove(listaAsistentes.indexOf(dni));
+	 		reunion.setListaAsistentes(listaAsistentes);
+	 		reunionService.updateReunion(reunion);
+	 	 }
 		usuarioService.deleteUsuario(dni);
 		return ResponseEntity.noContent().build();
 	}
