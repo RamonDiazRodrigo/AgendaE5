@@ -1,4 +1,4 @@
-package com.ae5.sige.encryption;
+package com.ae5.sige.security;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -18,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.ae5.sige.encryption.Encriptacion;
 import com.ae5.sige.model.Usuario;
 
 @Configuration
@@ -25,7 +26,7 @@ import com.ae5.sige.model.Usuario;
 public class Token {
 	
 	private static final Log LOG = LogFactory.getLog(Token.class);
-	private static HashMap<String, JSONArray> tokens = new HashMap<String, JSONArray>();
+	private static HashMap<String, JSONArray> tokens = new HashMap<>();
 		
 	public static JSONArray createToken(Usuario user) {
 
@@ -37,7 +38,6 @@ public class Token {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(tokenuser);
 		String md5 = getMD5(tokenuser.toString());
 		String json = getMD5(tokenuser+md5);
 		JSONArray token = new JSONArray();
@@ -49,32 +49,23 @@ public class Token {
 		return token;
 				
 	}
-	public static boolean header(String aux2) throws JSONException {
+	public static JSONArray header(String aux2) throws JSONException {
 		  String[] part1 = aux2.split("\\[");
 		  String[] part = part1[1].split("\\]");
-		  System.out.println(part[0]);
 		  String[]part3 = part[0].split("\\}");
 		  JSONObject jso = new JSONObject(part3[0]+"}"); 
-		  System.out.println(jso);
 		  String[] part4 = part3[1].split(",");
 		  String uno = part4[1].replace("\"", "");
 		  LocalTime dos = LocalTime.parse(part4[2].replace("\"", ""));
-		  System.out.println(part4[2]);
 		  JSONArray tokenuser = new JSONArray();
 		  tokenuser.put(jso);
 		  tokenuser.put(uno);
 		  tokenuser.put(dos);
-		  JSONArray tokennwe = checkToken(tokenuser);
-		  if(tokennwe==null) {
-			  return false;
-		  }
-		  return true;
+		  return checkToken(tokenuser);
 		  
 	}
 	
 	public static JSONArray checkToken(JSONArray token) throws JSONException {
-		HashMap<String, JSONArray> tokens1 = tokens;
-		String md= getMD5(token.toString());
 		if(tokens.containsKey(getMD5(token.toString()))) {
 			tokens.remove(token.toString());
 			token.put(2, LocalTime.now());
@@ -92,9 +83,6 @@ public class Token {
 		List<JSONArray> tokenaux = new ArrayList<>();
 		for (JSONArray value : tokens.values()) {
 			tokenaux.add(value);
-		}
-		for(int i = 0; i<tokens.size(); i++) {
-			
 		}
 
 		while(!tokenaux.isEmpty()) {

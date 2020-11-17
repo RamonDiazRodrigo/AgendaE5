@@ -1,4 +1,4 @@
-package com.ae5.sige.encryption;
+package com.ae5.sige.interceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

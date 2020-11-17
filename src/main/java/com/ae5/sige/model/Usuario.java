@@ -2,11 +2,7 @@ package com.ae5.sige.model;
 
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.lang.NonNull;
-
 import com.ae5.sige.encryption.Encriptacion;
 
 @Document(collection = "Usuarios")
@@ -16,14 +12,12 @@ public class Usuario {
 	 * 
 	 * @author ae5
 	 */
-	@Id
 	private String id;
 	/**
 	 * Contrasena.
 	 * 
 	 * @author ae5
 	 */
-	@NonNull
 	private String contrasena;
 	/**
 	 * nombre.
@@ -42,7 +36,6 @@ public class Usuario {
 	 * 
 	 * @author ae5
 	 */
-	@NonNull
 	private String dni;
 	/**
 	 * telefono.
@@ -70,8 +63,8 @@ public class Usuario {
 	private List<String> listaReuniones;
 	
 
-	public Usuario( @NonNull String contrasena, String nombre, String apellidos,
-			@NonNull String dni, String telefono, String correo, String tipo, List<String> listaReuniones) {
+	public Usuario( String contrasena, String nombre, String apellidos,
+			 String dni, String telefono, String correo, String tipo, List<String> listaReuniones) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		this.contrasena = Encriptacion.encriptar(contrasena);
@@ -85,7 +78,7 @@ public class Usuario {
 	}
 	
 	public Usuario( String id, String contrasena, String nombre, String apellidos,
-			@NonNull String dni, String telefono, String correo, String tipo, List<String> listaReuniones) {
+			String dni, String telefono, String correo, String tipo, List<String> listaReuniones) {
 		super();
 		this.id = id;
 		this.contrasena = (contrasena);

@@ -42,14 +42,11 @@ public class UsuarioService implements UsuarioServiceInt {
    * @author ae5
    */
   public Usuario findByUsernusuario(final String dni) {
-	
 	  
     final Optional<Usuario> user = userRepository.findOne(dni);
     
-    if (user.isPresent()) {	
-    	 final Optional<Usuario> userDesencriptado = Encriptacion.desencriptarOptionalUsuario(user);
-
-         return userDesencriptado.get();
+    if (user.isPresent()) {		
+         return Encriptacion.desencriptarUsuario(user.get());
     } else {
 
         throw new UserNotFound(dni);
