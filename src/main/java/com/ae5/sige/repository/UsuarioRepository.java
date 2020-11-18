@@ -84,8 +84,8 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	   * @author ae5
 	   */
 	  public void deleteUsuario(final String dni) {
-
-	    this.mongoOperations.findAndRemove(new Query(Criteria.where("DNI").is(dni)), Usuario.class);
+		  System.out.println("Entra en el repository del delete con dni: " +dni);
+	    this.mongoOperations.findAndRemove(new Query(Criteria.where("dni").is(dni)), Usuario.class);
 
 	  }
 

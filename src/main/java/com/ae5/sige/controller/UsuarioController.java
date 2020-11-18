@@ -118,7 +118,7 @@ public class UsuarioController {
 			String apellidos = null;
 			String correo = null;
 			String telefono = null;
-			String tipo = "asistente";//"admin"
+			String tipo = "asistente";
 			List<String> listaReuniones = new ArrayList<>();
 			try {
 				LOG.info("[SERVER] Registrando usuario...");
@@ -151,12 +151,12 @@ public class UsuarioController {
 	 * @author ae5
 	 * @throws Exception 
 	 */
-	@DeleteMapping("/{dni}")
+	@DeleteMapping("/deleteUser/{dni}")
 
 
 	public ResponseEntity<Void> deleteUser(@PathVariable final String dni) throws Exception {
 		LOG.info("Delete user " + dni);
-	 	Usuario user = usuarioService.findByUsernusuario(dni);
+	 	Usuario user = usuarioService.findByUsernusuario(Encriptacion.encriptar(dni));
 	 	 List<String> listaReuniones = user.getListaReuniones();
 	 	 while(!listaReuniones.isEmpty()){
 	 		String idreunion = listaReuniones.remove(0);
@@ -166,7 +166,7 @@ public class UsuarioController {
 	 		reunion.setListaAsistentes(listaAsistentes);
 	 		reunionService.updateReunion(reunion);
 	 	 }
-		usuarioService.deleteUsuario(dni);
+		usuarioService.deleteUsuario(Encriptacion.encriptar(dni));
 		return ResponseEntity.noContent().build();
 	}
 
@@ -235,6 +235,56 @@ public class UsuarioController {
 		return ResponseEntity.ok(users);
 	}
 	
+	/**
+	 * Registramos un usuario como admin y guardamos ese usuario en la base de datos.
+	 * 
+	 * @author ae5.
+	 * @throws JSONException 
+	 */
+	
+	@PostMapping("/adminregistro")
+
+	public ResponseEntity<Usuario> admin_registrarUsuario(@RequestBody final String usuario) throws JSONException {
+		final JSONObject jso = new JSONObject(usuario);
+		LOG.info(usuario);
+		final String dni = jso.getString("dni");
+		final String contrasena = jso.getString("password");
+		final String dniEncriptado = Encriptacion.encriptar(dni);
+		final String contrasenaEncrip = Encriptacion.encriptar(contrasena);
+
+		Usuario usuario1 = usuarioService.getUserBynusuarioAndPassword(dniEncriptado,contrasenaEncrip);
+		if (usuario1 == null) {
+			String nombre = null;
+			String apellidos = null;
+			String correo = null;
+			String telefono = null;
+			String tipo = null;
+			List<String> listaReuniones = new ArrayList<>();
+			try {
+				LOG.info("[SERVER] Registrando usuario...");
+				nombre = jso.getString("nombre");
+				apellidos = jso.getString("apellidos");
+				telefono = jso.getString("telefono");
+				correo = jso.getString("correo");
+				tipo = jso.getString("tipo");
+
+			} catch (JSONException j) {
+				LOG.info("[SERVER] Error en la lectura del JSON.");
+				LOG.info(j.getMessage());
+				return ResponseEntity.badRequest().build();
+			}
+
+			usuario1 = new Usuario(contrasena, nombre, apellidos, dni, telefono, correo, tipo, listaReuniones);
+			usuarioService.saveUsuario(usuario1);
+			LOG.info("[SERVER] Usuario registrado.");
+			LOG.info("[SERVER] " + usuario1.toString());
+			return ResponseEntity.ok().build();
+		} else {
+			LOG.info("[SERVER] Error: El usuario ya está registrado.");
+			LOG.info("[SERVER] " + usuario1.toString());
+			return ResponseEntity.badRequest().build();
+		}
+	}
 
 
 }
