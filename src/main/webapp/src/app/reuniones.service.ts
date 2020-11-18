@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ReunionesService {
+  
 
   private uri = 'http://localhost:9000/AgendaE5';
 
@@ -25,6 +26,9 @@ export class ReunionesService {
   public cancelarReunion(dni,id){
   
     return this.http.post(`${environment.apiUrl}/CancelarReuniones/${dni}`,id);
+  }
+  public modificarReunion(reunion,dni) {
+    return this.http.get(`${environment.apiUrl}/ModificarReunion/${dni}`, reunion);
   }
 
 }

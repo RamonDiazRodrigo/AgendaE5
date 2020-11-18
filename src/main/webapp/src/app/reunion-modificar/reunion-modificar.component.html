@@ -1,51 +1,53 @@
-<div class="container">
-    <div class="reunion-container">
-      <h1 mat-dialog-title><strong>Reunion</strong></h1>
-      <div class="form-container">
-        <mat-dialog-content>
-        <form action="">
+<body>
+  <div class="container">
+    <h2 class="register-title">Reunion</h2>
+    <form [formGroup]="reunionForm" class="modificar-reunion-container">
+
+      <div class="form-group">
+        <div class="form-group">
+          <label>Titulo: </label>
+          <input type="text" class="form-control" [(ngModel)]="local_data.titulo"
+          formControlName="titulo">
+        </div>
+        <div class="form-group">
+          <label>Descripcion: </label>
+          <textarea type="text" class="form-control" [(ngModel)]="local_data.descripcion" formControlName="descripcion"
+            ></textarea>
+        </div>
+        <div class="form-group">
+          <label>Organizador: </label>
+          <input type="text" class="form-control" [(ngModel)]="local_data.organizador" formControlName="organizador"
+            >
+        </div>
+        <div class="form-group">
+          <label>Fecha: </label>
+          <input type="date" class="form-control" [(ngModel)]="local_data.fecha" formControlName="fecha">
+        </div>
+        <span style="white-space:nowrap">
           <div class="form-group">
-            <label>Titulo: </label>
-            <input type="text" class="form-control"  matInput [(ngModel)]="local_data.titulo" name="titulo">
+            <label>Hora inicio: </label>
+            <input type="time" class="form-control" [(ngModel)]="local_data.horaIni" formControlName="horaini"
+              >
+
+            <label>Hora fin: </label>
+            <input type="time" class="form-control" [(ngModel)]="local_data.horaFin" formControlName="horafin"
+              >
           </div>
-          <div class="form-group">
-            <label>Descripcion: </label>
-            <textarea type="text" class="form-control" matInput [(ngModel)]="local_data.descripcion" name="descripcion"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Organizador: </label>
-            <input type="text" class="form-control" matInput [(ngModel)]="local_data.organizador" name="organizador">
-          </div>
-          <div class="form-group">
-            <label>Fecha: </label>
-            <input type="date" class="form-control" matInput [(ngModel)]="local_data.fecha" name="fecha">
-          </div>
-          <span style="white-space:nowrap">
-            <div class="form-group">
-              <label>Hora inicio: </label>
-              <input type="time" class="form-control" matInput [(ngModel)]="local_data.horaIni" name="horaini">
-  
-              <label>Hora fin: </label>
-              <input type="time" class="form-control" matInput [(ngModel)]="local_data.horaFin" name="horafin">
-            </div>
-          </span>
-          <div class="form-group">
-            <label>Lista asistentes: </label>
-            <input type="text" class="form-control" matInput [(ngModel)]="local_data.listaAsistentes"
-              name="listaAsistentes">
-          </div>
-          <div>
-            <button raised-button (click)="modificar()" mat-flat-button color="green"
-              class="btn btn-primary">Modificar</button>
-  
-            <button raised-button (click)="closeDialog()" mat-flat-button color="red"
-              class="btn btn-danger">cancelar</button>
-          </div>
-  
-        </form>
-      </mat-dialog-content>
+        </span>
+        <div class="form-group">
+          <label>Lista asistentes: </label>
+          <input type="text" class="form-control" [(ngModel)]="local_data.listaAsistentes"
+          formControlName="listaAsistentes" >
+        </div>
+        <div>
+          <button raised-button (click)="modificar()" mat-flat-button color="green"
+            class="btn btn-primary">Modificar</button>
+
+          <button raised-button (click)="closeDialog()" mat-flat-button color="red"
+            class="btn btn-danger">Eliminar</button>
+        </div>
+
       </div>
-  
-    </div>
-  
+    </form>
   </div>
+</body>
