@@ -29,7 +29,7 @@ public class ReunionesController {
 	
 	private static final Log LOG = LogFactory.getLog(ReunionesController.class);
 	/**
-	   * Interfaz CitasService.
+	   * Interfaz ReunionService.
 	   * 
 	   * @author ae5
 	   */
@@ -43,7 +43,7 @@ public class ReunionesController {
 
 	  @Autowired
 	  /**
-	   * Contructor CitaController.
+	   * Contructor ReunionController.
 	   * 
 	   * @author ae5
 	   */

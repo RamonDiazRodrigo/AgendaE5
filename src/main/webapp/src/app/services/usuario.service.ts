@@ -14,7 +14,7 @@ export class UsuarioService {
 }
 
 delete(id) {
-    return this.http.delete(`${environment.apiUrl}/usuarios/${id}`);
+    return this.http.delete(`${environment.apiUrl}/deleteUser/${id}`);
 }
 update(user,id) {
     return this.http.put(`${environment.apiUrl}/usuarios/${id}`, user);
@@ -25,5 +25,9 @@ getUsuarios(){
 
 findUser(id){
   return this.http.get(`${environment.apiUrl}/perfil/${id}`);
+}
+
+registeradmin(user) {
+  return this.http.post(`${environment.apiUrl}/adminregistro`, user);
 }
 }
