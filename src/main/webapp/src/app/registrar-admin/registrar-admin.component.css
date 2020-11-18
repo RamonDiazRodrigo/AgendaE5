@@ -1,3 +1,4 @@
+
 .container {
     width: 500px;
     margin: 16px auto;
@@ -12,6 +13,42 @@
     margin-bottom: 0;
 }
 
+.container p {
+    padding: 6px;
+}
+
+.container input[type="submit"] {
+    box-sizing: border-box;
+    padding: 6px;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    outline: 0;
+    font-family: inherit;
+    font-size: 0.95em;
+}
+
+.container input[type="text"],
+.container input[type="password"]{
+    width: 100%;
+    background: #fff;
+    border-color: #bbb;
+    color: #555;
+    margin-top: 5px;
+}
+.container select{
+      box-sizing: border-box;
+    padding: 6px;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    padding: 5%;
+    outline: 0;
+    font-family: inherit;
+    font-size: 0.95em;
+}
 
 /* The container form is achieved by a CSS hack */
 
