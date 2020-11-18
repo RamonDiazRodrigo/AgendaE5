@@ -1,7 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { AuthService } from '../auth.service';
+import { ReunionModificarComponent } from '../reunion-modificar/reunion-modificar.component';
 import { ReunionesService } from '../reuniones.service';
 
 export interface ReunionData {
@@ -22,7 +24,9 @@ export interface ReunionData {
 export class ReunionComponent {
   reuniones: any;
   local_data: any;
+  modificarB: boolean;
   constructor(
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<ReunionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ReunionData,
     private auth: AuthService,
@@ -30,6 +34,9 @@ export class ReunionComponent {
     private router: Router) {
       console.log(data)
       this.local_data = {...data};
+      
+      
+      console.log(this.modificarB);
      }
 
 
@@ -37,7 +44,19 @@ export class ReunionComponent {
        this.dialogRef.close({event: 'Cancel'})
      }
      modificar(){
-
+       this.dialogRef.updateSize("3px", "5px")
+      const dialogRef1 = this.dialog.open(ReunionModificarComponent, {
+        disableClose: true,
+        width: '325px',
+        data: this.local_data
+      });
+      dialogRef1.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.dialogRef.updateSize("325px", "auto")
+      });
+     
+      
+      
      }
      eliminar(){
      

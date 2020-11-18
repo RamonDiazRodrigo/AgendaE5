@@ -18,6 +18,7 @@ import { UsuariosAdminComponent } from './usuarios-admin/usuarios-admin.componen
 import { MatTableModule } from '@angular/material/table';
 import { PerfilusuarioComponent } from './perfilusuario/perfilusuario.component';
 import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
+import { ReunionModificarComponent } from './reunion-modificar/reunion-modificar.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
     ReunionComponent,
     AlertaComponent,
     UsuariosAdminComponent,
-    PerfilusuarioComponent
+    PerfilusuarioComponent,
+    ReunionModificarComponent
     
 
   ],
@@ -48,7 +50,8 @@ import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
   ],
   entryComponents:[
     ReunionComponent,
-    PerfilusuarioComponent
+    PerfilusuarioComponent,
+    ReunionModificarComponent
   ],
   providers: [
     {
