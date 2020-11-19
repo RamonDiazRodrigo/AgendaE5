@@ -62,9 +62,9 @@ public class ReunionesController {
 
     @GetMapping("/Reuniones/{dni}")
     public ResponseEntity<List<Reunion>> find(@PathVariable("dni") String dni) throws Exception{
-    	final String dniEncriptado = Encriptacion.encriptar(dni);
+  
     	List<Reunion> listReuniones = new ArrayList<>();
-    	List<String> listReunionesID = usuarioService.findReuniones(dniEncriptado); 
+    	List<String> listReunionesID = usuarioService.findReuniones(dni); 
     	while(!listReunionesID.isEmpty()) {
     		listReuniones.add(reunionService.findByReunionId(listReunionesID.remove(0)));
     	}
@@ -111,10 +111,14 @@ public class ReunionesController {
     	final JSONObject jso = new JSONObject(reunion);
 	
 		final Reunion reu = reunionService.findByReunionId(jso.getString("id"));
+		reu.setTitulo(jso.getString("titulo"));
+		reu.setDescripcion(jso.getString("descripcion"));
+		reu.setFecha(jso.getString("fecha"));
+		reu.setHoraFin(jso.getString("horaFin"));
+		reu.setHoraIni(jso.getString("horaIni"));
 		
-		reu.setDescripcion(jso.getString(""));
-
-	//	reunionService.updateReunion(reu);
+		
+		reunionService.updateReunion(reu);
 		
     	return ResponseEntity.ok().build();
     }

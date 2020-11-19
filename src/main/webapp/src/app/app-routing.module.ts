@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CargaComponent } from './carga/carga.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { ReunionesComponent } from './reuniones/reuniones.component';
@@ -23,6 +24,8 @@ const routes: Routes = [
   },
   {
     path: 'usuarios', component: UsuariosAdminComponent
+  },{
+    path: 'carga', component: CargaComponent
   }
 ];
 

@@ -17,8 +17,8 @@ import { UsuariosAdminComponent } from './usuarios-admin/usuarios-admin.componen
 import { MatTableModule } from '@angular/material/table';
 import { PerfilusuarioComponent } from './perfilusuario/perfilusuario.component';
 import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
-import { ReunionModificarComponent } from './reunion-modificar/reunion-modificar.component';
 import { CommonModule } from '@angular/common';
+import { CargaComponent } from './carga/carga.component';
 
 
 @NgModule({
@@ -33,7 +33,7 @@ import { CommonModule } from '@angular/common';
     AlertaComponent,
     UsuariosAdminComponent,
     PerfilusuarioComponent,
-    ReunionModificarComponent
+    CargaComponent
     
 
   ],
@@ -50,8 +50,7 @@ import { CommonModule } from '@angular/common';
   ],
   entryComponents:[
     ReunionComponent,
-    PerfilusuarioComponent,
-    ReunionModificarComponent
+    PerfilusuarioComponent
   ],
   providers: [
     {
