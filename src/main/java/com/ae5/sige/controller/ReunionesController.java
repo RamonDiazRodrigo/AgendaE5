@@ -60,9 +60,8 @@ public class ReunionesController {
 
     @GetMapping("/Reuniones/{dni}")
     public ResponseEntity<List<Reunion>> find(@PathVariable("dni") String dni) throws Exception{
-    	final String dniEncriptado = Encriptacion.encriptar(dni);
     	List<Reunion> listReuniones = new ArrayList<>();
-    	List<String> listReunionesID = usuarioService.findReuniones(dniEncriptado); 
+    	List<String> listReunionesID = usuarioService.findReuniones(dni); 
     	while(!listReunionesID.isEmpty()) {
     		listReuniones.add(reunionService.findByReunionId(listReunionesID.remove(0)));
     	}

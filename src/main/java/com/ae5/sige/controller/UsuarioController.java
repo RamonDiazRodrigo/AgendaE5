@@ -62,9 +62,10 @@ public class UsuarioController {
 		final String passEncrip = Encriptacion.encriptar(pass);
 		LOG.info(dniEncriptado +" "+ passEncrip );
 		final Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dniEncriptado, passEncrip);
-		JSONArray token = Token.createToken(usuario);
+
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		if (usuario != null) {
+			JSONArray token = Token.createToken(usuario);
 			LOG.info("[SERVER] Usuario encontrado: " + usuario.getNombre());
 			return ResponseEntity.ok(token.toString());
 		} else {
@@ -176,13 +177,14 @@ public class UsuarioController {
 	 * @author ae5
 	 * @throws JSONException 
 	 */
-	@PutMapping("/{dni}")
+	@PutMapping("update/{dni}")
 
 	public ResponseEntity<Usuario> updateUsuario(@RequestBody final String mensajerecibido,
 			@PathVariable final String dni) throws JSONException {
 		final JSONObject jso = new JSONObject(mensajerecibido);
-		final String DniEncriptado = Encriptacion.encriptar(dni);
+		final String DniEncriptado = Encriptacion.encriptar(jso.getString("dni"));
 		final Usuario usuario = usuarioService.findByUsernusuario(DniEncriptado);
+		LOG.info("El json que nos llega es:" + mensajerecibido);
 		if (usuario == null) {
 			LOG.info("[SERVER] Error: el usuario no existe.");
 			return ResponseEntity.badRequest().build();
@@ -193,35 +195,26 @@ public class UsuarioController {
 				// Depende de los campos que queramos que puedan actualizarse
 				final String nombre = jso.getString("nombre");
 				final String apellidos = jso.getString("apellidos");
-				final String telefono = jso.getString("numTelefono");
+				final String telefono = jso.getString("telefono");
 				final String correo = jso.getString("correo");
 				final String contrasena = jso.getString("contrasena");
-				final String tipo = jso.getString("tipo");
 
-				final String nombreEncrip = Encriptacion.encriptar(nombre);
-				final String apellidosEncrip = Encriptacion.encriptar(apellidos);
-				final String telefonoEncrip = Encriptacion.encriptar(telefono);
-				final String correoEncrip = Encriptacion.encriptar(correo);
-				final String contrasenaEncrip = Encriptacion.encriptar(contrasena);
-				final String tipoEncrip = Encriptacion.encriptar(tipo);
-
-
-				usuario.setDni(DniEncriptado);
-				usuario.setNombre(nombreEncrip);
-				usuario.setApellidos(apellidosEncrip);
-				usuario.setTelefono(telefonoEncrip);
-				usuario.setCorreo(correoEncrip);
-				usuario.setContrasena(contrasenaEncrip);
-				usuario.setTipo(tipoEncrip);
+				usuario.setNombre(nombre);
+				usuario.setApellidos(apellidos);
+				usuario.setTelefono(telefono);
+				usuario.setCorreo(correo);
+				usuario.setContrasena(contrasena);
+				
+				
+				
 			} catch (JSONException j) {
 				LOG.error("[SERVER] Error en la lectura del JSON.");
 				LOG.info(j.getMessage());
 				return ResponseEntity.badRequest().build();
 			}
-
-			usuarioService.updateUsuario(usuario);
+			usuarioService.updateUsuario(Encriptacion.encriptarUsuario(usuario));
 			LOG.info("[SERVER] Usuario actualizada.");
-			LOG.info("[SERVER] " + usuario.toString());
+			LOG.info("[SERVER] " + Encriptacion.encriptarUsuario(usuario).toString());
 			return ResponseEntity.ok().build();
 		}
 	}
