@@ -6,45 +6,46 @@
       <form action="">
         <div class="form-group">
           <label>Titulo: </label>
-          <input type="text" class="form-control" matInput [(ngModel)]="local_data.titulo" name="titulo"
-            disabled="false">
+          <input type="text" class="form-control" disabled="false" matInput [(ngModel)]="local_data.titulo" name="titulo" id="titulo"
+           >
         </div>
         <div class="form-group">
           <label>Descripcion: </label>
-          <textarea type="text" class="form-control" matInput [(ngModel)]="local_data.descripcion" name="descripcion"
+          <textarea type="text" class="form-control" matInput [(ngModel)]="local_data.descripcion" name="descripcion" id="descripcion"
             disabled="false"></textarea>
         </div>
         <div class="form-group">
           <label>Organizador: </label>
-          <input type="text" class="form-control" matInput [(ngModel)]="local_data.organizador" name="organizador"
+          <input type="text" class="form-control" matInput [(ngModel)]="local_data.organizador" name="organizador" id="organizador"
             disabled="false">
         </div>
         <div class="form-group">
           <label>Fecha: </label>
-          <input type="date" class="form-control" matInput [(ngModel)]="local_data.fecha" name="fecha" disabled="true">
+          <input type="date" class="form-control" matInput [(ngModel)]="local_data.fecha" name="fecha" disabled="false" id="fecha">
         </div>
         <span style="white-space:nowrap">
           <div class="form-group">
             <label>Hora inicio: </label>
-            <input type="time" class="form-control" matInput [(ngModel)]="local_data.horaIni" name="horaini"
+            <input type="time" class="form-control" matInput [(ngModel)]="local_data.horaIni" name="horaIni" id="horaIni"
               disabled="false">
 
             <label>Hora fin: </label>
-            <input type="time" class="form-control" matInput [(ngModel)]="local_data.horaFin" name="horafin"
+            <input type="time" class="form-control" matInput [(ngModel)]="local_data.horaFin" name="horaFin" id="horaFin"
               disabled="true">
           </div>
         </span>
         <div class="form-group">
           <label>Lista asistentes: </label>
-          <input type="text" class="form-control" matInput [(ngModel)]="local_data.listaAsistentes"
+          <input type="text" class="form-control" matInput [(ngModel)]="local_data.listaAsistentes" id="listaAsistentes"
             name="listaAsistentes" disabled="false">
         </div>
         <div>
+
           <button raised-button (click)="modificar()" mat-flat-button color="green"
-            class="btn btn-primary">Modificar</button>
+            class="btn btn-primary">{{modificars}}</button>
 
           <button raised-button (click)="eliminar()" mat-flat-button color="red"
-            class="btn btn-danger">Eliminar</button>
+            class="btn btn-danger">{{action}}</button>
         </div>
 
       </form>

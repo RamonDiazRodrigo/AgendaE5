@@ -2,6 +2,8 @@ package com.ae5.sige.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.ae5.sige.encryption.Encriptacion;
@@ -66,10 +68,10 @@ public class Reunion {
 	   */
 	 
 	  private List<String> listaAsistentes = new ArrayList<>();
-	public Reunion(String id, String titulo, String descripcion, String organizador, String fecha, String horaIni,
+	public Reunion(String titulo, String descripcion, String organizador, String fecha, String horaIni,
 			String horaFin, List<String> listaAsistentes) {
 		super();
-		this.id = id;
+		this.id =  UUID.randomUUID().toString();
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.organizador = organizador;

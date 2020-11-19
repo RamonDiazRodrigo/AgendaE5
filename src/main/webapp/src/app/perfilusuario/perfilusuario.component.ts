@@ -15,6 +15,7 @@ export class PerfilusuarioComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<PerfilusuarioComponent>,
     private auth: AuthService,
     private userservice: UsuarioService) {
+      dialogRef.disableClose = true;
      }
      ngOnInit(): void {
        this.user = {

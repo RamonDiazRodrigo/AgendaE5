@@ -93,13 +93,10 @@ public class Token {
 		for (JSONArray value : tokens.values()) {
 			tokenaux.add(value);
 		}
-		for(int i = 0; i<tokens.size(); i++) {
-			
-		}
 
 		while(!tokenaux.isEmpty()) {
 			JSONArray tokenact= tokenaux.remove(0);
-			if(Duration.between(aux, (LocalTime) tokenact.get(2)).toMinutes() > 3.0 ) {
+			if(Math.abs(Duration.between(aux, (LocalTime) tokenact.get(2)).toMinutes()) > 3.0 ) {
 				tokens.remove(getMD5(tokenact.toString()),tokenact);
 			}
 		}
