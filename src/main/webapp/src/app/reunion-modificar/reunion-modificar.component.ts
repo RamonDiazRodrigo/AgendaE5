@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
 import { ReunionesService } from '../reuniones.service';
 
 export interface ReunionData {
+  id: string;
   titulo: "";
   descripcion: "";
   organizador: "";
@@ -52,10 +53,16 @@ export class ReunionModificarComponent implements OnInit{
        this.dialogRef.close({event: 'Cancel'})
      }
      modificar(){
-       console.log(this.reunionForm.value)
-      this.reunionService.modificarReunion(this.reunionForm.value, this.auth.currentUserValue[0].dni)
+      this.local_data.titulo = this.reunionForm.value.titulo
+      this.local_data.descripcion = this.reunionForm.value.descripcion
+      this.local_data.organizador = this.reunionForm.value.organizador
+      this.local_data.fecha = this.reunionForm.value.fecha
+      this.local_data.horaini = this.reunionForm.value.horaini
+      this.local_data.horafin = this.reunionForm.value.horafin
+      this.local_data.listaAsistentes = this.reunionForm.value.listaAsistentes
+      this.reunionService.modificarReunion(this.local_data, this.auth.currentUserValue[0].dni)
       .subscribe(
-        data => {
+        () => {
           this.closeDialog()
         });
           

@@ -28,7 +28,8 @@ export class ReunionesService {
     return this.http.post(`${environment.apiUrl}/CancelarReuniones/${dni}`,id);
   }
   public modificarReunion(reunion,dni) {
-    return this.http.get(`${environment.apiUrl}/ModificarReunion/${dni}`, reunion);
+    console.log(reunion)
+    return this.http.post(`${environment.apiUrl}/ModificarReunion/${dni}`, reunion);
   }
 
 }

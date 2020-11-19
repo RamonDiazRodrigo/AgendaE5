@@ -104,7 +104,7 @@ public class ReunionesController {
        	
            return ResponseEntity.ok().build();
          }
-    @GetMapping("/ModificarReunion/{dni}")
+    @PostMapping("/ModificarReunion/{dni}")
     public ResponseEntity<Reunion> modificarReunion(@PathVariable final String dni, @RequestBody final String reunion) throws JSONException, Exception{
     	LOG.info(reunion);
 		
