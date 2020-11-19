@@ -2,6 +2,7 @@ package com.ae5.bbdd.Steps;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +38,11 @@ public class CrearReunionSteps {
     r.setDescripcion(a.get(0).get("Descripcion"));
     r.setOrganizador(a.get(0).get("Organizador"));
     r.setFecha(a.get(0).get("Fecha"));
-    r.setHora_Inicio(a.get(0).get("Hora inicio"));
-    r.setHora_Fin(a.get(0).get("Hora fin"));
-    r.setLista_Asistentes(a.get(0).get("Lista asistentes"));
+    r.setHoraIni(a.get(0).get("Hora inicio"));
+    r.setHoraFin(a.get(0).get("Hora fin"));
+    List<String> aux = new ArrayList<>();
+    aux.add(a.get(0).get("Lista asistentes"));
+    r.setListaAsistentes(aux);
     
 
   }
