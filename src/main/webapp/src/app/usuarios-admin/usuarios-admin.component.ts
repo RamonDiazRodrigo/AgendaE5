@@ -25,6 +25,7 @@ export class UsuariosAdminComponent{
   columnas: string[] = ['contrasena', 'nombre', 'apellidos','dni', 'telefono', 'correo', 'tipo'];
   dataSource = new MatTableDataSource<DatosUsuario>();
   data: DatosUsuario[];
+  usuario: any;
   constructor(
     private user: UsuarioService,
     private auth: AuthService,
@@ -40,11 +41,18 @@ export class UsuariosAdminComponent{
       this.dataSource = new MatTableDataSource(data);
     });
   }
+
+
+
   modificar(): void{
    
   }
-  eliminar(): void{
-    
-  }
+  eliminar(dni): void{
+    this.user.delete(dni)
+    .subscribe(response => {
+      this.usuario = response;
+      this.ngOnInit();
+  });
 
+  }
 }

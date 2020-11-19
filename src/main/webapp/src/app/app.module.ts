@@ -19,6 +19,7 @@ import { PerfilusuarioComponent } from './perfilusuario/perfilusuario.component'
 import { AuthInterceptorService } from './interceptor/auth-interceptor.service';
 import { CommonModule } from '@angular/common';
 import { CargaComponent } from './carga/carga.component';
+import { RegistrarAdminComponent } from './registrar-admin/registrar-admin.component';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import { CargaComponent } from './carga/carga.component';
     AlertaComponent,
     UsuariosAdminComponent,
     PerfilusuarioComponent,
-    CargaComponent
+    ModificarReunion,
+    CargaComponent,
+    RegistrarAdminComponent
     
 
   ],
