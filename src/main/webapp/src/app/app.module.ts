@@ -34,7 +34,6 @@ import { RegistrarAdminComponent } from './registrar-admin/registrar-admin.compo
     AlertaComponent,
     UsuariosAdminComponent,
     PerfilusuarioComponent,
-    ModificarReunion,
     CargaComponent,
     RegistrarAdminComponent
     

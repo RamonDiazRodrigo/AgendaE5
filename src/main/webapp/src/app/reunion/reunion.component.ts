@@ -56,6 +56,7 @@ export class ReunionComponent {
             this.router.navigate(['/reuniones']);
           });
     } else {
+      this.dialogRef.disableClose = true;
       this.modificarB = true;
       this.action = "Cancelar";
       this.modificars = "Guardar"
@@ -87,6 +88,7 @@ export class ReunionComponent {
         });
     }
     else{
+      this.dialogRef.disableClose = false;
       this.modificarB=false;
       this.action="Eliminar";
       this.modificars = "Modificar"
