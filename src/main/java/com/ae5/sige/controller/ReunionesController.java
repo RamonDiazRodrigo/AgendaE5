@@ -7,6 +7,8 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +71,7 @@ public class ReunionesController {
     }
     @PostMapping("/CancelarReuniones/{dni}")
 
-   	public ResponseEntity<Usuario> Cancelar(@PathVariable final String dni, @RequestBody final String id) throws Exception {
+   	public ResponseEntity<Usuario> cancelar(@PathVariable final String dni, @RequestBody final String id) throws Exception {
    		LOG.info("[SERVER] Borrando cita:  " + id);
        	Usuario user = usuarioService.findByUsernusuario(dni);
        	Reunion reunion = reunionService.findByReunionId(id);
@@ -101,7 +103,24 @@ public class ReunionesController {
        	
            return ResponseEntity.ok().build();
          }
-
+    @PostMapping("/ModificarReunion/{dni}")
+    public ResponseEntity<Reunion> modificarReunion(@PathVariable final String dni, @RequestBody final String reunion) throws JSONException, Exception{
+    	LOG.info(reunion);
+		
+    	final JSONObject jso = new JSONObject(reunion);
+	
+		final Reunion reu = reunionService.findByReunionId(jso.getString("id"));
+		reu.setTitulo(jso.getString("titulo"));
+		reu.setDescripcion(jso.getString("descripcion"));
+		reu.setFecha(jso.getString("fecha"));
+		reu.setHoraFin(jso.getString("horaFin"));
+		reu.setHoraIni(jso.getString("horaIni"));
+		
+		
+		reunionService.updateReunion(reu);
+		
+    	return ResponseEntity.ok().build();
+    }
 
     
 
