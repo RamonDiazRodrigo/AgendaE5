@@ -32,9 +32,10 @@ export class PerfilusuarioComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<PerfilusuarioComponent>,
     private auth: AuthService,
     public alertaService: AlertaService,
-    private router: Router) {
-    private userservice: UsuarioService) {
-      dialogRef.disableClose = true;
+    private router: Router, 
+    private userservice: UsuarioService
+    ) {
+     
      }
      ngOnInit(): void {
        this.user = {
@@ -52,7 +53,7 @@ export class PerfilusuarioComponent implements OnInit {
      }
 
     closeDialog(){
-      this.dialogRef.close({event: 'Cancel'}),
+      this.dialogRef.close({event: 'Cancel'});
       this.router.navigate(['/carga']);
     }
 
@@ -102,7 +103,7 @@ export class PerfilusuarioComponent implements OnInit {
         this.Modificar="Modificar";
         this.guardar();
       }else{
-      
+    this.dialogRef.disableClose = true;  
     this.inputnombre = document.getElementById("nombre");
     this.inputnombre.disabled = false;
     this.inputapellido = document.getElementById("apellidos");
