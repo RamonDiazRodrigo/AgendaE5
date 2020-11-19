@@ -157,17 +157,20 @@ public class UsuarioController {
 
 	public ResponseEntity<Void> deleteUser(@PathVariable final String dni) throws Exception {
 		LOG.info("Delete user " + dni);
-	 	Usuario user = usuarioService.findByUsernusuario(Encriptacion.encriptar(dni));
+		String dniEncrip = Encriptacion.encriptar(dni);
+	 	Usuario user = usuarioService.findByUsernusuario(dniEncrip);
 	 	 List<String> listaReuniones = user.getListaReuniones();
-	 	 while(!listaReuniones.isEmpty()){
-	 		String idreunion = listaReuniones.remove(0);
+	 	for(int i=0; i<listaReuniones.size();i++){
+	 		String idreunion = listaReuniones.get(i);
 	 		Reunion reunion = reunionService.findByReunionId(idreunion);
+	 		LOG.info(reunion);
 	 		List<String> listaAsistentes = reunion.getListaAsistentes();
-	 		listaAsistentes.remove(listaAsistentes.indexOf(dni));
-	 		reunion.setListaAsistentes(listaAsistentes);
+	 		LOG.info("La posicion en la que esta "+dniEncrip+" es: " +listaAsistentes.indexOf(dniEncrip));
+	 		listaAsistentes.remove(listaAsistentes.indexOf(dniEncrip));
 	 		reunionService.updateReunion(reunion);
 	 	 }
-		usuarioService.deleteUsuario(Encriptacion.encriptar(dni));
+	 	LOG.info(user);
+		usuarioService.deleteUsuario(dniEncrip);
 		return ResponseEntity.noContent().build();
 	}
 
