@@ -86,7 +86,7 @@ public class ReunionesController {
            	List<String> listaReuniones = asist.getListaReuniones();
            	listaReuniones.remove(listaReuniones.indexOf(id));
            	asist.setListaReuniones(listaReuniones);
-           	
+ 
            	usuarioService.updateUsuario(Encriptacion.encriptarUsuario(asist));
            }
            LOG.info("Se han eliminado los asistentes de la reunion");
