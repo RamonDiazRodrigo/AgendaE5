@@ -26,7 +26,20 @@ public class Eliminar_UsuarioSteps {
   public void el_administrador_quiere_eliminar_a_un_usuario_registrado(
       io.cucumber.datatable.DataTable dataTable) {
 
-	  //Mirar los drivers necesarios
+	  
+	  Path path = FileSystems.getDefault().getPath("src/test/resources/features/geckodriver.exe");
+	    System.setProperty("webdriver.gecko.driver", path.toString());
+	    FirefoxOptions fo = new FirefoxOptions();
+	    fo.addArguments("--headless");
+	    WebDriver driver = new FirefoxDriver(fo);
+	    driver.get("http://localhost:4200/auth/login");
+
+	    a = dataTable.asMaps(String.class, String.class);
+
+	    driver.findElement(By.xpath("//input[@placeholder='DNI']")).sendKeys(a.get(0).get("Usuario"));
+	    driver.findElement(By.xpath("//input[@placeholder='Contraseña']")).sendKeys(a.get(0).get("contraseña"));
+	    driver.findElement(By.xpath("//input[@value='Acceder']")).click();
+	  }
 
   }
 
