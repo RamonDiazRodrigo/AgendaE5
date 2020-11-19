@@ -1,32 +1,62 @@
+<app-alerta></app-alerta>
 <div class="container">
     <div class="perfil-container">
       <h1 mat-dialog-title><strong>Perfil</strong></h1>
       <div class="form-container">
         <mat-dialog-content>
         <form action="">
+
           <div class="form-group">
             <label>Nombre: </label>
-            <input type="text" class="form-control" matInput [(ngModel)]="user.nombre" name="nombre" disabled="false">
+            <input type="text"  class="form-control" matInput [(ngModel)]="user.nombre" name="nombre" id = "nombre" disabled="false"  [ngClass]="{ 'is-invalid': submitted && user.nombre.errors }">
+            <div *ngIf="submitted && user.nombre.errors" class="invalid-feedback">
+              <div *ngIf="user.nombre.errors.required">Por favor, escriba su nombre</div>
+            </div>
           </div>
+
           <div class="form-group">
             <label>Apellidos: </label>
-            <input type="text" class="form-control" matInput [(ngModel)]="user.apellidos" name="apellidos" disabled="false">
+            <input type="text" class="form-control" matInput [(ngModel)]="user.apellidos" name="apellidos" id = "apellidos" disabled="false"  [ngClass]="{ 'is-invalid': submitted && user.apellidos.errors }">
+            <div *ngIf="submitted && user.apellidos.errors" class="invalid-feedback">
+              <div *ngIf="user.apellidos.errors.required">Por favor, escriba sus apellidos</div>
+            </div>
           </div>
+
           <div class="form-group">
             <label>DNI: </label>
-            <input type="text" class="form-control" matInput [(ngModel)]="user.dni" name="dni" disabled="false">
+            <input type="text" class="form-control" matInput [(ngModel)]="user.dni" name="dni"  disabled="false">
           </div>
+
           <div class="form-group">
             <label>Contraseña: </label>
-            <input type="password" class="form-control" matInput [(ngModel)]="user.contrasena" name="contraseña" disabled="false">
+            <input type="password" class="form-control" matInput [(ngModel)]="user.contrasena" name="contrasena" id = "contrasena" disabled="false"  [ngClass]="{ 'is-invalid': submitted && user.contrasena.errors }">
+            <div *ngIf="submitted && user.contrasena.errors" class="invalid-feedback">
+              <div *ngIf="user.contrasena.errors.required">Por favor, escriba una contraseña</div>
+            </div>
           </div>
+
           <div class="form-group">
             <label>Telefono: </label>
-            <input type="text" class="form-control" matInput [(ngModel)]="user.telefono" name="telefono" disabled="false">
+            <input type="text" class="form-control" matInput [(ngModel)]="user.telefono" name="telefono" id = "telefono" disabled="false" [ngClass]="{ 'is-invalid': submitted && user.telefono.errors }">
+            <div *ngIf="submitted && user.telefono.errors" class="invalid-feedback">
+              <div *ngIf="user.telefono.errors.required">Por favor, escriba su número de teléfono</div>
+            </div>
           </div>
+
           <div class="form-group">
             <label>Correo: </label>
-            <input type="text" class="form-control" matInput [(ngModel)]="user.correo" name="correo" disabled="false">
+            <input type="text" class="form-control" matInput [(ngModel)]="user.correo" name="correo" id = "correo" disabled="false"  [ngClass]="{ 'is-invalid': submitted && user.correo.errors }">
+            <div *ngIf="submitted && user.correo.errors" class="invalid-feedback">
+              <div *ngIf="user.correo.errors.required">Por favor, escriba un correo electrónico</div>
+            </div>
+          </div>
+
+          <div>
+                <button style="margin:10px" raised-button (click)="modificar()" mat-flat-button color="blue" id="modificar"
+                class="btn btn-primary">{{Modificar}}</button>
+                <button raised-button (click)="cancelar()" mat-flat-button color="blue" id="cancelar" disabled = "true"
+                class="btn btn-primary">Cancelar</button>
+             
           </div>
   
   

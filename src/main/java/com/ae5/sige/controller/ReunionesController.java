@@ -62,7 +62,6 @@ public class ReunionesController {
 
     @GetMapping("/Reuniones/{dni}")
     public ResponseEntity<List<Reunion>> find(@PathVariable("dni") String dni) throws Exception{
-  
     	List<Reunion> listReuniones = new ArrayList<>();
     	List<String> listReunionesID = usuarioService.findReuniones(dni); 
     	while(!listReunionesID.isEmpty()) {
