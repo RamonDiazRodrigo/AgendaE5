@@ -1,7 +1,7 @@
 language: java
 before_install:
   - chmod +x mvnw
-  - chmod +x src/test/resources/geckodriver
+  - chmod +x src/test/resources/geckodriver.exe
 
 addons:
   firefox: "latest"
