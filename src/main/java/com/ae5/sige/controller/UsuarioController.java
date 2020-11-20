@@ -44,7 +44,7 @@ public class UsuarioController {
 	/**
 	 * @author ae5
 	 */
-	public UsuarioController(final UsuarioService usuarioService, final ReunionServiceInt reunionService) {
+	public UsuarioController(UsuarioService usuarioService, ReunionServiceInt reunionService) {
 		this.usuarioService = usuarioService;
 		 this.reunionService = reunionService;
 	}
@@ -56,12 +56,12 @@ public class UsuarioController {
 	 */
 
 	@GetMapping("/usuarios")
-	public ResponseEntity<String> getUserPassword(@RequestParam("dni") final String dni,
-			@RequestParam("password") final String pass) {		
-		final String dniEncriptado = Encriptacion.encriptar(dni);
-		final String passEncrip = Encriptacion.encriptar(pass);
+	public ResponseEntity<String> getUserPassword(@RequestParam("dni") String dni,
+			@RequestParam("password") String pass) {		
+		String dniEncriptado = Encriptacion.encriptar(dni);
+		String passEncrip = Encriptacion.encriptar(pass);
 		LOG.info(dniEncriptado +" "+ passEncrip );
-		final Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dniEncriptado, passEncrip);
+		Usuario usuario = usuarioService.getUserBynusuarioAndPassword(dniEncriptado, passEncrip);
 
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		if (usuario != null) {
@@ -82,7 +82,7 @@ public class UsuarioController {
 	@GetMapping("/perfil/{dni}")
 	// @ApiOperation(value = "Find an user", notes = "Return a user by DNI")
 
-	public ResponseEntity<Usuario> userByDni(@PathVariable final String dni) {
+	public ResponseEntity<Usuario> userByDni(@PathVariable String dni) {
 		LOG.info("[SERVER] Buscando usuario: " + dni);
 		
 		try {
@@ -105,13 +105,13 @@ public class UsuarioController {
 	 */
 	@PostMapping()
 
-	public ResponseEntity<Usuario> registrarUsuario(@RequestBody final String usuario) throws JSONException {
-		final JSONObject jso = new JSONObject(usuario);
+	public ResponseEntity<Usuario> registrarUsuario(@RequestBody String usuario) throws JSONException {
+		JSONObject jso = new JSONObject(usuario);
 		LOG.info(usuario);
-		final String dni = jso.getString("dni");
-		final String contrasena = jso.getString("password");
-		final String dniEncriptado = Encriptacion.encriptar(dni);
-		final String contrasenaEncrip = Encriptacion.encriptar(contrasena);
+		String dni = jso.getString("dni");
+		String contrasena = jso.getString("password");
+		String dniEncriptado = Encriptacion.encriptar(dni);
+		String contrasenaEncrip = Encriptacion.encriptar(contrasena);
 
 		Usuario usuario1 = usuarioService.getUserBynusuarioAndPassword(dniEncriptado,contrasenaEncrip);
 		if (usuario1 == null) {
@@ -155,7 +155,7 @@ public class UsuarioController {
 	@DeleteMapping("/deleteUser/{dni}")
 
 
-	public ResponseEntity<Void> deleteUser(@PathVariable final String dni) throws Exception {
+	public ResponseEntity<Void> deleteUser(@PathVariable String dni) throws Exception {
 		LOG.info("Delete user " + dni);
 		String dniEncrip = Encriptacion.encriptar(dni);
 	 	Usuario user = usuarioService.findByUsernusuario(dniEncrip);
@@ -182,11 +182,11 @@ public class UsuarioController {
 	 */
 	@PutMapping("update/{dni}")
 
-	public ResponseEntity<Usuario> updateUsuario(@RequestBody final String mensajerecibido,
-			@PathVariable final String dni) throws JSONException {
-		final JSONObject jso = new JSONObject(mensajerecibido);
-		final String DniEncriptado = Encriptacion.encriptar(jso.getString("dni"));
-		final Usuario usuario = usuarioService.findByUsernusuario(DniEncriptado);
+	public ResponseEntity<Usuario> updateUsuario(@RequestBody String mensajerecibido,
+			@PathVariable String dni) throws JSONException {
+		JSONObject jso = new JSONObject(mensajerecibido);
+		String DniEncriptado = Encriptacion.encriptar(jso.getString("dni"));
+		Usuario usuario = usuarioService.findByUsernusuario(DniEncriptado);
 		LOG.info("El json que nos llega es:" + mensajerecibido);
 		if (usuario == null) {
 			LOG.info("[SERVER] Error: el usuario no existe.");
@@ -196,11 +196,11 @@ public class UsuarioController {
 				LOG.info("[SERVER] Actualizando usuario...");
 
 				// Depende de los campos que queramos que puedan actualizarse
-				final String nombre = jso.getString("nombre");
-				final String apellidos = jso.getString("apellidos");
-				final String telefono = jso.getString("telefono");
-				final String correo = jso.getString("correo");
-				final String contrasena = jso.getString("contrasena");
+				String nombre = jso.getString("nombre");
+				String apellidos = jso.getString("apellidos");
+				String telefono = jso.getString("telefono");
+				String correo = jso.getString("correo");
+				String contrasena = jso.getString("contrasena");
 
 				usuario.setNombre(nombre);
 				usuario.setApellidos(apellidos);
@@ -240,13 +240,13 @@ public class UsuarioController {
 	
 	@PostMapping("/adminregistro")
 
-	public ResponseEntity<Usuario> admin_registrarUsuario(@RequestBody final String usuario) throws JSONException {
-		final JSONObject jso = new JSONObject(usuario);
+	public ResponseEntity<Usuario> admin_registrarUsuario(@RequestBody String usuario) throws JSONException {
+		JSONObject jso = new JSONObject(usuario);
 		LOG.info(usuario);
-		final String dni = jso.getString("dni");
-		final String contrasena = jso.getString("password");
-		final String dniEncriptado = Encriptacion.encriptar(dni);
-		final String contrasenaEncrip = Encriptacion.encriptar(contrasena);
+		String dni = jso.getString("dni");
+		String contrasena = jso.getString("password");
+		String dniEncriptado = Encriptacion.encriptar(dni);
+		String contrasenaEncrip = Encriptacion.encriptar(contrasena);
 
 		Usuario usuario1 = usuarioService.getUserBynusuarioAndPassword(dniEncriptado,contrasenaEncrip);
 		if (usuario1 == null) {

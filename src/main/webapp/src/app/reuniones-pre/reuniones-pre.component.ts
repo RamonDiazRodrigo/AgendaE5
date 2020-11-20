@@ -22,12 +22,12 @@ export class ReunionesPreComponent implements OnInit {
   }
 
   verReunion() {
+    this.reunion.action = "Modificar";
 		const dialogRef = this.dialog.open(ReunionComponent, {
       width: '325px',
       data: this.reunion
     });
-    dialogRef.afterClosed().subscribe(result => {
-      
+    dialogRef.afterClosed().subscribe(() => {
       this.router.navigateByUrl('/carga');
     });
   }

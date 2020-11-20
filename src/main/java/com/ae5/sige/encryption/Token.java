@@ -96,7 +96,7 @@ public class Token {
 
 		while(!tokenaux.isEmpty()) {
 			JSONArray tokenact= tokenaux.remove(0);
-			if(Math.abs(Duration.between(aux, (LocalTime) tokenact.get(2)).toMinutes()) > 3.0 ) {
+			if(Math.abs(Duration.between(aux, (LocalTime) tokenact.get(2)).toMinutes()) > 20.0 ) {
 				tokens.remove(getMD5(tokenact.toString()),tokenact);
 			}
 		}
