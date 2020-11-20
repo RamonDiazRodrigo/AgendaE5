@@ -54,16 +54,12 @@ public class LoginSteps {
 
     driver.findElement(By.xpath("//input[@value='Acceder']")).click();
 
-    // REMIRARLO
-
     String expectedUrl = driver.getCurrentUrl();
 
-    if (testCase == "Case1") {
-      assertEquals("http://localhost:4200/reuniones", expectedUrl);
-    } else if (a.get(0).get("testCase") == "CASO 2") {
+    if (testCase.equals("Case1")||testCase.equals("Case2")) {
       assertEquals("http://localhost:4200/reuniones", expectedUrl);
     } else {
-      assertEquals("http://localhost:4200/reuniones", expectedUrl);
+      assertEquals("http://localhost:4200/login", expectedUrl);
     }
 
     Thread.sleep(7000);
