@@ -2,6 +2,8 @@ language: java
 before_install:
   - chmod +x mvnw
 
+addons:
+  firefox: "latest"
 deploy:
   provider: heroku
   api_key:
