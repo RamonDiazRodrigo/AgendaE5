@@ -3,6 +3,11 @@ language: java
 
 before_install:
   - chmod +x mvnw
+  - wget https://github.com/mozilla/geckodriver/releases/download/v${GECKODRIVER_VERSION}/geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz
+  - mkdir geckodriver
+  - tar -xzf geckodriver-v${GECKODRIVER_VERSION}-linux64.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
+  
 
 deploy:
   provider: heroku
