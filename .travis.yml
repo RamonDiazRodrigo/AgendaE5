@@ -9,7 +9,6 @@ before_install:
   - sudo tar -xzf geckodriver-v0.19.0-linux64.tar.gz -C /usr/bin
   - sudo chmod a+x /usr/bin/geckodriver
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
   - sleep 5 
   
 deploy:
