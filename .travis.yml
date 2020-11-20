@@ -1,12 +1,10 @@
 language: java
-addons:
-  firefox: "60.0.1"
 before_install:
+  - sudo apt-get update
   - chmod +x mvnw
-  - wget https://github.com/mozilla/geckodriver/releases/download/v0.20.1/geckodriver-v0.20.1-linux64.tar.gz
-  - mkdir geckodriver
-  - tar -xzf geckodriver-v0.20.1-linux64.tar.gz -C geckodriver
-  - export PATH=$PATH:$PWD/geckodriver
+  - sudo chmod +x src/test/resources/geckodriver 
+addons:
+  firefox: "latest"
 deploy:
   provider: heroku
   api_key:
