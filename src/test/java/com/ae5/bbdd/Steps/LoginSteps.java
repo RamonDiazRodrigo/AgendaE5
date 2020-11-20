@@ -29,13 +29,13 @@ public class LoginSteps {
   @Given("abrir la aplicación web en el navegador")
   public void abrir_la_aplicacion_web_en_el_navegador() {
 
-    Path path = FileSystems.getDefault().getPath("src/test/resources/geckodriver");
+    Path path = FileSystems.getDefault().getPath("src/test/resources/geckodriver.exe");
     System.setProperty("webdriver.gecko.driver", path.toString());
     FirefoxOptions fo = new FirefoxOptions();
     fo.addArguments("--headless");
     driver = new FirefoxDriver(fo);
 
-    driver.get("http://localhost:4200");
+    driver.get("http://localhost:8080");
   }
   
 
@@ -57,9 +57,9 @@ public class LoginSteps {
     String expectedUrl = driver.getCurrentUrl();
 
     if (testCase.equals("Case1")||testCase.equals("Case2")) {
-      assertEquals("http://localhost:4200/reuniones", expectedUrl);
+      assertEquals("http://localhost:8080/reuniones", expectedUrl);
     } else {
-      assertEquals("http://localhost:4200/login", expectedUrl);
+      assertEquals("http://localhost:8080/login", expectedUrl);
     }
 
     Thread.sleep(7000);
