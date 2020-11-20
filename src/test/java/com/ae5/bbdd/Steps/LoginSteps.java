@@ -35,7 +35,7 @@ public class LoginSteps {
     fo.addArguments("--headless");
     driver = new FirefoxDriver(fo);
 
-    driver.get("http://localhost:8080");
+    driver.get("http://localhost:4200");
   }
   
 
@@ -57,9 +57,9 @@ public class LoginSteps {
     String expectedUrl = driver.getCurrentUrl();
 
     if (testCase.equals("Case1")||testCase.equals("Case2")) {
-      assertEquals("http://localhost:8080/reuniones", expectedUrl);
+      assertEquals("http://localhost:4200/reuniones", expectedUrl);
     } else {
-      assertEquals("http://localhost:8080/login", expectedUrl);
+      assertEquals("http://localhost:4200/login", expectedUrl);
     }
 
     Thread.sleep(7000);
