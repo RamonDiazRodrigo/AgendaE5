@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import { AlertaService } from '../services/alerta.service';
 import { UsuarioService } from '../services/usuario.service';
+import { DatosUsuario } from '../usuarios-admin/usuarios-admin.component';
 
 
 @Component({
@@ -27,15 +28,19 @@ export class PerfilusuarioComponent implements OnInit {
   loading = false;
   submitted = false;
   Modificar = "Modificar";
+  local_data: any;
  
 
   constructor(public dialogRef: MatDialogRef<PerfilusuarioComponent>,
     private auth: AuthService,
     public alertaService: AlertaService,
     private router: Router, 
-    private userservice: UsuarioService
+    private userservice: UsuarioService,
+    @Inject(MAT_DIALOG_DATA) public data: DatosUsuario,
+    
+    
     ) {
-     
+      this.local_data = { ...data };
      }
      ngOnInit(): void {
        this.user = {
