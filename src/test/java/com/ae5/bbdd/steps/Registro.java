@@ -1,5 +1,4 @@
 package com.ae5.bbdd.steps; 
-
 import static org.junit.Assert.assertEquals;
 
 import java.net.MalformedURLException;
@@ -14,9 +13,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
 import com.ae5.sige.repository.UsuarioRepository; 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+
+import cucumber.api.DataTable;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 
 public class Registro {
 
@@ -37,7 +39,7 @@ public class Registro {
   }
 
   @When("introducir los datos de registro")
-  public void introducir_los_datos_de_registro(io.cucumber.datatable.DataTable dataTable) {
+  public void introducir_los_datos_de_registro(cucumber.api.DataTable dataTable) {
 
     a = dataTable.asMaps(String.class, String.class);
 
