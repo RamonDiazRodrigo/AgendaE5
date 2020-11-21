@@ -41,6 +41,10 @@ export class PerfilusuarioComponent implements OnInit {
     
     ) {
       this.local_data = { ...data };
+      console.log("Inicio "+this.local_data.id)
+    /*if (typeof this.local_data.id !== 'undefined') {
+      this.user=this.local_data;
+    }*/
      }
      ngOnInit(): void {
        this.user = {
@@ -51,10 +55,6 @@ export class PerfilusuarioComponent implements OnInit {
         correo: ['', Validators.required],
         telefono: ['', Validators.required],
        };
-      this.userservice.findUser(this.auth.currentUserValue[0].dni)
-      .subscribe(response => {
-        this.user = response;
-      });
      }
 
     closeDialog(){
