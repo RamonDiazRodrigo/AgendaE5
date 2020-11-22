@@ -19,6 +19,11 @@
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Por favor, escriba una contraseña</div>
           </div>
+          <label>Repite Contraseña: </label>
+        <input type="password" formControlName="password2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password2.errors }" />
+        <div *ngIf="submitted && f.password2.errors" class="invalid-feedback">
+            <div *ngIf="f.password2.errors.required">Las contraseñas no coinciden</div>
+        </div>
           <label>Nombre: </label>
           <input type="text" formControlName="nombre" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }">

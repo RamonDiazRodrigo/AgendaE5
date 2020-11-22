@@ -24,7 +24,7 @@ export interface DatosUsuario{
 })
 
 export class UsuariosAdminComponent{
-  columnas: string[] = ['contrasena', 'nombre', 'apellidos','dni', 'telefono', 'correo', 'tipo'];
+  columnas: string[] = ['Dni','Nombre', 'Apellidos', 'Telefono', 'Correo', 'Tipo'];
   dataSource = new MatTableDataSource<DatosUsuario>();
   data: DatosUsuario[];
   usuario: any;
