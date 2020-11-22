@@ -98,6 +98,8 @@ export class PerfilusuarioComponent implements OnInit {
       return 0;
     }
 
+   
+
     if ((this.local_data.telefono.length != 9) && (!isNaN(this.local_data.telefono))) {
       this.alertaService.error("Formato de número de teléfono incorrecto. El teléfono debe tener al menos 9 números", false);
       return 0;
