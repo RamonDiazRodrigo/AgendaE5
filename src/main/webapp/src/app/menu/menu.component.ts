@@ -4,6 +4,8 @@ import { AuthService } from '../auth.service';
 import { PerfilusuarioComponent } from '../perfilusuario/perfilusuario.component';
 import { UsuarioService } from '../services/usuario.service';
 
+
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -12,7 +14,6 @@ import { UsuarioService } from '../services/usuario.service';
 export class MenuComponent implements OnInit {
   public nombre: String;
   public admin: boolean;
-  private user;
   constructor(
     private UsuarioService: AuthService,
     private userservice: UsuarioService,
@@ -32,14 +33,13 @@ export class MenuComponent implements OnInit {
     
     this.userservice.findUser(this.UsuarioService.currentUserValue[0].dni)
     .subscribe(response => {
-      console.log("Response"+response);
-      this.user = response;
+      const dialogRef = this.dialog.open(PerfilusuarioComponent, {
+        width: '450px',
+        data: response
+      });
     });
-    
-    const dialogRef = this.dialog.open(PerfilusuarioComponent, {
-      width: '450px',
-      data: this.user
-		});
+   
+   
     
   }
 

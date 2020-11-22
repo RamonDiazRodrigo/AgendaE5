@@ -19,6 +19,9 @@ delete(id) {
 update(user,id) {
     return this.http.put(`${environment.apiUrl}/update/${id}`, user);
 }
+updateadmin(user,id){
+  return this.http.put(`${environment.apiUrl}/admin-update/${id}`, user);
+}
 getUsuarios(){
   return this.http.get(`${environment.apiUrl}/admin-usuarios`);
 }

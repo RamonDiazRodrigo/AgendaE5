@@ -48,14 +48,10 @@ export class UsuariosAdminComponent{
 
 
 
-  modificar(): void{
+  modificar(el): void{
     const dialogRef = this.dialog.open(PerfilusuarioComponent, {
       width: '325px',
-      data: this.usuarios
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      
-      this.router.navigateByUrl('/carga');
+      data: el
     });
   }
   
