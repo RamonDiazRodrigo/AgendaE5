@@ -39,7 +39,7 @@ public class Encriptacion {
 
 			final byte[] plainTextBytes = texto.getBytes("utf-8");
 			final byte[] buf = cipher.doFinal(plainTextBytes);
-			final byte[] base64Bytes = Base64.encodeBase64(buf);
+			final byte[] base64Bytes = Base64.encodeBase64URLSafe(buf);
 			base64EncryptedString = new String(base64Bytes);
 
 		} catch (Exception ex) {

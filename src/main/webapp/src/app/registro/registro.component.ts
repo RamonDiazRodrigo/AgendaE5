@@ -32,8 +32,7 @@ export class RegistroComponent implements OnInit {
           nombre: ['', [Validators.required]],
           apellidos: ['', Validators.required],
           correo: ['', Validators.required],
-          telefono: ['', Validators.required],
-          tipousuario: ['', Validators.required]
+          telefono: ['', Validators.required]
           
       });
   }

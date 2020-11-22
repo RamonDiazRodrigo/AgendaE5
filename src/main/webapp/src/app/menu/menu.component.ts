@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.nombre = this.UsuarioService.currentUserValue[0].nombre;
-    if (this.UsuarioService.currentUserValue[0].tipo == "NJlGkLOGjTQ=") {
+    if (this.UsuarioService.currentUserValue[0].tipo == "NJlGkLOGjTQ") {
       this.admin = true;
     }
     else {
