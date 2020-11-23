@@ -9,15 +9,14 @@
     </thead>
     <tbody>
       <tr mdbTableCol *ngFor="let el of data">
-        <td scope="row">{{el.contrasena}}</td>
+        <td>{{el.dni}}</td>
         <td>{{el.nombre}}</td>
         <td>{{el.apellidos}}</td>
-        <td>{{el.dni}}</td>
         <td>{{el.telefono}}</td>
         <td>{{el.correo}}</td>
         <td>{{el.tipo}}</td>
         <td>
-            <button raised-button (click)="modificar()" mat-flat-button color="green"
+            <button raised-button (click)="modificar(el)" mat-flat-button color="green"
 					class="btn btn-primary">Modificar</button>
         </td>
         <td>
@@ -27,8 +26,5 @@
       </tr>
     </tbody>
   </table>
-  <div class="col text-center">
-  <button raised-button color="green" class="btn btn-primary btn-lg">Añadir</button>
-  </div>
 </div>
 </div>

@@ -24,7 +24,7 @@ export class ReunionesComponent implements OnInit {
   ngOnInit(): void {
     this.router.onSameUrlNavigation = "reload";
 
-    if (this.auth.currentUserValue[0].tipo != "NJlGkLOGjTQ=")  {
+    if (this.auth.currentUserValue[0].tipo != "NJlGkLOGjTQ")  {
       this.service.findReuniones(this.auth.currentUserValue[0].dni)
         .subscribe(response => {
           this.reuniones = response;
