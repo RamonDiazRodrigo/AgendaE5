@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { ReunionesService } from '../reuniones.service';
+import { AlertaService } from '../services/alerta.service';
 
 export interface ReunionData {
   titulo: string;
@@ -26,12 +27,15 @@ export class ReunionComponent implements OnInit{
   form: any;
   btn1: string;
   btn2: string;
+  submitted= false;
+  loading= false;
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ReunionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ReunionData,
     private auth: AuthService,
     private service: ReunionesService,
+    public alertaService: AlertaService,
     private router: Router) {
     console.log(data)
     this.local_data = { ...data };
@@ -63,12 +67,26 @@ export class ReunionComponent implements OnInit{
 
   modificar() {
     if (this.btn2 == "Crear") {
+      this.submitted = true;
+      this.alertaService.clear();
+
+      if ((this.local_data.titulo.length =null)) {
+        this.alertaService.error("Formato de DNI incorrecto. El DNI debe de tener 8 números y una letra", false);
+        return 0;
+    }
+      if ((this.local_data.descripcion.length < 5)) {
+          this.alertaService.error("Formato de contraseña incorrecta. La contraseña debe contener al menos 6 carácteres, mayúsuculas y minúsculas, números y algún símbolo.", false);
+          return 0;
+      }
+      this.loading = true;
       this.service.crearReunion(this.local_data, this.auth.currentUserValue[0].dni)
         .subscribe(
           () => {
+            this.alertaService.success('Creacion realizada', true);
             this.closeDialog()
             this.router.navigate(['/reuniones']);
           });
+          return 1;
     } else {
       if (this.modificarB) {
         this.modificarB = false;

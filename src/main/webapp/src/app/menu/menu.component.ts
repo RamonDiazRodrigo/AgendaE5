@@ -47,6 +47,7 @@ export class MenuComponent implements OnInit {
     
   }
   crearReunion(){
+
     this.reunion.action = "Crear"
     const dialogRef = this.dialog.open(ReunionComponent, {
       width: '450px',
