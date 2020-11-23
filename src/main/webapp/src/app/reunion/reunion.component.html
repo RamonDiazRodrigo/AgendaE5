@@ -31,7 +31,7 @@
 
             <label>Hora fin: </label>
             <input type="time" class="form-control" matInput [(ngModel)]="local_data.horaFin" name="horaFin" id="horaFin"
-              disabled="true">
+              disabled="false">
           </div>
         </span>
         <div class="form-group">
@@ -42,10 +42,10 @@
         <div>
 
           <button raised-button (click)="modificar()" mat-flat-button color="green"
-            class="btn btn-primary">{{modificars}}</button>
+            class="btn btn-primary">{{btn2}}</button>
 
           <button raised-button (click)="eliminar()" mat-flat-button color="red"
-            class="btn btn-danger">{{action}}</button>
+            class="btn btn-danger">{{btn1}}</button>
         </div>
 
       </form>

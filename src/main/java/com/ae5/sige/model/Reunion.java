@@ -71,7 +71,7 @@ public class Reunion {
 	public Reunion(String titulo, String descripcion, String organizador, String fecha, String horaIni,
 			String horaFin, List<String> listaAsistentes) {
 		super();
-		this.id =  UUID.randomUUID().toString();
+		
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.organizador = organizador;
@@ -81,7 +81,7 @@ public class Reunion {
 		this.listaAsistentes = listaAsistentes;
 	}
 	public Reunion() {
-		
+		this.id =  UUID.randomUUID().toString();
 	}
 	
 	public String getId() {

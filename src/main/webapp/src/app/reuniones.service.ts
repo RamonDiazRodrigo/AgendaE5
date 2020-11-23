@@ -31,5 +31,8 @@ export class ReunionesService {
     console.log(reunion)
     return this.http.post(`${environment.apiUrl}/ModificarReunion/${dni}`, reunion);
   }
+  public crearReunion(reunion, dni){
+    return this.http.post(`${environment.apiUrl}/CrearReunion/${dni}`, reunion);
+  }
 
 }

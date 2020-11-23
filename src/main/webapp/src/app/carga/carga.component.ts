@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carga',
-  templateUrl: './carga.component.html',
-  styleUrls: ['./carga.component.css']
+  templateUrl: './carga.component.html'
 })
 export class CargaComponent implements OnInit {
 

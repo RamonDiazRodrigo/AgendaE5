@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../auth.service';
 import { PerfilusuarioComponent } from '../perfilusuario/perfilusuario.component';
+import { ReunionComponent } from '../reunion/reunion.component';
 import { UsuarioService } from '../services/usuario.service';
-
 
 
 @Component({
@@ -11,9 +11,12 @@ import { UsuarioService } from '../services/usuario.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
+
+
 export class MenuComponent implements OnInit {
   public nombre: String;
   public admin: boolean;
+  private reunion: any;
   constructor(
     private UsuarioService: AuthService,
     private userservice: UsuarioService,
@@ -27,10 +30,19 @@ export class MenuComponent implements OnInit {
     else {
       this.admin = false;
     }
+    this.reunion = {
+      titulo: [''],
+      descripcion: [''],
+      organizador: this.UsuarioService.currentUserValue[0].nombre,
+      fecha: [''],
+      horaIni: [''],
+      horaFin: [''],
+      listaAsistentes: ['']
+     };
   }
 
   verPerfil(){
-    
+   
     this.userservice.findUser(this.UsuarioService.currentUserValue[0].dni)
     .subscribe(response => {
       const dialogRef = this.dialog.open(PerfilusuarioComponent, {
@@ -38,9 +50,15 @@ export class MenuComponent implements OnInit {
         data: response
       });
     });
-   
-   
     
+  }
+  crearReunion(){
+
+    this.reunion.action = "Crear"
+    const dialogRef = this.dialog.open(ReunionComponent, {
+      width: '450px',
+      data: this.reunion
+		});
   }
 
   logout() {

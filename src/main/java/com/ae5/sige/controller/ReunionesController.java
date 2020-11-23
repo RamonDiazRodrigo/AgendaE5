@@ -49,7 +49,7 @@ public class ReunionesController {
 	   * 
 	   * @author ae5
 	   */
-	  public ReunionesController(final ReunionServiceInt reunionService, final UsuarioServiceInt usuarioService) {
+	  public ReunionesController(ReunionServiceInt reunionService, UsuarioServiceInt usuarioService) {
 	    this.usuarioService = usuarioService;
 	    this.reunionService = reunionService;
 	  }
@@ -71,7 +71,7 @@ public class ReunionesController {
     }
     @PostMapping("/CancelarReuniones/{dni}")
 
-   	public ResponseEntity<Usuario> cancelar(@PathVariable final String dni, @RequestBody final String id) throws Exception {
+   	public ResponseEntity<Usuario> cancelar(@PathVariable String dni, @RequestBody String id) throws Exception {
    		LOG.info("[SERVER] Borrando cita:  " + id);
        	Usuario user = usuarioService.findByUsernusuario(dni);
        	Reunion reunion = reunionService.findByReunionId(id);
@@ -104,12 +104,12 @@ public class ReunionesController {
            return ResponseEntity.ok().build();
          }
     @PostMapping("/ModificarReunion/{dni}")
-    public ResponseEntity<Reunion> modificarReunion(@PathVariable final String dni, @RequestBody final String reunion) throws JSONException, Exception{
+    public ResponseEntity<Reunion> modificarReunion(@PathVariable String dni, @RequestBody String reunion) throws JSONException, Exception{
     	LOG.info(reunion);
 		
-    	final JSONObject jso = new JSONObject(reunion);
+    	JSONObject jso = new JSONObject(reunion);
 	
-		final Reunion reu = reunionService.findByReunionId(jso.getString("id"));
+		Reunion reu = reunionService.findByReunionId(jso.getString("id"));
 		reu.setTitulo(jso.getString("titulo"));
 		reu.setDescripcion(jso.getString("descripcion"));
 		reu.setFecha(jso.getString("fecha"));
@@ -122,7 +122,24 @@ public class ReunionesController {
     	return ResponseEntity.ok().build();
     }
 
-    
+    @PostMapping("/CrearReunion/{dni}")
+    public ResponseEntity<Reunion> CrearReunion(@PathVariable String dni, @RequestBody String reunion) throws JSONException, Exception{
+    	LOG.info(reunion);
+		
+    	JSONObject jso = new JSONObject(reunion);
+	
+		Reunion reu = new Reunion();
+		reu.setTitulo(jso.getString("titulo"));
+		reu.setDescripcion(jso.getString("descripcion"));
+		reu.setFecha(jso.getString("fecha"));
+		reu.setHoraFin(jso.getString("horaFin"));
+		reu.setHoraIni(jso.getString("horaIni"));
+		reu.setOrganizador(dni);
+		
+		reunionService.saveReunion(reu);
+		
+    	return ResponseEntity.ok().build();
+    }
 
 }
 
