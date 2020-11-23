@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class AuthInterceptorService implements HttpInterceptor {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private dialogRef: MatDialog
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -31,6 +33,8 @@ export class AuthInterceptorService implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
 
         if (err.status === 401) {
+          alert("Tiempo de espera superado, vuelva a entrar")
+          this.dialogRef.closeAll();
           this.router.navigateByUrl('/login');
         }
 

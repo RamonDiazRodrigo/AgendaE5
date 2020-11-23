@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import com.ae5.sige.encryption.Encriptacion;
+
 
 @Document(collection = "Reuniones")
 public class Reunion {

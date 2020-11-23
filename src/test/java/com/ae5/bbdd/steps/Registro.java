@@ -1,4 +1,4 @@
-package com.ae5.bbdd.steps; 
+package com.ae5.bbdd.Steps; 
 import static org.junit.Assert.assertEquals;
 
 import java.net.MalformedURLException;
@@ -12,9 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-import com.ae5.sige.repository.UsuarioRepository; 
+import com.ae5.sige.repository.UsuarioRepository;
 
-import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
