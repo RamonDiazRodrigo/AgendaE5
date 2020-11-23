@@ -27,13 +27,13 @@ public class Registro {
   List<Map<String, String>> a;
   String testCase="";
 
-  @Given("abrir la aplicacion web en el navegador e iniciar el formulario de registro")
-  public void abrir_la_aplicacion_web_en_el_navegador_e_iniciar_el_formulario_de_registro() throws MalformedURLException {
+  @Given("registro")
+  public void registro() throws MalformedURLException {
 
 	  Path path = FileSystems.getDefault().getPath("src/test/resources/geckodriver.exe");       
 	    System.setProperty("webdriver.gecko.driver", path.toString());
   FirefoxOptions fo = new FirefoxOptions();
-  //fo.addArguments("--headless");
+  fo.addArguments("--headless");
   driver = new FirefoxDriver(fo);
 
   driver.get("http://localhost:4200/register");
