@@ -182,12 +182,12 @@ public class UsuarioController {
 	 */
 	@PutMapping("update/{dni}")
 
-	public ResponseEntity<Usuario> updateUsuario(@RequestBody final String mensajerecibido,
+	public ResponseEntity<Usuario> updateUsuario(@RequestBody final String usuariomodificado,
 			@PathVariable final String dni) throws JSONException {
-		final JSONObject jso = new JSONObject(mensajerecibido);
+		final JSONObject jso = new JSONObject(usuariomodificado);
 		final String DniEncriptado = Encriptacion.encriptar(jso.getString("dni"));
 		final Usuario usuario = usuarioService.findByUsernusuario(DniEncriptado);
-		LOG.info("El json que nos llega es:" + mensajerecibido);
+		LOG.info("El json que nos llega es:" + usuariomodificado);
 		if (usuario == null) {
 			LOG.info("[SERVER] Error: el usuario no existe.");
 			return ResponseEntity.badRequest().build();
@@ -208,6 +208,55 @@ public class UsuarioController {
 				usuario.setCorreo(correo);
 				usuario.setContrasena(contrasena);
 				
+				
+				
+			} catch (JSONException j) {
+				LOG.error("[SERVER] Error en la lectura del JSON.");
+				LOG.info(j.getMessage());
+				return ResponseEntity.badRequest().build();
+			}
+			usuarioService.updateUsuario(Encriptacion.encriptarUsuario(usuario));
+			LOG.info("[SERVER] Usuario actualizada.");
+			LOG.info("[SERVER] " + Encriptacion.encriptarUsuario(usuario).toString());
+			return ResponseEntity.ok().build();
+		}
+	}
+	
+	/**
+	 * actualiza un usuario en funcion de su dni.
+	 * 
+	 * @author ae5
+	 * @throws JSONException 
+	 */
+	@PutMapping("admin-update/{dni}")
+
+	public ResponseEntity<Usuario> adminupdateUsuario(@RequestBody final String usuariomodificado,
+			@PathVariable final String dni) throws JSONException {
+		final JSONObject jso = new JSONObject(usuariomodificado);
+		final String DniEncriptado = Encriptacion.encriptar(jso.getString("dni"));
+		final Usuario usuario = usuarioService.findByUsernusuario(DniEncriptado);
+		LOG.info("El json que nos llega es:" + usuariomodificado);
+		if (usuario == null) {
+			LOG.info("[SERVER] Error: el usuario no existe.");
+			return ResponseEntity.badRequest().build();
+		} else {
+			try {
+				LOG.info("[SERVER] Actualizando usuario...");
+
+				// Depende de los campos que queramos que puedan actualizarse
+				final String nombre = jso.getString("nombre");
+				final String apellidos = jso.getString("apellidos");
+				final String telefono = jso.getString("telefono");
+				final String correo = jso.getString("correo");
+				final String contrasena = jso.getString("contrasena");
+				final String tipo = jso.getString("tipo");
+
+				usuario.setNombre(nombre);
+				usuario.setApellidos(apellidos);
+				usuario.setTelefono(telefono);
+				usuario.setCorreo(correo);
+				usuario.setContrasena(contrasena);
+				usuario.setTipo(tipo);
 				
 				
 			} catch (JSONException j) {

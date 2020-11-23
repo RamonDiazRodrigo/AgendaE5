@@ -1,9 +1,11 @@
-import { Component} from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { MatDialog} from '@angular/material/dialog'; 
 import { MatTableDataSource} from '@angular/material/table';
 import { UsuarioService } from '../services/usuario.service';
 import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { PerfilusuarioComponent } from '../perfilusuario/perfilusuario.component';
+import { Router } from '@angular/router';
 
 export interface DatosUsuario{
   contrasena: string;
@@ -22,15 +24,17 @@ export interface DatosUsuario{
 })
 
 export class UsuariosAdminComponent{
-  columnas: string[] = ['contrasena', 'nombre', 'apellidos','dni', 'telefono', 'correo', 'tipo'];
+  columnas: string[] = ['Dni','Nombre', 'Apellidos', 'Telefono', 'Correo', 'Tipo'];
   dataSource = new MatTableDataSource<DatosUsuario>();
   data: DatosUsuario[];
   usuario: any;
+  @Input() public usuarios;
   constructor(
     private user: UsuarioService,
     private auth: AuthService,
     public dialog: MatDialog,
-    private FormBuilder: FormBuilder 
+    private FormBuilder: FormBuilder,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -44,9 +48,13 @@ export class UsuariosAdminComponent{
 
 
 
-  modificar(): void{
-   
+  modificar(el): void{
+    const dialogRef = this.dialog.open(PerfilusuarioComponent, {
+      width: '325px',
+      data: el
+    });
   }
+  
   eliminar(dni): void{
     this.user.delete(dni)
     .subscribe(response => {

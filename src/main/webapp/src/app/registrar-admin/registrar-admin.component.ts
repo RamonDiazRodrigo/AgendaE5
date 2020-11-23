@@ -29,6 +29,7 @@ export class RegistrarAdminComponent implements OnInit {
       this.registerForm = this.formBuilder.group({
           dni: ['', Validators.required],
           password: ['', [Validators.required]],
+          password2: ['', [Validators.required]],
           nombre: ['', [Validators.required]],
           apellidos: ['', Validators.required],
           correo: ['', Validators.required],
@@ -57,6 +58,11 @@ export class RegistrarAdminComponent implements OnInit {
           this.alertaService.error("Formato de contraseña incorrecta. La contraseña debe contener al menos 6 carácteres, mayúsuculas y minúsculas, números y algún símbolo.", false);
           return;
       }
+
+      if (this.f.password.value != this.f.password2.value) {
+        this.alertaService.error("Las contraseñas no coinciden.", false);
+        return;
+    }
 
       if ((this.f.telefono.value.length != 9) && (!isNaN(this.f.telefono.value))) {
         this.alertaService.error("Formato de número de teléfono incorrecto. El teléfono debe tener al menos 9 números", false);

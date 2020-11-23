@@ -20,7 +20,7 @@ export class ReunionesService {
   }
 
   public findReuniones(id){
-    return this.http.get(this.uri + '/Reuniones/' + id);
+    return this.http.get(`${environment.apiUrl}/Reuniones/${id}`);
   }
   
   public cancelarReunion(dni,id){
