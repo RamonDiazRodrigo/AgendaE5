@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
-import com.ae5.sige.encryption.Encriptacion;
 import com.ae5.sige.model.Reunion;
 
 

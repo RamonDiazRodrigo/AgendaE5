@@ -23,10 +23,10 @@ import com.ae5.sige.model.Usuario;
 @Configuration
 @EnableScheduling
 public class Token {
-	
+
 	private static final Log LOG = LogFactory.getLog(Token.class);
 	private static HashMap<String, JSONArray> tokens = new HashMap<String, JSONArray>();
-		
+
 	public static JSONArray createToken(Usuario user) {
 
 		JSONObject tokenuser = new JSONObject();
@@ -47,34 +47,36 @@ public class Token {
 		System.out.println("token: "+ token.toString());
 		tokens.put(getMD5(token.toString()),token);
 		return token;
-				
+
 	}
 	public static boolean header(String aux2) throws JSONException {
-		  String[] part1 = aux2.split("\\[");
-		  String[] part = part1[1].split("\\]");
-		  System.out.println(part[0]);
-		  String[]part3 = part[0].split("\\}");
-		  JSONObject jso = new JSONObject(part3[0]+"}"); 
-		  System.out.println(jso);
-		  String[] part4 = part3[1].split(",");
-		  String uno = part4[1].replace("\"", "");
-		  LocalTime dos = LocalTime.parse(part4[2].replace("\"", ""));
-		  System.out.println(part4[2]);
-		  JSONArray tokenuser = new JSONArray();
-		  tokenuser.put(jso);
-		  tokenuser.put(uno);
-		  tokenuser.put(dos);
-		  JSONArray tokennwe = checkToken(tokenuser);
-		  if(tokennwe==null) {
-			  return false;
-		  }
-		  return true;
-		  
+		try {
+		String[] part1 = aux2.split("\\[");
+		String[] part = part1[1].split("\\]");
+		System.out.println(part[0]);
+		String[]part3 = part[0].split("\\}");
+		JSONObject jso = new JSONObject(part3[0]+"}"); 
+		System.out.println(jso);
+		String[] part4 = part3[1].split(",");
+		String uno = part4[1].replace("\"", "");
+		LocalTime dos = LocalTime.parse(part4[2].replace("\"", ""));
+		System.out.println(part4[2]);
+		JSONArray tokenuser = new JSONArray();
+		tokenuser.put(jso);
+		tokenuser.put(uno);
+		tokenuser.put(dos);
+		JSONArray tokennwe = checkToken(tokenuser);
+		if(tokennwe==null) {
+			return false;
+		}
+		}catch(Exception e) {
+			return false;
+		}
+		return true;
+		
 	}
-	
+
 	public static JSONArray checkToken(JSONArray token) throws JSONException {
-		HashMap<String, JSONArray> tokens1 = tokens;
-		String md= getMD5(token.toString());
 		if(tokens.containsKey(getMD5(token.toString()))) {
 			tokens.remove(token.toString());
 			token.put(2, LocalTime.now());
@@ -84,7 +86,7 @@ public class Token {
 			return null;
 		}
 	}
-	
+
 	@Scheduled(fixedDelay = 30000)
 	public void deletetokenaftertime() throws JSONException {
 		LOG.info("Comprobación token antiguos");
@@ -101,21 +103,21 @@ public class Token {
 			}
 		}
 	}
-	
-	public static String getMD5(String input) {
-		 try {
-		 MessageDigest md = MessageDigest.getInstance("MD5");
-		 byte[] messageDigest = md.digest(input.getBytes());
-		 BigInteger number = new BigInteger(1, messageDigest);
-		 String hashtext = number.toString(16);
 
-		 while (hashtext.length() < 32) {
-		 hashtext = "0" + hashtext;
-		 }
-		 return hashtext;
-		 }
-		 catch (NoSuchAlgorithmException e) {
-		 throw new RuntimeException(e);
-		 }
-		 }
+	public static String getMD5(String input) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] messageDigest = md.digest(input.getBytes());
+			BigInteger number = new BigInteger(1, messageDigest);
+			String hashtext = number.toString(16);
+
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			return hashtext;
+		}
+		catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

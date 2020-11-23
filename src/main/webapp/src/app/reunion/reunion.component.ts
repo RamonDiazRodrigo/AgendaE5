@@ -20,15 +20,15 @@ export interface ReunionData {
   templateUrl: './reunion.component.html',
   styleUrls: ['./reunion.component.css']
 })
-export class ReunionComponent implements OnInit{
+export class ReunionComponent implements OnInit {
   reuniones: any;
   local_data: any;
   modificarB: boolean;
   form: any;
   btn1: string;
   btn2: string;
-  submitted= false;
-  loading= false;
+  submitted = false;
+  loading = false;
   constructor(
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<ReunionComponent>,
@@ -44,7 +44,7 @@ export class ReunionComponent implements OnInit{
     this.btn1 = "Cancelar"
   }
   ngOnInit(): void {
-    console.log("Inicio "+this.local_data.id)
+    console.log("Inicio " + this.local_data.id)
     if (typeof this.local_data.id !== 'undefined') {
       this.btn1 = "Eliminar"
     } else {
@@ -58,7 +58,7 @@ export class ReunionComponent implements OnInit{
       this.dialogRef.disableClose = true;
       this.habilitar(false);
     }
-    
+
   }
 
   closeDialog() {
@@ -70,23 +70,35 @@ export class ReunionComponent implements OnInit{
       this.submitted = true;
       this.alertaService.clear();
 
-      if ((this.local_data.titulo.length =null)) {
-        this.alertaService.error("Formato de DNI incorrecto. El DNI debe de tener 8 números y una letra", false);
+      if ((this.local_data.titulo.length < 1)) {
+        this.alertaService.error("Introduzca un titulo a la reunion.", false);
         return 0;
-    }
-      if ((this.local_data.descripcion.length < 5)) {
-          this.alertaService.error("Formato de contraseña incorrecta. La contraseña debe contener al menos 6 carácteres, mayúsuculas y minúsculas, números y algún símbolo.", false);
-          return 0;
+      }
+      if ((this.local_data.descripcion.length < 1)) {
+        this.alertaService.error("Introduzca una descripcion", false);
+        return 0;
+      }
+      if ((this.local_data.fecha.length < 1)) {
+        this.alertaService.error("Introduzca una fecha valida.", false);
+        return 0;
+      }
+      if ((this.local_data.horaIni.length < 1)) {
+        this.alertaService.error("Introduzca una hora de inicio de reunion.", false);
+        return 0;
+      }
+      if ((this.local_data.horaFin.length < 1)) {
+        this.alertaService.error("Introduzca una hora de finalización de reunion.", false);
+        return 0;
       }
       this.loading = true;
       this.service.crearReunion(this.local_data, this.auth.currentUserValue[0].dni)
         .subscribe(
           () => {
-            this.alertaService.success('Creacion realizada', true);
+            this.alertaService.success('Reunion creada', true);
             this.closeDialog()
             this.router.navigate(['/reuniones']);
           });
-          return 1;
+      return 1;
     } else {
       if (this.modificarB) {
         this.modificarB = false;

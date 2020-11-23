@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -104,7 +103,7 @@ public class ReunionesController {
            return ResponseEntity.ok().build();
          }
     @PostMapping("/ModificarReunion/{dni}")
-    public ResponseEntity<Reunion> modificarReunion(@PathVariable String dni, @RequestBody String reunion) throws JSONException, Exception{
+    public ResponseEntity<Reunion> modificarReunion(@PathVariable String dni, @RequestBody String reunion) throws Exception{
     	LOG.info(reunion);
 		
     	JSONObject jso = new JSONObject(reunion);
@@ -123,11 +122,11 @@ public class ReunionesController {
     }
 
     @PostMapping("/CrearReunion/{dni}")
-    public ResponseEntity<Reunion> CrearReunion(@PathVariable String dni, @RequestBody String reunion) throws JSONException, Exception{
+    public ResponseEntity<Reunion> crearReunion(@PathVariable String dni, @RequestBody String reunion) throws Exception{
     	LOG.info(reunion);
 		
     	JSONObject jso = new JSONObject(reunion);
-	
+    	List<String> parti = new ArrayList<>();
 		Reunion reu = new Reunion();
 		reu.setTitulo(jso.getString("titulo"));
 		reu.setDescripcion(jso.getString("descripcion"));
@@ -135,7 +134,8 @@ public class ReunionesController {
 		reu.setHoraFin(jso.getString("horaFin"));
 		reu.setHoraIni(jso.getString("horaIni"));
 		reu.setOrganizador(dni);
-		
+		parti.add(dni);
+		reu.setListaAsistentes(parti);
 		reunionService.saveReunion(reu);
 		
     	return ResponseEntity.ok().build();
