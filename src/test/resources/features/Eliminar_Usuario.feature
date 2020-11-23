@@ -5,18 +5,19 @@ Feature: Eliminar usuario
   
      Given el administrador quiere eliminar a un usuario registrado
       
-        | DNI	   |Contraseña	    | Nombre         | Apellidos        | E-mail  | Nº Telefono     |
+        | DNI	   |Contrasena	    | Nombre         | Apellidos        | E-mail  | N Telefono     |
 
 
-    When el administrador  eliminará el usuario seleccionado
+    When el administrador  eliminara el usuario seleccionado
     
-    	     | DNI	   |Contraseña	    | Nombre         | Apellidos        | E-mail  | Nº Telefono     |
-    	      | <dni>  |<contraseña>    | <nombre>        | <apellidos>       | <e-mail>  | <n_telefono>    |
+    	     | DNI	   |Contrasena	    | Nombre         | Apellidos        | E-mail  | N Telefono     |
+    	      | <dni>  |<contrasena>    | <nombre>        | <apellidos>       | <e-mail>  | <n_telefono>    |
     		
-    Then se elimina el usuario  de la base de datos. '<expectedResult>'
+    Then se elimina el usuario  de la base de datos
     
+    Examples: 
 
-      Examples:
-		| testCase                      | expectedResult | | DNI	   |Contraseña	    | Nombre         | Apellidos        | E-mail  | Nº Telefono     |
-    | No tipo presente              | FAILS          | 05766445K    |     1234          | Móises   | Crespo Palomares     | Moisescrespo24@gmail.com  | 667890763        |
+      	| testCase                      | expectedResult | | DNI	   |Contrasena	    | Nombre         | Apellidos        | E-mail  | N Telefono     |
+	
+
     
