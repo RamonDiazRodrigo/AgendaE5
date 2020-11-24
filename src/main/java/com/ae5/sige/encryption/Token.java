@@ -89,7 +89,6 @@ public class Token {
 
 	@Scheduled(fixedDelay = 30000)
 	public void deletetokenaftertime() throws JSONException {
-		LOG.info("Comprobación token antiguos");
 		LocalTime aux = LocalTime.now();
 		List<JSONArray> tokenaux = new ArrayList<>();
 		for (JSONArray value : tokens.values()) {

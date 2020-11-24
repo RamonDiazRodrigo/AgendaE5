@@ -1,4 +1,4 @@
-package com.ae5.bbdd.Steps;
+package com.ae5.bbdd.steps;
 import static org.junit.Assert.assertEquals;
 
 import java.nio.file.FileSystems;
@@ -28,8 +28,8 @@ public class LoginSteps {
   @Given("abrir la aplicación web en el navegador")
   public void abrir_la_aplicacion_web_en_el_navegador() {
 
-	Path path = FileSystems.getDefault().getPath("/usr/bin/geckodriver");
-    System.setProperty("webdriver.gecko.driver", path.toString());
+	  Path path = FileSystems.getDefault().getPath("src/test/resources/geckodriver.exe");       
+	    System.setProperty("webdriver.gecko.driver", path.toString());
     FirefoxOptions fo = new FirefoxOptions();
     fo.addArguments("--headless");
     driver = new FirefoxDriver(fo);
@@ -52,7 +52,6 @@ public class LoginSteps {
   public void pulsamos_entrar() throws InterruptedException {
 
     driver.findElement(By.xpath("//input[@value='Acceder']")).click();
-
     String expectedUrl = driver.getCurrentUrl();
 
     if (testCase.equals("Case1")||testCase.equals("Case2")) {
