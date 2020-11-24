@@ -30,8 +30,8 @@ public class Modificar_UsuarioSteps {
   
   List<Map<String, String>> a;
 
-  @Given("el usuario se ha logueado y quiere cambiar los valores de los campos del usuario para actualizarlos")
-  public void el_usuario_se_ha_logueado_y_quiere_cambiar_los_valores_de_los_campos_del_usuario_para_actualizarlos() {
+  @Given("loguear y modificar")
+  public void loguear_y_modificar() {
 
     Path path = FileSystems.getDefault().getPath("src/test/resources/geckodriver.exe");
     System.setProperty("webdriver.gecko.driver", path.toString());
@@ -40,13 +40,13 @@ public class Modificar_UsuarioSteps {
     WebDriver driver = new FirefoxDriver(fo);
     driver.get("http://localhost:4200/login");
 
-    a = dataTable.asMaps(String.class, String.class);
+    
 
-    driver.findElement(By.xpath("//input[@placeholder='DNI']")).sendKeys(a.get(0).get("Usuario"));
-    driver.findElement(By.xpath("//input[@placeholder='Contraseña']")).sendKeys(a.get(0).get("contraseña"));
+    driver.findElement(By.xpath("//input[@placeholder='DNI']")).sendKeys("05227738M");
+    driver.findElement(By.xpath("//input[@placeholder='Contraseña']")).sendKeys("1q2w3e4r");
     driver.findElement(By.xpath("//input[@value='Acceder']")).click();
-    driver.findElement(By.linkText("Ramon Diaz Rodrigo")).click();
-    driver.findElement(By.xpath("//input[@id='modificar']")).click();
+    driver.findElement(By.linkText("Julian Ruiz Garcia")).click();
+    driver.findElement(By.id("modificar")).click();
    
     
     
@@ -56,12 +56,11 @@ public class Modificar_UsuarioSteps {
   @When("el usuario  se modifica los valores")
   public void el_usuario_se_modifica_los_valores(DataTable dataTable) {
 	  a = dataTable.asMaps(String.class, String.class);
-	  	driver.findElement(By.xpath("//input[@id='nombre']")).sendKeys(a.get(0).get("nombre"));
-	    driver.findElement(By.xpath("//input[@id='apellidos']")).sendKeys(a.get(0).get("apellidos"));
-	    driver.findElement(By.xpath("//input[@name='dni']")).sendKeys(a.get(0).get("DNI"));
-	    driver.findElement(By.xpath("//input[@id='contrasena']")).sendKeys(a.get(0).get("password"));
-	    driver.findElement(By.xpath("//input[@id='telefono']")).sendKeys(a.get(0).get("telefono"));
-	    driver.findElement(By.xpath("//input[@id='correo']")).sendKeys(a.get(0).get("correo"));
+	  	driver.findElement(By.id("nombre")).sendKeys(a.get(0).get("nombre"));
+	    driver.findElement(By.id("apellidos")).sendKeys(a.get(0).get("apellidos"));
+	    driver.findElement(By.id("contrasena")).sendKeys(a.get(0).get("password"));
+	    driver.findElement(By.id("telefono")).sendKeys(a.get(0).get("telefono"));
+	    driver.findElement(By.id("correo")).sendKeys(a.get(0).get("correo"));
 	    testCase = a.get(0).get("testCase");
 	    usuario.setNombre(a.get(0).get("nombre"));
 	    usuario.setApellidos(a.get(0).get("apellidos"));
@@ -75,7 +74,7 @@ public class Modificar_UsuarioSteps {
 
   @Then("se modifica los valores del usuario y se sustituye en la base de datos")
   public void se_modifica_los_valores_del_usuario_y_se_sustituye_en_la_base_de_datos() {
-    driver.findElement(By.xpath("//input[@id='modificar']")).click();
+	  driver.findElement(By.id("modificar")).click();
     Usuario usuario2 = usuarioRepository.findOne(usuario.getDni()).get();
     usuario.setListaReuniones(usuario2.getListaReuniones());
     if (testCase.equals("En el reso de casos")) {
