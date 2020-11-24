@@ -38,7 +38,7 @@ public class UsuarioController {
 	private static final Log LOG = LogFactory.getLog(UsuarioController.class);
 	private final UsuarioService usuarioService;
 	private final ReunionServiceInt reunionService;
-
+ 
 	@Autowired
 	/**
 	 * @author ae5
@@ -221,7 +221,7 @@ public class UsuarioController {
 	}
 	
 	/**
-	 * actualiza un usuario en funcion de su dni.
+	 * actualiza un usuario en funcion de su dni siendo admin.
 	 * 
 	 * @author ae5
 	 * @throws JSONException 
