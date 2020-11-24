@@ -36,7 +36,7 @@ public class Modificar_UsuarioSteps {
     Path path = FileSystems.getDefault().getPath("src/test/resources/geckodriver.exe");
     System.setProperty("webdriver.gecko.driver", path.toString());
     FirefoxOptions fo = new FirefoxOptions();
-    //fo.addArguments("--headless");
+    fo.addArguments("--headless");
     WebDriver driver = new FirefoxDriver(fo);
     driver.get("http://localhost:4200/login");
     
