@@ -36,16 +36,15 @@ public class Modificar_UsuarioSteps {
     Path path = FileSystems.getDefault().getPath("src/test/resources/geckodriver.exe");
     System.setProperty("webdriver.gecko.driver", path.toString());
     FirefoxOptions fo = new FirefoxOptions();
-    fo.addArguments("--headless");
+    //fo.addArguments("--headless");
     WebDriver driver = new FirefoxDriver(fo);
     driver.get("http://localhost:4200/login");
-
     
 
     driver.findElement(By.xpath("//input[@placeholder='DNI']")).sendKeys("05227738M");
     driver.findElement(By.xpath("//input[@placeholder='Contraseña']")).sendKeys("1q2w3e4r");
     driver.findElement(By.xpath("//input[@value='Acceder']")).click();
-    driver.findElement(By.linkText("Julian Ruiz Garcia")).click();
+    driver.findElement(By.xpath("\"//a[@placeholder='viendoperfil')]")).click();
     driver.findElement(By.id("modificar")).click();
    
     
@@ -53,7 +52,7 @@ public class Modificar_UsuarioSteps {
    
   }
 
-  @When("el usuario  se modifica los valores")
+  @When("el usuario se modifica los valores")
   public void el_usuario_se_modifica_los_valores(DataTable dataTable) {
 	  a = dataTable.asMaps(String.class, String.class);
 	  	driver.findElement(By.id("nombre")).sendKeys(a.get(0).get("nombre"));

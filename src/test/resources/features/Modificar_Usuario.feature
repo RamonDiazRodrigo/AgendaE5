@@ -4,7 +4,7 @@ Feature: Modificar Usuario
 
   Scenario Outline: <testCase> <expectedResult>
     Given loguear y modificar
-    When el usuario  se modifica los valores
+    When el usuario se modifica los valores
       | DNI   | Contraseña   | Nombre   | Apellidos   | E-mail   | Nº Telefono  |
       | <dni> | <contraseña> | <nombre> | <apellidos> | <e-mail> | <n_telefono> |
     Then se modifica los valores del usuario y se sustituye en la base de datos '<expectedResult>'

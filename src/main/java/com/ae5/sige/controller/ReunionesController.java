@@ -72,7 +72,7 @@ public class ReunionesController {
 
    	public ResponseEntity<Usuario> cancelar(@PathVariable String dni, @RequestBody String id) throws Exception {
    		LOG.info("[SERVER] Borrando cita:  " + id);
-       	Usuario user = usuarioService.findByUsernusuario(dni);
+       	Usuario user = usuarioService.findByUsernusuarioencriptado(dni);
        	Reunion reunion = reunionService.findByReunionId(id);
        	String admin = Encriptacion.encriptar("admin");
        	
@@ -81,12 +81,12 @@ public class ReunionesController {
            List<String> listaAsistentes = reunion.getListaAsistentes();
            while(!listaAsistentes.isEmpty()){
            	String dniasistente = listaAsistentes.remove(0);
-           	Usuario asist = usuarioService.findByUsernusuario(dniasistente);
+           	Usuario asist = usuarioService.findByUsernusuarioencriptado(dniasistente);
            	List<String> listaReuniones = asist.getListaReuniones();
            	listaReuniones.remove(listaReuniones.indexOf(id));
            	asist.setListaReuniones(listaReuniones);
  
-           	usuarioService.updateUsuario(Encriptacion.encriptarUsuario(asist));
+           	usuarioService.updateUsuario(asist);
            }
            LOG.info("Se han eliminado los asistentes de la reunion");
            reunionService.deleteReunion(id);

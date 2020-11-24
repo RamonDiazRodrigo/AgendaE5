@@ -58,6 +58,26 @@ public class UsuarioService implements UsuarioServiceInt {
     
     
   }
+  
+  /**
+   * @author ae5
+   */
+  public Usuario findByUsernusuarioencriptado(final String dni) {
+	
+	  
+    final Optional<Usuario> user = userRepository.findOne(dni);
+    
+    if (user.isPresent()) {	
+         return user.get();
+    } else {
+
+        throw new UserNotFound(dni);
+
+      }
+    
+    
+  }
+
 
   /**
    * @author ae5
