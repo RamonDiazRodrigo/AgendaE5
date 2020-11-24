@@ -1,54 +1,82 @@
 package com.ae5.bbdd.steps;
-
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
+import com.ae5.sige.service.ReunionService;
+import com.ae5.sige.service.ReunionServiceInt;
+
+
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.ae5.sige.model.Reunion;
-import com.ae5.sige.repository.ReunionRepository;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
+import com.ae5.sige.model.Reunion;
+import com.ae5.sige.service.ReunionService;
+
+import java.util.Optional;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class CrearReunionSteps {
+	  WebDriver driver=null;
+	  List<Map<String, String>> a;
+	  String testCase="";
+	  String titulo="";
+	
 
-  private ReunionRepository reunionRepository; 
-  private Reunion r = new Reunion(); 
+	  @Given ("se abre el formulario del login")
+	  public void se_abre_el_formulario_del_login_y_el_usuario_introduce_sus_credenciales() {
+		Path path = FileSystems.getDefault().getPath("src/test/resources/geckodriver.exe");       
+		System.setProperty("webdriver.gecko.driver", path.toString());
+	    FirefoxOptions fo = new FirefoxOptions();
+	    fo.addArguments("--headless");
+	    driver = new FirefoxDriver(fo);
 
-  @Given("^se registra la reunion con los siguientes campos$")
-  public void se_registra_la_reunion_con_los_siguientes_campos(DataTable dataTable) throws Throwable {
-    /*
-     Titulo   | Descripcion	  	| Organizador   | Fecha | Hora inicio        | Hora fin    | Lista asistentes   | 
-     */
+	    driver.get("http://localhost:4200");
+	    
 
-    List<Map<String, String>> a = dataTable.asMaps(String.class, String.class);
+	  }
+	  
+	  @When ("el usuario introduce sus credenciales y va a crear una reunion con los siguientes datos")
+	  public void el_usuario_introduce_sus_credenciales_y_va_a_crear_una_reunion_con_los_siguientes_datos(DataTable dataTable) {
+		a = dataTable.asMaps(String.class, String.class);
 
-    r.setTitulo(a.get(0).get("Titulo"));
-    r.setDescripcion(a.get(0).get("Descripcion"));
-    r.setOrganizador(a.get(0).get("Organizador"));
-    r.setFecha(a.get(0).get("Fecha"));
-    r.setHoraIni(a.get(0).get("Hora inicio"));
-    r.setHoraFin(a.get(0).get("Hora fin"));
-    List<String> aux = new ArrayList<>();
-    aux.add(a.get(0).get("Lista asistentes"));
-    r.setListaAsistentes(aux);
-    
-
-  }
-
-  @When("la reunion guarda sus datos con los campos requeridos")
-  public void el_usuario_guarda_la_reunion_con_los_campos_requeridos() {
-    this.reunionRepository.saveReunion(r);
-
-  }
-
-  @Then("el resultado de guardar la reunion es correcto")
-  public void el_resultado_de_guardar_la_reunion_es_correcto() {
-   
-  }
+		driver.findElement(By.xpath("//input[@placeholder='DNI']")).sendKeys(a.get(0).get("DNI"));
+		driver.findElement(By.xpath("//input[@placeholder='Contraseña']")).sendKeys(a.get(0).get("password"));    
+		driver.findElement(By.xpath("//input[@value='Acceder']")).click();
+		
+		driver.findElement(By.xpath("//li[2]/a")).click();
+		driver.findElement(By.id("titulo")).sendKeys(a.get(0).get("titulo"));
+	    
+		driver.findElement(By.id("descripcion")).sendKeys(a.get(0).get("descripcion"));
+		driver.findElement(By.id("fecha")).sendKeys(a.get(0).get("fecha"));
+		driver.findElement(By.id("horaIni")).sendKeys(a.get(0).get("horainicio"));
+		driver.findElement(By.id("horaFin")).sendKeys(a.get(0).get("horafin"));
+		testCase = a.get(0).get("testCase");
+		titulo =a.get(0).get("titulo");
+	   
+	  }
+	  
+	  @Then ("pulsamos crear una reunion")
+	  public void pulsamos_crear_una_reunion() {
+		  driver.findElement(By.cssSelector("div:nth-child(7) > .btn-primary")).click();
+//		  System.out.println(ReunionService); es nulo
+//		  Optional<Reunion> reu =   ReunionService.findOneTitulo(titulo);
+//		  if(testCase.equals("testCase1")) {
+//			  assertNotEquals(reu.get(),null);
+//		  }else {
+//			  assertEquals(reu.get(),null);
+//		  }
+		  driver.close();
+	  }
 
 }
