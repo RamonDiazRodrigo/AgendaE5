@@ -82,11 +82,15 @@ public class ReunionesController {
            while(!listaAsistentes.isEmpty()){
            	String dniasistente = listaAsistentes.remove(0);
            	Usuario asist = usuarioService.findByUsernusuarioencriptado(dniasistente);
+           	try {
            	List<String> listaReuniones = asist.getListaReuniones();
            	listaReuniones.remove(listaReuniones.indexOf(id));
            	asist.setListaReuniones(listaReuniones);
- 
            	usuarioService.updateUsuario(asist);
+           	}catch(Exception e) {
+           		
+           	}
+           	
            }
            LOG.info("Se han eliminado los asistentes de la reunion");
            reunionService.deleteReunion(id);
@@ -137,7 +141,11 @@ public class ReunionesController {
 		parti.add(dni);
 		reu.setListaAsistentes(parti);
 		reunionService.saveReunion(reu);
-		
+		Usuario user = usuarioService.findByUsernusuarioencriptado(dni);
+		List<String> reuniones = user.getListaReuniones();
+		reuniones.add(reu.getId());
+		user.setListaReuniones(reuniones);
+		usuarioService.updateUsuario(user);
     	return ResponseEntity.ok().build();
     }
 

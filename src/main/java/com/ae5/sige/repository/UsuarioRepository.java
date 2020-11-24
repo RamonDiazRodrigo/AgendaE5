@@ -53,7 +53,6 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	   * @author ae5
 	   */
 	  public Optional<Usuario> findOne(final String dni) {
-	    System.out.println("el usuario buscado  es: " + dni);
 	    Usuario d = this.mongoOperations.findOne(new Query(Criteria.where("dni").is(dni)), Usuario.class);
 	    return Optional.ofNullable(d);
 	  }
@@ -84,7 +83,6 @@ public class UsuarioRepository implements UsuarioRepositoryInt{
 	   * @author ae5
 	   */
 	  public void deleteUsuario(final String dni) {
-		  System.out.println("Entra en el repository del delete con dni: " +dni);
 	    this.mongoOperations.findAndRemove(new Query(Criteria.where("dni").is(dni)), Usuario.class);
 
 	  }

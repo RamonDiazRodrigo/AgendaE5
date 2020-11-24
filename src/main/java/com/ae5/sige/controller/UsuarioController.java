@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.ae5.sige.model.Reunion;
 import com.ae5.sige.model.Usuario;
+import com.ae5.sige.security.Token;
 import com.ae5.sige.service.ReunionServiceInt;
 import com.ae5.sige.service.UsuarioService;
 import com.ae5.sige.encryption.Encriptacion;
 import com.ae5.sige.exception.UserNotFound;
-import com.ae5.sige.encryption.Token;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONArray;

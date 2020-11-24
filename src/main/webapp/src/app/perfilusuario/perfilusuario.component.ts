@@ -151,10 +151,11 @@ export class PerfilusuarioComponent implements OnInit {
         this.dialogRef.disableClose = false;
       }
     } else {
+      this.Modificar = "Guardar";
       this.modificado = true;
       this.dialogRef.disableClose = true;
       this.habilitar(false);
-      this.Modificar = "Guardar";
+      
     }
   }
 
@@ -165,7 +166,9 @@ export class PerfilusuarioComponent implements OnInit {
     this.closeDialog();
   }
 
-  private habilitar(bolean): void {
+  private habilitar(bolean): void { 
+    this.form = document.getElementById("correo");
+    this.form.disabled = bolean;
     this.form = document.getElementById("nombre");
     this.form.disabled = bolean;
     this.form = document.getElementById("apellidos");
@@ -180,5 +183,6 @@ export class PerfilusuarioComponent implements OnInit {
     this.form.disabled = bolean;
     this.form = document.getElementById("asistente");
     this.form.disabled = bolean;
+   
   }
 }
