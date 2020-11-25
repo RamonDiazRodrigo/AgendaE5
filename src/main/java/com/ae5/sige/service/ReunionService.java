@@ -66,15 +66,16 @@ public class ReunionService implements ReunionServiceInt{
   /**
    * @author ae5
    */
-  public void saveReunion(final Reunion usuario) {
-	  reunionRepository.saveReunion(usuario);
+  public void saveReunion(final Reunion reunion) {
+	  
+	  reunionRepository.saveReunion(reunion);
   } 
 
   /**
    * @author ae5
    */
-  public void updateReunion(final Reunion user) {
-	  reunionRepository.updateReunion(user);
+  public void updateReunion(final Reunion reunion) {
+	  reunionRepository.updateReunion(reunion);
   }
 
   /**

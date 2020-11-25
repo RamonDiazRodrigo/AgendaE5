@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {ReunionComponent} from '../reunion/reunion.component';
 
 @Component({
   selector: 'app-reuniones-pre',
@@ -9,10 +11,18 @@ export class ReunionesPreComponent implements OnInit {
 
   @Input() public reunion;
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     console.log(this.reunion);
   }
 
+  verReunion() {
+		const dialogRef = this.dialog.open(ReunionComponent, {
+      width: '325px',
+			data: this.reunion
+		});
+  }
 }

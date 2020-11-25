@@ -54,10 +54,9 @@ public class ReunionRepository implements ReunionRepositoryInt{
 	   * @author ae5
 	   */
 	  public Optional<Reunion> findOne(final String id) {
-	    System.out.println("La Reunion buscada es: " + id);
-	    Reunion d = this.mongoOperations.findOne(new Query(Criteria.where("_id").is(id)), Reunion.class);
-	    return Optional.ofNullable(d);
-	  }
+		    Reunion d = this.mongoOperations.findOne(new Query(Criteria.where("_id").is(id)), Reunion.class);
+		    return Optional.ofNullable(d);
+		  }
 
 	  /**
 	   * Guarda una Reunion en la base de datos.
@@ -91,10 +90,8 @@ public class ReunionRepository implements ReunionRepositoryInt{
 	  
 	  @Override
 	  public List<Reunion> findUsuario(final String dni) {
-	    final List<Reunion> reuniones = this.mongoOperations
-	        .find(new Query(Criteria.where("listaAsistentes").is(dni)), Reunion.class);
-	    System.out.println("REUNIONES ENCONTRADAS: " + reuniones);
-	   return reuniones;
-	  }
-	
+		    final List<Reunion> reuniones = this.mongoOperations
+		        .find(new Query(Criteria.where("listaAsistentes").is(dni)), Reunion.class);
+		   return reuniones;
+		  }
 }
